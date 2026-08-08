@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://diabesityexpo.com/sitemap.xml

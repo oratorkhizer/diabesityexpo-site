@@ -1,0 +1,9 @@
+{
+  "name": "diabesityexpo-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Caspian Diabesity Expo 2026 website with Razorpay pass checkout",
+  "dependencies": {
+    "razorpay": "^2.9.4"
+  }
+}
