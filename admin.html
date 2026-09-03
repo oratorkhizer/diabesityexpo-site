@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expo Desk | Caspian Diabesity Expo 2026</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0C1D38;--navy2:#12294B;--gold:#C6A02E;--goldl:#E7D9A8;--ice:#C9D6E8;--light:#EEF3FA;--ink:#1A2433;--muted:#55677D;--ok:#1F6B45;--warn:#9A5B00;--bad:#8B1E1E}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#F4F7FB;color:var(--ink);line-height:1.5}
+header{background:var(--navy);color:#fff;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+header h1{font-family:'Fraunces',serif;font-size:1.25rem}
+header small{color:var(--ice);display:block;font-size:.78rem}
+.wrap{max-width:1280px;margin:0 auto;padding:22px}
+.btn{display:inline-block;padding:9px 16px;border-radius:999px;font-weight:600;font-size:.86rem;border:0;cursor:pointer;text-decoration:none;font-family:inherit}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-ghost{background:#fff;border:1px solid #D5DEEA;color:var(--ink)}
+.btn-wa{background:#25D366;color:#062B12}
+.btn-sm{padding:6px 11px;font-size:.78rem}
+.gate{max-width:420px;margin:80px auto;background:#fff;border-radius:16px;padding:36px;box-shadow:0 10px 40px rgba(18,41,75,.1)}
+.gate h2{font-family:'Fraunces',serif;margin-bottom:8px}
+.gate p{color:var(--muted);font-size:.9rem;margin-bottom:18px}
+.gate input{width:100%;padding:13px 16px;border-radius:10px;border:1px solid #D5DEEA;font-size:1rem;margin-bottom:12px;font-family:inherit}
+.err{color:var(--bad);font-size:.85rem;margin-top:8px;display:none}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:22px}
+.tile{background:#fff;border-radius:14px;padding:18px 20px;border:1px solid #E1E8F2}
+.tile b{display:block;font-family:'Fraunces',serif;font-size:1.9rem;color:var(--navy)}
+.tile small{color:var(--muted);font-size:.8rem}
+.tile.gold b{color:var(--gold)}
+.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tabs button{background:#fff;border:1px solid #D5DEEA;border-radius:999px;padding:8px 16px;font-weight:600;font-size:.86rem;cursor:pointer;font-family:inherit}
+.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.tools input,.tools select{padding:9px 12px;border-radius:10px;border:1px solid #D5DEEA;font-size:.88rem;font-family:inherit;background:#fff}
+.card{background:#fff;border-radius:14px;border:1px solid #E1E8F2;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:.86rem;min-width:900px}
+th,td{padding:11px 12px;border-bottom:1px solid #EDF1F7;text-align:left;vertical-align:top}
+th{background:#F8FAFD;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);position:sticky;top:0}
+tr:hover td{background:#FBFCFE}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.p-paid{background:#DCEFE3;color:var(--ok)}.p-registered{background:#DDEAFB;color:#1D4E89}.p-pending_payment{background:#FCEBD2;color:var(--warn)}.p-failed,.p-refunded,.p-cancelled{background:#F8D9D9;color:var(--bad)}
+.p-free{background:#EEF3FA;color:var(--muted)}.p-priority{background:#EBE2C4;color:#7A6218}.p-family{background:#E3DDF5;color:#4B2E83}
+.mini{font-size:.76rem;color:var(--muted)}
+select.fu{padding:5px 8px;border-radius:8px;border:1px solid #D5DEEA;font-size:.78rem;font-family:inherit}
+input.notes{width:170px;padding:5px 8px;border-radius:8px;border:1px solid #D5DEEA;font-size:.78rem;font-family:inherit}
+.empty{padding:40px;text-align:center;color:var(--muted)}
+.foot{margin-top:18px;font-size:.78rem;color:var(--muted)}
+@media(max-width:700px){.wrap{padding:14px}}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Expo Desk</h1><small>Caspian Diabesity Expo 2026 · registrations, passes, revenue and follow-up</small></div>
+  <div id="hdrTools" style="display:none"><button class="btn btn-ghost btn-sm" onclick="load()">Refresh</button> <button class="btn btn-ghost btn-sm" onclick="exportCsv()">Export CSV</button> <button class="btn btn-ghost btn-sm" onclick="logout()">Lock</button></div>
+</header>
+
+<div class="wrap">
+  <div class="gate" id="gate">
+    <h2 id="gateTitle">Enter passcode</h2>
+    <p id="gateHint">This desk shows registrant names and phone numbers. Keep the passcode private.</p>
+    <form id="gateForm">
+      <input type="password" id="pc" placeholder="Passcode" autocomplete="current-password" required>
+      <input type="password" id="pc2" placeholder="Repeat passcode" style="display:none" autocomplete="new-password">
+      <button class="btn btn-navy" type="submit" id="gateBtn" style="width:100%">Open desk</button>
+      <div class="err" id="gateErr"></div>
+    </form>
+  </div>
+
+  <div id="app" style="display:none">
+    <div class="tiles" id="tiles"></div>
+    <div class="tabs">
+      <button class="on" data-tab="all">All registrations</button>
+      <button data-tab="paid">Paid passes</button>
+      <button data-tab="free">Free (upsell list)</button>
+      <button data-tab="abandoned">Abandoned checkouts</button>
+      <button data-tab="sponsors">Sponsor leads</button>
+    </div>
+    <div class="tools">
+      <input type="search" id="q" placeholder="Search name, phone, email">
+      <select id="fu"><option value="">Any follow-up status</option><option>new</option><option>messaged</option><option>upgraded</option><option>attended</option><option>no_show</option><option>do_not_contact</option></select>
+      <span class="mini" id="count"></span>
+    </div>
+    <div class="card"><div id="table"></div></div>
+    <p class="foot">WhatsApp buttons open a pre-written message in your WhatsApp; nothing is sent automatically. Follow-up status and notes save on change. Payments are confirmed by Razorpay signature on the server; reconcile against the Razorpay dashboard before refunds.</p>
+  </div>
+</div>
+
+<script>
+const SB_URL = 'https://ntrlsnudicbdwdcguynz.supabase.co';
+const SB_KEY = 'sb_publishable_si0ucpO3OLawZMr1ihiuIw_shZbLoIw';
+let passcode = sessionStorage.getItem('expo_desk_pc') || '';
+let regs = [], leads = [], summary = {}, tab = 'all';
+
+async function rpc(fn, args){
+  const r = await fetch(SB_URL + '/rest/v1/rpc/' + fn, { method:'POST', headers:{ apikey:SB_KEY, Authorization:'Bearer '+SB_KEY, 'Content-Type':'application/json' }, body: JSON.stringify(args||{}) });
+  const t = await r.text(); let d = null; try { d = t ? JSON.parse(t) : null; } catch(e){ d = t; }
+  if (!r.ok) throw new Error(d && d.message ? d.message : ('HTTP ' + r.status));
+  return d;
+}
+
+// ---- Gate ----
+async function initGate(){
+  const has = await rpc('admin_has_passcode').catch(() => true);
+  if (has === false) {
+    document.getElementById('gateTitle').textContent = 'Set your passcode';
+    document.getElementById('gateHint').textContent = 'First visit. Choose a passcode of at least 6 characters. Only you will know it; it is stored hashed.';
+    document.getElementById('pc2').style.display = 'block';
+    document.getElementById('gateBtn').textContent = 'Set passcode and open desk';
+    document.getElementById('gateForm').dataset.mode = 'set';
+  }
+  if (passcode) { try { await load(); show(); } catch(e){ passcode=''; sessionStorage.removeItem('expo_desk_pc'); } }
+}
+document.getElementById('gateForm').addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const err = document.getElementById('gateErr'); err.style.display='none';
+  const pc = document.getElementById('pc').value;
+  try {
+    if (ev.target.dataset.mode === 'set') {
+      if (pc !== document.getElementById('pc2').value) throw new Error('The two passcodes do not match');
+      const ok = await rpc('admin_set_passcode', { p_passcode: pc });
+      if (!ok) throw new Error('A passcode already exists. Reload and enter it.');
+    }
+    passcode = pc;
+    await load();
+    sessionStorage.setItem('expo_desk_pc', pc);
+    show();
+  } catch(e){ err.textContent = /unauthorised/i.test(e.message) ? 'Wrong passcode.' : e.message; err.style.display='block'; }
+});
+function show(){ document.getElementById('gate').style.display='none'; document.getElementById('app').style.display='block'; document.getElementById('hdrTools').style.display='block'; }
+function logout(){ sessionStorage.removeItem('expo_desk_pc'); location.reload(); }
+
+// ---- Data ----
+async function load(){
+  [summary, regs, leads] = await Promise.all([
+    rpc('admin_summary', { p_passcode: passcode }),
+    rpc('admin_registrations', { p_passcode: passcode }),
+    rpc('admin_sponsor_leads', { p_passcode: passcode })
+  ]);
+  render();
+}
+const inr = p => '₹' + (Math.round((p||0)/100)).toLocaleString('en-IN');
+function renderTiles(){
+  const s = summary || {};
+  const t = [
+    ['Revenue collected', inr(s.revenue_paise), 'paid passes, INR', 'gold'],
+    ['Priority passes', s.priority_paid||0, '₹499 each'],
+    ['Family passes', s.family_paid||0, '₹1,999 each'],
+    ['Free registrations', s.free_registrations||0, 'upsell candidates'],
+    ['Abandoned checkouts', s.abandoned_checkouts||0, 'started payment, did not finish'],
+    ['Expected visitors', s.expected_visitors||0, 'people across confirmed passes'],
+    ['Sponsor leads', leads.length, leads.filter(l=>l.stage==='won').length + ' won']
+  ];
+  document.getElementById('tiles').innerHTML = t.map(x => `<div class="tile ${x[3]||''}"><small>${x[0]}</small><b>${x[1]}</b><small>${x[2]}</small></div>`).join('');
+}
+function waLink(r){
+  const first = (r.name||'').split(' ')[0];
+  let msg;
+  if (r.status === 'pending_payment') msg = `Hi ${first}, this is the Caspian Diabesity Expo team. Your ${r.pass_type === 'family' ? 'Family Pass' : 'Priority Pass'} payment did not go through. Would you like me to send you the payment link again? Reserved screening slots are limited for 14 November.`;
+  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free pass is confirmed. If you would like to skip every queue and get a one-on-one specialist review of your screening report, the Priority Pass is ₹499: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
+  else msg = `Hi ${first}, your ${r.pass_type === 'family' ? 'Family Pass' : 'Priority Pass'} for the Caspian Diabesity Expo on Saturday 14 November 2026 is confirmed. Payment ID ${r.razorpay_payment_id||''}. See you at 11 AM; bring this message to the priority gate.`;
+  const ph = (r.phone||'').replace(/\D/g,''); const intl = ph.length === 10 ? '91' + ph : ph;
+  return `https://wa.me/${intl}?text=${encodeURIComponent(msg)}`;
+}
+function fmt(d){ return new Date(d).toLocaleString('en-IN', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' }); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function filtered(){
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const fu = document.getElementById('fu').value;
+  let rows = regs;
+  if (tab === 'paid') rows = rows.filter(r => r.status === 'paid');
+  if (tab === 'free') rows = rows.filter(r => r.pass_type === 'free' && r.status === 'registered');
+  if (tab === 'abandoned') rows = rows.filter(r => r.status === 'pending_payment');
+  if (fu) rows = rows.filter(r => r.followup_status === fu);
+  if (q) rows = rows.filter(r => [r.name, r.phone, r.email].join(' ').toLowerCase().includes(q));
+  return rows;
+}
+function render(){
+  renderTiles();
+  const el = document.getElementById('table');
+  if (tab === 'sponsors') {
+    const q = document.getElementById('q').value.trim().toLowerCase();
+    const rows = leads.filter(l => !q || [l.org,l.contact_name,l.phone,l.email].join(' ').toLowerCase().includes(q));
+    document.getElementById('count').textContent = rows.length + ' leads';
+    el.innerHTML = rows.length ? `<table><thead><tr><th>When</th><th>Organisation</th><th>Contact</th><th>Interest</th><th>Message</th><th>Source</th><th>Stage</th><th>Value (₹)</th><th>Notes</th><th></th></tr></thead><tbody>` + rows.map(l => `<tr>
+      <td class="mini">${fmt(l.created_at)}</td><td><b>${esc(l.org)}</b></td>
+      <td>${esc(l.contact_name)}<br><span class="mini">${esc(l.phone)}${l.email ? ' · ' + esc(l.email) : ''}</span></td>
+      <td><span class="pill p-priority">${esc(l.interest)}</span></td><td class="mini">${esc(l.message||'')}</td>
+      <td class="mini">${esc(l.utm_source||l.referrer||'direct')}</td>
+      <td><select class="fu" onchange="updLead('${l.id}', {p_stage:this.value})">${['new','contacted','proposal_sent','negotiating','won','lost'].map(s => `<option ${s===l.stage?'selected':''}>${s}</option>`).join('')}</select></td>
+      <td><input class="notes" style="width:90px" value="${l.value_paise ? Math.round(l.value_paise/100) : ''}" placeholder="0" onchange="updLead('${l.id}', {p_value_paise: Math.round(Number(this.value||0)*100)})"></td>
+      <td><input class="notes" value="${esc(l.notes||'')}" placeholder="notes" onchange="updLead('${l.id}', {p_notes:this.value})"></td>
+      <td><a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="https://wa.me/${(l.phone||'').replace(/\D/g,'').replace(/^(\d{10})$/,'91$1')}?text=${encodeURIComponent('Hi ' + (l.contact_name||'').split(' ')[0] + ', thank you for your enquiry about the Caspian Diabesity Expo 2026. This is Dr Khizer. When would be a good time for a short call about your ' + (l.interest||'partnership').replace(/_/g,' ') + '?')}">WhatsApp</a></td>
+    </tr>`).join('') + '</tbody></table>' : '<div class="empty">No sponsor leads yet. Share diabesityexpo.com/exhibit with prospects.</div>';
+    return;
+  }
+  const rows = filtered();
+  document.getElementById('count').textContent = rows.length + ' of ' + regs.length + ' registrations';
+  el.innerHTML = rows.length ? `<table><thead><tr><th>When</th><th>Name</th><th>Phone / email</th><th>Pass</th><th>Status</th><th>People</th><th>Amount</th><th>Source</th><th>Follow-up</th><th>Notes</th><th>Check-in</th><th></th></tr></thead><tbody>` + rows.map(r => `<tr>
+    <td class="mini">${fmt(r.created_at)}</td>
+    <td><b>${esc(r.name)}</b></td>
+    <td>${esc(r.phone)}<br><span class="mini">${esc(r.email||'')}</span></td>
+    <td><span class="pill p-${r.pass_type}">${r.pass_type}</span></td>
+    <td><span class="pill p-${r.status}">${r.status.replace('_',' ')}</span>${r.razorpay_payment_id ? '<br><span class="mini">' + esc(r.razorpay_payment_id) + '</span>' : ''}</td>
+    <td>${r.people}</td><td>${r.amount_paise ? inr(r.amount_paise) : '<span class="mini">free</span>'}</td>
+    <td class="mini">${esc(r.utm_source || (r.referrer ? new URL(r.referrer).hostname : 'direct'))}${r.utm_campaign ? '<br>' + esc(r.utm_campaign) : ''}</td>
+    <td><select class="fu" onchange="updReg('${r.id}', {p_followup_status:this.value})">${['new','messaged','upgraded','attended','no_show','do_not_contact'].map(s => `<option ${s===r.followup_status?'selected':''}>${s}</option>`).join('')}</select></td>
+    <td><input class="notes" value="${esc(r.followup_notes||'')}" placeholder="notes" onchange="updReg('${r.id}', {p_followup_notes:this.value})"></td>
+    <td><input type="checkbox" ${r.checked_in_at ? 'checked' : ''} onchange="updReg('${r.id}', {p_checked_in:this.checked})" title="Checked in"></td>
+    <td>${r.followup_status === 'do_not_contact' ? '' : `<a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="${waLink(r)}">WhatsApp</a>`}</td>
+  </tr>`).join('') + '</tbody></table>' : '<div class="empty">Nothing here yet.</div>';
+}
+async function updReg(id, patch){
+  try { await rpc('admin_update_registration', Object.assign({ p_passcode: passcode, p_id: id, p_followup_status: null, p_followup_notes: null, p_checked_in: null }, patch)); const r = regs.find(x => x.id === id); if (r) { if (patch.p_followup_status) r.followup_status = patch.p_followup_status; if (patch.p_followup_notes != null) r.followup_notes = patch.p_followup_notes; if (patch.p_checked_in != null) r.checked_in_at = patch.p_checked_in ? new Date().toISOString() : null; } }
+  catch(e){ alert('Could not save: ' + e.message); }
+}
+async function updLead(id, patch){
+  try { await rpc('admin_update_lead', Object.assign({ p_passcode: passcode, p_id: id, p_stage: null, p_notes: null, p_value_paise: null }, patch)); const l = leads.find(x => x.id === id); if (l) Object.keys(patch).forEach(k => { l[k.replace('p_','')] = patch[k]; }); renderTiles(); }
+  catch(e){ alert('Could not save: ' + e.message); }
+}
+function exportCsv(){
+  const rows = tab === 'sponsors' ? leads : filtered();
+  if (!rows.length) return alert('Nothing to export');
+  const cols = Object.keys(rows[0]);
+  const csv = [cols.join(',')].concat(rows.map(r => cols.map(c => '"' + String(r[c]==null?'':r[c]).replace(/"/g,'""') + '"').join(','))).join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'})); a.download = 'expo-' + tab + '-' + new Date().toISOString().slice(0,10) + '.csv'; a.click();
+}
+document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.tabs button').forEach(x => x.classList.remove('on')); b.classList.add('on'); tab = b.dataset.tab; render(); }));
+document.getElementById('q').addEventListener('input', render);
+document.getElementById('fu').addEventListener('change', render);
+initGate();
+</script>
+</body>
+</html>

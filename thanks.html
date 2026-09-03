@@ -9,6 +9,8 @@
   gtag('js', new Date());
   gtag('config', 'G-7XDYZ4FNXN');
 </script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>You're in | Caspian Diabesity Expo 2026</title>
@@ -23,6 +25,7 @@ h1{font-family:'Fraunces',serif;font-size:1.9rem;margin:0 0 12px}
 p{color:#C9D6E8;font-size:.95rem;line-height:1.6;margin:0 0 10px}
 .pid{background:rgba(255,255,255,.07);border-radius:10px;padding:10px 14px;font-size:.85rem;margin:18px 0;word-break:break-all}
 a.btn{display:inline-block;margin-top:18px;background:#C6A02E;color:#0C1D38;font-weight:600;text-decoration:none;padding:13px 26px;border-radius:999px}
+a.btn.wa{background:#25D366;color:#062B12;margin-left:8px}
 </style>
 </head>
 <body>
@@ -31,15 +34,26 @@ a.btn{display:inline-block;margin-top:18px;background:#C6A02E;color:#0C1D38;font
   <h1 id="h">You're in. See you on 14 November.</h1>
   <p id="msg">Your pass is confirmed and your payment receipt is on its way from Razorpay. Save your payment ID below and show it at the priority gate.</p>
   <div class="pid" id="pid"></div>
-  <p>Questions? WhatsApp us at +91 89193 41154.</p>
-  <a class="btn" href="/">Back to the expo site</a>
+  <p>Save the date: Saturday 14 November 2026, 11 AM to 9 PM, Hyderabad. Bring the people you share meals with; the free screening is open to them too.</p>
+  <a class="btn" href="/">Back to the expo site</a><a class="btn wa" id="waShare" href="#" target="_blank" rel="noopener">Tell your family on WhatsApp</a>
 </div>
 <script>
 const q = new URLSearchParams(location.search);
-const pass = q.get('pass'); const pid = q.get('pid');
+const pass = q.get('pass'); const pid = q.get('pid'); const oid = q.get('oid');
 const names = { priority: 'Priority Pass', family: 'Family Pass' };
+const price = { priority: 499, family: 1999 };
 if (pass && names[pass]) document.getElementById('h').textContent = names[pass] + ' confirmed. See you on 14 November.';
 document.getElementById('pid').textContent = pid ? ('Payment ID: ' + pid) : '';
+document.getElementById('waShare').href = 'https://wa.me/?text=' + encodeURIComponent('I just booked my pass for the Caspian Diabesity Expo on Saturday 14 November 2026 in Hyderabad. Free full-body screening, specialist talks and free entry for the family. Register here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=share&utm_campaign=thanks_page');
+// Fire the purchase once per payment id
+try {
+  if (pass && names[pass] && pid && !localStorage.getItem('exp_purchase_' + pid)) {
+    const params = { transaction_id: pid, value: price[pass], currency: 'INR', items: [{ item_id: pass, item_name: names[pass], price: price[pass], quantity: 1 }] };
+    gtag('event', 'purchase', params);
+    window.va && window.va('event', { name: 'purchase', data: { pass: pass, value: price[pass], order: oid || '' } });
+    localStorage.setItem('exp_purchase_' + pid, '1');
+  }
+} catch (e) {}
 </script>
 </body>
 </html>
