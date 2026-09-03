@@ -9,6 +9,9 @@
   gtag('js', new Date());
   gtag('config', 'G-7XDYZ4FNXN');
 </script>
+<!-- Vercel Web Analytics -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,21 +34,49 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Event",
-  "name": "Caspian Diabesity Expo 2026",
-  "description": "Hyderabad's biggest free public day of diabetes and obesity action: free full-body screenings, specialist talks, workshops, a doctor CME track and a solutions exhibition. 3rd edition, on World Diabetes Day.",
-  "startDate": "2026-11-14T09:00:00+05:30",
-  "endDate": "2026-11-14T21:00:00+05:30",
-  "eventStatus": "https://schema.org/EventScheduled",
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "image": "https://diabesityexpo.com/assets/og-image.jpg",
-  "url": "https://diabesityexpo.com/",
-  "location": { "@type": "Place", "name": "Venue to be announced", "address": { "@type": "PostalAddress", "addressLocality": "Hyderabad", "addressRegion": "Telangana", "addressCountry": "IN" } },
-  "organizer": { "@type": "Organization", "name": "Caspian Healthcare Foundation", "url": "https://diabesityexpo.com/" },
-  "offers": [
-    { "@type": "Offer", "name": "Free Entry Pass", "price": "0", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": "https://diabesityexpo.com/#tickets" },
-    { "@type": "Offer", "name": "Priority Pass", "price": "499", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": "https://diabesityexpo.com/#tickets" },
-    { "@type": "Offer", "name": "Family Pass", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": "https://diabesityexpo.com/#tickets" }
+  "@graph": [
+  {
+    "@type": "Event",
+    "@id": "https://diabesityexpo.com/#event",
+    "name": "Caspian Diabesity Expo 2026",
+    "description": "Hyderabad's biggest free public day of diabetes and obesity action: free full-body screenings, specialist talks, workshops, a doctor CME track and a solutions exhibition. 3rd edition, on World Diabetes Day.",
+    "startDate": "2026-11-14T11:00:00+05:30",
+    "endDate": "2026-11-14T21:00:00+05:30",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "image": ["https://diabesityexpo.com/assets/og-image.jpg", "https://diabesityexpo.com/assets/hero.jpg"],
+    "url": "https://diabesityexpo.com/",
+    "isAccessibleForFree": true,
+    "location": { "@type": "Place", "name": "Venue to be announced", "address": { "@type": "PostalAddress", "addressLocality": "Hyderabad", "addressRegion": "Telangana", "addressCountry": "IN" } },
+    "organizer": { "@id": "https://diabesityexpo.com/#organizer" },
+    "performer": { "@type": "Person", "name": "Dr. Khizer Hussain Junaidy", "jobTitle": "Bariatric Physician" },
+    "offers": [
+      { "@type": "Offer", "name": "Free Entry Pass", "price": "0", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-08-08", "url": "https://diabesityexpo.com/#register" },
+      { "@type": "Offer", "name": "Priority Pass", "price": "499", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-08-08", "url": "https://diabesityexpo.com/#tickets" },
+      { "@type": "Offer", "name": "Family Pass (up to 4 people)", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-08-08", "url": "https://diabesityexpo.com/#tickets" }
+    ]
+  },
+  {
+    "@type": "Organization",
+    "@id": "https://diabesityexpo.com/#organizer",
+    "name": "Caspian Healthcare Foundation",
+    "url": "https://diabesityexpo.com/",
+    "logo": "https://diabesityexpo.com/assets/logo.png",
+    "email": "oratorkhizer@gmail.com",
+    "telephone": "+918919341154",
+    "address": { "@type": "PostalAddress", "streetAddress": "Vijay Nagar Colony", "addressLocality": "Hyderabad", "addressRegion": "Telangana", "addressCountry": "IN" }
+  },
+  {
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Is entry to the Caspian Diabesity Expo really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Register for a Free Entry Pass and walk in. Paid passes only add convenience: reserved screening slots, seating and extras. Nobody is turned away." } },
+      { "@type": "Question", "name": "Which tests are free, and should I come fasting?", "acceptedAnswer": { "@type": "Answer", "text": "Blood sugar, blood pressure and BMI are free for every visitor, with advanced tests subsidised on site. A random (non-fasting) sugar check works for screening, so come as you are. If you want a fasting test, come before eating and get screened first." } },
+      { "@type": "Question", "name": "Can I bring my parents and children?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The expo is built as a family day, and the Family Pass covers up to four people with priority benefits. Risk runs in families, so bring the people you share meals with." } },
+      { "@type": "Question", "name": "Are paid passes refundable?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, fully refundable until 31 October 2026. Refunds are processed to the original payment method through Razorpay." } },
+      { "@type": "Question", "name": "I am a doctor. What is the CME track?", "acceptedAnswer": { "@type": "Answer", "text": "An accredited morning scientific program for clinicians, running before the public expo opens. Registration details will be announced; meanwhile write to oratorkhizer@gmail.com." } },
+      { "@type": "Question", "name": "How do I book a stall or a sponsorship at the expo?", "acceptedAnswer": { "@type": "Answer", "text": "Download the prospectus or WhatsApp +91 89193 41154. Stalls start at Rs 25,000 and early partners get preferred placement and pricing." } }
+    ]
+  }
   ]
 }
 </script>
@@ -175,10 +206,19 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .regbox h3{color:#fff;margin-bottom:6px}
 .regbox p{color:var(--ice);font-size:.88rem;margin-bottom:20px}
 .regbox .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.regbox input,.regbox select{width:100%;padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:.95rem;font-family:inherit}
-.regbox input::placeholder{color:#7E92AC}
+.regbox input,.regbox select,.regbox textarea{width:100%;padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:.95rem;font-family:inherit}
+.regbox input::placeholder,.regbox textarea::placeholder{color:#7E92AC}
+.regbox select option{color:var(--ink)}
 .regbox .full{grid-column:1/-1}
 .regbox .ok{display:none;background:rgba(31,107,69,.25);border:1px solid #2E9E68;color:#C9F0DB;padding:14px;border-radius:10px;margin-top:14px;font-size:.9rem}
+.regbox .ok a{color:#fff;font-weight:600}
+.regbox.light{background:var(--light);border:1px solid #E1E8F2}
+.regbox.light h3{color:var(--navy)}
+.regbox.light p{color:var(--muted)}
+.regbox.light input,.regbox.light select,.regbox.light textarea{background:#fff;border:1px solid #D5DEEA;color:var(--ink)}
+.regbox.light input::placeholder,.regbox.light textarea::placeholder{color:#8A9BB0}
+.regbox.light .ok{background:#DCEFE3;border-color:#2E9E68;color:#1F6B45}
+.regbox.light .ok a{color:#1F6B45}
 /* SPONSOR */
 .sponsor .cols{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;margin-top:36px;align-items:start}
 .sp-list{list-style:none;margin-top:18px}
@@ -213,6 +253,10 @@ html.js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){html.js .reveal{opacity:1;transform:none;transition:none}}
 .wa-float{position:fixed;right:22px;bottom:22px;z-index:60;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(0,0,0,.3)}
 .wa-float svg{width:30px;height:30px;fill:#fff}
+/* Sticky mobile pass bar */
+.passbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(12,29,56,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;gap:10px}
+.passbar a{flex:1;text-align:center;padding:12px 10px;font-size:.9rem}
+.passbar .btn-ghost{border-color:rgba(255,255,255,.35)}
 @media(max-width:900px){
   .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--navy);flex-direction:column;padding:20px;gap:16px}
   .nav-links.open{display:flex}
@@ -222,6 +266,10 @@ html.js .reveal.in{opacity:1;transform:none}
   .gal{grid-template-columns:repeat(2,1fr)}
   .regbox .row{grid-template-columns:1fr}
   section{padding:64px 0}
+  .passbar{display:flex}
+  .passbar.hidden{display:none}
+  .wa-float{bottom:84px}
+  body{padding-bottom:70px}
 }
 </style>
 </head>
@@ -240,7 +288,7 @@ html.js .reveal.in{opacity:1;transform:none}
       <li><a href="#tickets">Passes</a></li>
       <li><a href="#sponsor">Exhibit &amp; Sponsor</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a class="nav-cta" href="#register">Get Free Pass</a></li>
+      <li><a class="nav-cta" href="#register" data-track="cta_nav_free_pass">Get Free Pass</a></li>
     </ul>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -262,8 +310,8 @@ html.js .reveal.in{opacity:1;transform:none}
       <div><b id="cd-s">0</b><small>Seconds</small></div>
     </div>
     <div class="hero-ctas">
-      <a class="btn btn-gold" href="#register">Get your free pass</a>
-      <a class="btn btn-ghost" href="#tickets">See Priority passes</a>
+      <a class="btn btn-gold" href="#register" data-track="cta_hero_free_pass">Get your free pass</a>
+      <a class="btn btn-ghost" href="#tickets" data-track="cta_hero_priority">See Priority passes</a>
     </div>
     <p class="host"><b>Hosted by the Caspian Healthcare Foundation</b>, a registered public charitable trust · Past editions in collaboration with RSSDI Telangana</p>
   </div>
@@ -396,7 +444,7 @@ html.js .reveal.in{opacity:1;transform:none}
           <li>Whole family welcome</li>
           <li>Registration required, takes one minute</li>
         </ul>
-        <a class="btn btn-ghost" href="#register">Register free</a>
+        <a class="btn btn-ghost" href="#register" data-track="cta_card_free_pass">Register free</a>
       </div>
       <div class="tix featured reveal">
         <span class="pop">Most popular</span>
@@ -435,11 +483,11 @@ html.js .reveal.in{opacity:1;transform:none}
       <p id="regHint">Register in one minute. Show the confirmation at the gate. For Priority and Family passes, fill this form and the payment window opens.</p>
       <form id="regForm">
         <div class="row">
-          <input type="text" name="name" id="f-name" placeholder="Full name *" required>
-          <input type="tel" name="phone" id="f-phone" placeholder="WhatsApp number *" pattern="[0-9+ ]{10,15}" required>
+          <input type="text" name="name" id="f-name" placeholder="Full name *" required autocomplete="name">
+          <input type="tel" name="phone" id="f-phone" placeholder="WhatsApp number *" pattern="[0-9+ ]{10,15}" required autocomplete="tel">
         </div>
         <div class="row">
-          <input type="email" name="email" id="f-email" placeholder="Email (optional)">
+          <input type="email" name="email" id="f-email" placeholder="Email (optional)" autocomplete="email">
           <select name="people" id="f-people" aria-label="How many people are coming">
             <option value="1">Coming alone</option>
             <option value="2">2 people</option>
@@ -450,7 +498,7 @@ html.js .reveal.in{opacity:1;transform:none}
         <div class="row">
           <button type="submit" class="btn btn-gold full" id="regBtn">Register free</button>
         </div>
-        <div class="ok" id="regOk">Registered. See you on 14 November. A confirmation will reach your WhatsApp or email before the event.</div>
+        <div class="ok" id="regOk">Registered. See you on 14 November. A confirmation will reach your WhatsApp or email before the event. <span id="regUpsell">Want to skip every queue on the day? <a href="#tickets" onclick="startCheckout('priority');return false;">Upgrade to a Priority Pass for ₹499</a>.</span></div>
       </form>
     </div>
   </div>
@@ -471,8 +519,8 @@ html.js .reveal.in{opacity:1;transform:none}
           <li>For pharma: a UCPMP-compliant doctor track and a CSR route via the Foundation</li>
         </ul>
         <div class="hero-ctas" style="margin-top:26px">
-          <a class="btn btn-navy" href="assets/CASPIAN-Diabesity-Expo-2026-Prospectus.pdf" download>Download the prospectus (PDF)</a>
-          <a class="btn btn-gold" href="https://wa.me/918919341154?text=Hi%2C%20I%20want%20to%20discuss%20sponsoring%20or%20exhibiting%20at%20the%20Caspian%20Diabesity%20Expo%202026." target="_blank" rel="noopener">WhatsApp the organisers</a>
+          <a class="btn btn-navy" href="assets/CASPIAN-Diabesity-Expo-2026-Prospectus.pdf" download data-track="prospectus_download">Download the prospectus (PDF)</a>
+          <a class="btn btn-gold" href="https://wa.me/918919341154?text=Hi%2C%20I%20want%20to%20discuss%20sponsoring%20or%20exhibiting%20at%20the%20Caspian%20Diabesity%20Expo%202026." target="_blank" rel="noopener" data-track="sponsor_whatsapp">WhatsApp the organisers</a>
         </div>
       </div>
       <div class="rate-box reveal">
@@ -491,7 +539,40 @@ html.js .reveal.in{opacity:1;transform:none}
     </div>
     <div class="csr-strip reveal">
       <p><b>CSR desks:</b> fund screenings under Schedule VII (preventive healthcare) through a registered public charitable trust, with 80G receipts, audited utilisation and a board-ready impact report within 45 days. CSR partnerships from ₹1,00,000.</p>
-      <a class="btn btn-gold" href="mailto:oratorkhizer@gmail.com?subject=CSR%20partnership%20-%20Caspian%20Diabesity%20Expo%202026">Write to us</a>
+      <a class="btn btn-gold" href="#sponsor-enquiry" data-track="csr_write_to_us">Write to us</a>
+    </div>
+
+    <div class="regbox light" id="sponsor-enquiry" style="max-width:none;margin-top:36px">
+      <h3>Reserve a stall or request a partnership call</h3>
+      <p>Tell us who you are and what you have in mind. We reply within one working day with the rate card, floor plan and available slots. Early-partner pricing closes 30 September 2026.</p>
+      <form id="spForm">
+        <div class="row">
+          <input type="text" name="org" id="sp-org" placeholder="Organisation / brand *" required autocomplete="organization">
+          <input type="text" name="contact_name" id="sp-name" placeholder="Your name *" required autocomplete="name">
+        </div>
+        <div class="row">
+          <input type="tel" name="phone" id="sp-phone" placeholder="Phone / WhatsApp *" pattern="[0-9+ ]{10,15}" required autocomplete="tel">
+          <input type="email" name="email" id="sp-email" placeholder="Work email" autocomplete="email">
+        </div>
+        <div class="row">
+          <select name="interest" id="sp-interest" aria-label="What are you interested in">
+            <option value="stall">Exhibition stall (from ₹25,000)</option>
+            <option value="silver">Silver Partner (₹75,000)</option>
+            <option value="gold">Gold Partner (₹1,50,000)</option>
+            <option value="cme_slot">CME Symposium Slot (₹1,50,000)</option>
+            <option value="screening_zone">Screening Zone "Powered by" (₹2,00,000)</option>
+            <option value="co_powered">Co-Powered By (₹2,50,000)</option>
+            <option value="title">Title Sponsor (₹5,00,000)</option>
+            <option value="csr">CSR partnership (from ₹1,00,000)</option>
+            <option value="other">Something else</option>
+          </select>
+          <input type="text" name="message" id="sp-message" placeholder="Anything we should know? (optional)">
+        </div>
+        <div class="row">
+          <button type="submit" class="btn btn-navy full" id="spBtn">Send enquiry</button>
+        </div>
+        <div class="ok" id="spOk">Thank you. Your enquiry is with the organisers; expect a reply within one working day. In a hurry? <a href="https://wa.me/918919341154" target="_blank" rel="noopener">WhatsApp +91 89193 41154</a>.</div>
+      </form>
     </div>
   </div>
 </section>
@@ -521,8 +602,8 @@ html.js .reveal.in{opacity:1;transform:none}
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><a href="tel:+918919341154">+91 89193 41154</a></li>
-          <li><a href="https://wa.me/918919341154" target="_blank" rel="noopener">WhatsApp us</a></li>
+          <li><a href="tel:+918919341154" data-track="call_click">+91 89193 41154</a></li>
+          <li><a href="https://wa.me/918919341154" target="_blank" rel="noopener" data-track="whatsapp_click">WhatsApp us</a></li>
           <li><a href="mailto:oratorkhizer@gmail.com">oratorkhizer@gmail.com</a></li>
           <li>Caspian Healthcare, Vijay Nagar Colony, Hyderabad</li>
         </ul>
@@ -530,13 +611,14 @@ html.js .reveal.in{opacity:1;transform:none}
       <div>
         <h4>More</h4>
         <ul>
-          <li><a href="/about.html">About us</a></li>
-          <li><a href="/contact.html">Contact us</a></li>
+          <li><a href="/about">About us</a></li>
+          <li><a href="/contact">Contact us</a></li>
           <li><a href="#tickets">Passes &amp; pricing</a></li>
-          <li><a href="assets/CASPIAN-Diabesity-Expo-2026-Prospectus.pdf" download>Sponsorship prospectus</a></li>
-          <li><a href="/terms.html">Terms &amp; conditions</a></li>
-          <li><a href="/privacy.html">Privacy policy</a></li>
-          <li><a href="/refund.html">Refund &amp; cancellation policy</a></li>
+          <li><a href="#sponsor-enquiry">Exhibit or sponsor</a></li>
+          <li><a href="assets/CASPIAN-Diabesity-Expo-2026-Prospectus.pdf" download data-track="prospectus_download">Sponsorship prospectus</a></li>
+          <li><a href="/terms">Terms &amp; conditions</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/refund">Refund &amp; cancellation policy</a></li>
         </ul>
       </div>
     </div>
@@ -547,7 +629,12 @@ html.js .reveal.in{opacity:1;transform:none}
   </div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/918919341154?text=Hi%2C%20I%20have%20a%20question%20about%20the%20Diabesity%20Expo%202026." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+<div class="passbar" id="passbar">
+  <a class="btn btn-ghost" href="#register" data-track="cta_sticky_free">Free pass</a>
+  <a class="btn btn-gold" href="#tickets" onclick="startCheckout('priority');return false;" data-track="cta_sticky_priority">Priority ₹499</a>
+</div>
+
+<a class="wa-float" href="https://wa.me/918919341154?text=Hi%2C%20I%20have%20a%20question%20about%20the%20Diabesity%20Expo%202026." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-track="whatsapp_float">
   <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.7 6L4 29l8.2-1.6c1.2.6 2.5.9 3.8.9 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22c-1.2 0-2.4-.3-3.5-.8l-.6-.3-4.9 1 1-4.7-.3-.6C6.6 18.1 6 16.6 6 15 6 9.5 10.5 5 16 5s10 4.5 10 10-4.5 10-10 10zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
 </a>
 
@@ -556,12 +643,42 @@ html.js .reveal.in{opacity:1;transform:none}
 document.documentElement.classList.add('js');
 // Safety: if anything prevents the observer from firing, reveal everything after 4s
 setTimeout(() => document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in')), 4000);
+
+// ---- Analytics helpers (GA4 + Vercel) ----
+function track(name, params){
+  try { gtag('event', name, params || {}); } catch(e){}
+  try { window.va && window.va('event', { name: name, data: params || {} }); } catch(e){}
+}
+document.querySelectorAll('[data-track]').forEach(el => el.addEventListener('click', () => track(el.getAttribute('data-track'))));
+
+// Marketing attribution: remember the first UTM/referrer we saw for this visitor
+function attribution(){
+  let a = {};
+  try { a = JSON.parse(sessionStorage.getItem('expo_attr') || '{}'); } catch(e){}
+  if (!a.landing_path) {
+    const q = new URLSearchParams(location.search);
+    a = {
+      utm_source: q.get('utm_source') || null, utm_medium: q.get('utm_medium') || null,
+      utm_campaign: q.get('utm_campaign') || null, utm_content: q.get('utm_content') || null,
+      referrer: document.referrer || null, landing_path: location.pathname + location.search
+    };
+    try { sessionStorage.setItem('expo_attr', JSON.stringify(a)); } catch(e){}
+  }
+  return a;
+}
+attribution();
+
 // Nav
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
 const burger = document.getElementById('burger'), navLinks = document.getElementById('navLinks');
 burger.addEventListener('click', () => navLinks.classList.toggle('open'));
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+// Hide the sticky pass bar while the registration form is on screen
+const passbar = document.getElementById('passbar');
+const regObs = new IntersectionObserver(es => es.forEach(e => passbar.classList.toggle('hidden', e.isIntersecting)), {threshold:.1});
+regObs.observe(document.getElementById('register'));
 
 // Countdown to expo day
 const target = new Date('2026-11-14T11:00:00+05:30').getTime();
@@ -582,15 +699,20 @@ tick(); setInterval(tick, 1000);
 const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Registration + checkout
+// ---- Registration + checkout ----
 let pendingPass = null; // null = free registration
 const PASS_LABELS = { priority: 'Priority Pass (₹499)', family: 'Family Pass (₹1,999, up to 4 people)' };
+const PASS_PRICE = { priority: 499, family: 1999 };
 
 function startCheckout(passType){
   pendingPass = passType;
+  track('select_item', { item_list_name: 'passes', items: [{ item_id: passType, item_name: PASS_LABELS[passType], price: PASS_PRICE[passType] }] });
   document.getElementById('regTitle').textContent = 'Almost there: ' + PASS_LABELS[passType];
   document.getElementById('regHint').textContent = 'Fill your details and the secure Razorpay window opens. Payment goes to the Caspian Healthcare Foundation.';
   document.getElementById('regBtn').textContent = 'Continue to payment';
+  document.getElementById('regBtn').disabled = false;
+  document.getElementById('regOk').style.display = 'none';
+  if (passType === 'family') document.getElementById('f-people').value = '4';
   document.getElementById('register').scrollIntoView({behavior:'smooth'});
   document.getElementById('f-name').focus();
 }
@@ -602,16 +724,18 @@ document.getElementById('regForm').addEventListener('submit', async (ev) => {
   const email = document.getElementById('f-email').value.trim();
   const people = document.getElementById('f-people').value;
   const btn = document.getElementById('regBtn');
+  const attr = attribution();
 
   if (!pendingPass) {
-    // Free registration via FormSubmit
+    // Free registration: saved to the expo database, copy emailed to the organisers
     btn.disabled = true; btn.textContent = 'Registering...';
     try {
-      await fetch('https://formsubmit.co/ajax/oratorkhizer@gmail.com', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json','Accept':'application/json'},
-        body: JSON.stringify({ _subject: 'Free Pass: Diabesity Expo 2026', name, phone, email, people, pass: 'Free Entry Pass' })
+      const r = await fetch('/api/register', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ name, phone, email, people, attribution: attr })
       });
+      if (!r.ok) throw new Error('register failed');
+      track('generate_lead', { lead_type: 'free_pass', people: Number(people), currency: 'INR', value: 0 });
       document.getElementById('regOk').style.display = 'block';
       btn.textContent = 'Registered ✓';
     } catch(e) {
@@ -623,13 +747,15 @@ document.getElementById('regForm').addEventListener('submit', async (ev) => {
 
   // Paid pass via Razorpay
   btn.disabled = true; btn.textContent = 'Opening secure payment...';
+  const passType = pendingPass;
   try {
     const r = await fetch('/api/create-order', {
       method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ passType: pendingPass, name, phone, email, people })
+      body: JSON.stringify({ passType, name, phone, email, people, attribution: attr })
     });
     if (!r.ok) throw new Error('order failed');
     const o = await r.json();
+    track('begin_checkout', { currency: 'INR', value: PASS_PRICE[passType], items: [{ item_id: passType, item_name: PASS_LABELS[passType], price: PASS_PRICE[passType], quantity: 1 }] });
     const rzp = new Razorpay({
       key: o.keyId, order_id: o.orderId, amount: o.amount, currency: 'INR',
       name: 'Caspian Diabesity Expo 2026',
@@ -645,17 +771,39 @@ document.getElementById('regForm').addEventListener('submit', async (ev) => {
         });
         const vr = await v.json();
         if (vr.verified) {
-          window.location.href = '/thanks.html?pass=' + pendingPass + '&pid=' + encodeURIComponent(resp.razorpay_payment_id);
+          window.location.href = '/thanks?pass=' + passType + '&pid=' + encodeURIComponent(resp.razorpay_payment_id) + '&oid=' + encodeURIComponent(resp.razorpay_order_id);
         } else {
           alert('Payment received but verification failed. Please WhatsApp us with your payment ID: ' + resp.razorpay_payment_id);
         }
       },
-      modal: { ondismiss: function(){ btn.disabled = false; btn.textContent = 'Continue to payment'; } }
+      modal: { ondismiss: function(){ track('checkout_abandoned', { pass: passType }); btn.disabled = false; btn.textContent = 'Continue to payment'; } }
     });
+    rzp.on('payment.failed', function(){ track('payment_failed', { pass: passType }); });
     rzp.open();
   } catch(e) {
     alert('Could not start the payment. Please try again or WhatsApp +91 89193 41154.');
     btn.disabled = false; btn.textContent = 'Continue to payment';
+  }
+});
+
+// ---- Sponsor / exhibitor enquiry ----
+document.getElementById('spForm').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const f = id => document.getElementById(id).value.trim();
+  const btn = document.getElementById('spBtn');
+  btn.disabled = true; btn.textContent = 'Sending...';
+  try {
+    const r = await fetch('/api/sponsor-lead', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ org: f('sp-org'), contact_name: f('sp-name'), phone: f('sp-phone'), email: f('sp-email'), interest: f('sp-interest'), message: f('sp-message'), attribution: attribution() })
+    });
+    if (!r.ok) throw new Error('lead failed');
+    track('generate_lead', { lead_type: 'sponsor', interest: f('sp-interest') });
+    document.getElementById('spOk').style.display = 'block';
+    btn.textContent = 'Enquiry sent ✓';
+  } catch(e) {
+    alert('Could not send right now. Please WhatsApp us at +91 89193 41154.');
+    btn.disabled = false; btn.textContent = 'Send enquiry';
   }
 });
 </script>
