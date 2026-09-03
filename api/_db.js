@@ -41,7 +41,9 @@ async function rest(path, { method = "GET", body, prefer } = {}) {
 }
 
 function insert(table, row) {
-  return rest(table, { method: "POST", body: row, prefer: "return=representation" });
+  // With the anon key, RLS allows INSERT but not SELECT, so RETURNING would fail: ask for no body.
+  const prefer = hasServiceRole() ? "return=representation" : "return=minimal";
+  return rest(table, { method: "POST", body: row, prefer }).then((d) => (Array.isArray(d) ? d : []));
 }
 
 function update(table, filter, patch) {

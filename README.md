@@ -1,54 +1,38 @@
-# Caspian Diabesity Expo 2026 Website
+# Caspian Diabesity Expo 2026 website
 
-Fast static site for diabesityexpo.com with Razorpay pass checkout, built for the
-Caspian Healthcare Foundation. Same stack as caspianobesity.com: static pages plus
-two Vercel serverless functions, deployed from GitHub with auto-deploy.
+Static site + Vercel serverless functions. Push to `main` deploys production (diabesityexpo.com). diabesityexpo.in and www.diabesityexpo.in 301 to the .com.
 
-## What is in here
+## Revenue funnel (Sept 2026)
 
-| File | Purpose |
-|---|---|
-| `index.html` | The whole site (single page, inline CSS/JS): hero, five points of view, offerings, track record, agenda, passes with Razorpay checkout, sponsor section, FAQ, footer |
-| `thanks.html` | Post-payment confirmation page |
-| `terms.html`, `privacy.html`, `refund.html` | Policy pages (Razorpay compliance) |
-| `api/create-order.js` | Creates a Razorpay order server-side (amounts fixed in code: ₹499 / ₹1,999) |
-| `api/verify-payment.js` | Verifies the payment signature (HMAC SHA256) |
-| `assets/og-image.jpg` | WhatsApp/social link preview card (replace with real artwork any time) |
-| `assets/CASPIAN-Diabesity-Expo-2026-Prospectus.pdf` | Sponsor prospectus download |
-| `favicon.svg`, `robots.txt`, `sitemap.xml` | Basics |
+| Path | What it does |
+| --- | --- |
+| `POST /api/register` | Free pass. Saves to Supabase `registrations` and emails a copy via FormSubmit. |
+| `POST /api/create-order` | Razorpay order (amounts fixed server-side). Saves a `pending_payment` row so abandoned checkouts can be followed up. |
+| `POST /api/verify-payment` | Verifies the Razorpay signature and marks the row `paid`. |
+| `POST /api/sponsor-lead` | Stall / sponsor / CSR enquiry into `sponsor_leads`. |
+| `/admin` | Expo Desk: revenue tiles, registrants, abandoned checkouts, sponsor leads, WhatsApp follow-up links, CSV export. Passcode set on first visit (stored hashed in Supabase `admin_config`). |
 
-## Deploy (about 20 minutes)
+Short links: `/register`, `/passes`, `/sponsor`, `/exhibit`.
 
-1. **GitHub**: create a repo (e.g. `oratorkhizer/diabesityexpo-site`) and push these files.
-2. **Vercel**: Add New Project → import the repo (team "Caspian Branding" works fine).
-   Before deploying, add Environment Variables:
-   - `RAZORPAY_KEY_ID` = the Foundation's live key id
-   - `RAZORPAY_KEY_SECRET` = the Foundation's live secret
-   Deploy. Make one small test payment once live, then refund it from the Razorpay dashboard.
-3. **GoDaddy DNS** (cutover, do this last):
-   - In the Vercel project → Settings → Domains → add `diabesityexpo.com` and `www.diabesityexpo.com`.
-   - In GoDaddy DNS for diabesityexpo.com: change the `A` record for `@` to `76.76.21.21`,
-     and the `CNAME` for `www` to `cname.vercel-dns.com`. Remove the old hosting records.
-   - The old WordPress hosting can stay paid until you confirm the new site is live, then cancel it.
-     (Take a WordPress export first if you want the old content archived.)
-4. **Free pass form**: the form posts to FormSubmit (oratorkhizer@gmail.com).
-   The first submission triggers a confirmation email from formsubmit.co : click it once and
-   all later registrations flow to your inbox.
+### Data
 
-## Content you should update
+Supabase project `diabesityexpo` (Caspian Branding org, Mumbai). Tables: `registrations`, `sponsor_leads`, `events`, `admin_config`; view `revenue_summary`. Row Level Security: the public key may only INSERT free registrations and sponsor leads; everything else goes through the service role on the server or the passcode-protected `admin_*` RPCs.
 
-- **Venue**: search for "venue announcement soon" in `index.html` once the hall is booked
-  (also update the JSON-LD `location` block near the top).
-- **Gallery**: eight real photos from the 2025 edition are in `assets/gallery/` (g1-g8). To swap one, replace the file and keep the name
-  (or edit the `figure` tags in the gallery section). The hero background is `assets/hero.jpg`.
-- **Agenda and speakers**: the agenda is marked provisional; update by October.
-- **Analytics**: add your GA4 tag in `<head>` when ready (left out deliberately, no fake IDs).
-- **Refund cutoff**: 31 October 2026 is set in the FAQ, tickets note and `refund.html`. Keep in sync.
+### Environment variables (Vercel, Production)
 
-## Notes
+| Name | Purpose |
+| --- | --- |
+| `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Payments (set). |
+| `SUPABASE_SERVICE_ROLE_KEY` | **Required** for paid-pass rows (pending and paid) and for returning row ids. Without it, free registrations and sponsor leads are still saved; paid passes are only in Razorpay. Copy from Supabase > Project Settings > API keys, paste in Vercel, redeploy. |
+| `SUPABASE_URL`, `SUPABASE_ANON_KEY` | Optional overrides; defaults are baked in. |
 
-- Pass prices are enforced server-side in `api/create-order.js`. Prices: Priority ₹499, Family ₹1,999 (set server-side). Changing a price means editing
-  that file and the matching copy in `index.html`.
-- Every payment lands in the Foundation's Razorpay account with the buyer's name, phone and
-  pass type saved in the order notes (visible in the Razorpay dashboard, exportable to Excel).
-- No cookies, no trackers by default. localStorage is not used.
+### Analytics
+
+GA4 `G-7XDYZ4FNXN` with events `generate_lead` (free pass, sponsor), `select_item`, `begin_checkout`, `purchase` (thanks page, once per payment id), `checkout_abandoned`, `payment_failed`, plus `data-track` clicks (CTAs, WhatsApp, prospectus). Vercel Web Analytics enabled; the same events are mirrored with `window.va`.
+
+## Editing
+
+- Venue: replace "venue announcement soon" in `index.html` (hero `.meta`) and the `location` block in the JSON-LD.
+- Agenda and speakers: `#agenda` section.
+- Pass prices: `api/create-order.js` (`PASSES`), `index.html` (cards, `PASS_PRICE`, JSON-LD offers), `thanks.html` (`price`).
+- Prospectus PDF: `assets/CASPIAN-Diabesity-Expo-2026-Prospectus.pdf`.
