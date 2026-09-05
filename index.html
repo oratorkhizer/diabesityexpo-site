@@ -271,6 +271,10 @@ html.js .reveal.in{opacity:1;transform:none}
   .wa-float{bottom:84px}
   body{padding-bottom:70px}
 }
+.regbox .r-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+#remindMsg{min-height:1.2em;margin:10px 0 0;font-size:.85rem}
+#remindMsg.err{color:#f5b5b5}
+#remindMsg.ok{display:block;font-weight:600}
 </style>
 </head>
 <body>
@@ -499,6 +503,26 @@ html.js .reveal.in{opacity:1;transform:none}
           <button type="submit" class="btn btn-gold full" id="regBtn">Register free</button>
         </div>
         <div class="ok" id="regOk">Registered. See you on 14 November. A confirmation will reach your WhatsApp or email before the event. <span id="regUpsell">Want to skip every queue on the day? <a href="#tickets" onclick="startCheckout('priority');return false;">Upgrade to a Priority Pass for ₹499</a>.</span></div>
+      </form>
+    </div>
+    <!-- After-event mode: shown only once Expo 2026 is over. Posts to the central Caspian subscribe endpoint. -->
+    <div class="regbox" id="remind" hidden>
+      <div class="kicker">Expo 2026 is over</div>
+      <h3>Get a reminder for the next Diabesity Expo</h3>
+      <p>Leave your WhatsApp number or email. We will message you once, when the next Expo's date and free registration open. Reply STOP or unsubscribe any time.</p>
+      <form id="remindForm" novalidate>
+        <div class="row">
+          <input id="r-name" name="name" type="text" placeholder="Name" aria-label="Name" autocomplete="name" maxlength="80">
+          <input id="r-phone" name="phone" type="tel" placeholder="WhatsApp number (10-digit mobile)" aria-label="WhatsApp number" autocomplete="tel" inputmode="numeric">
+        </div>
+        <div class="row">
+          <input id="r-email" name="email" type="email" placeholder="Email (optional)" aria-label="Email (optional)" autocomplete="email" class="full">
+        </div>
+        <input class="r-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="row">
+          <button class="btn btn-gold full" type="submit" id="remindBtn">Remind me about the next Expo</button>
+        </div>
+        <p class="rmsg" id="remindMsg" aria-live="polite"></p>
       </form>
     </div>
   </div>
@@ -806,6 +830,36 @@ document.getElementById('spForm').addEventListener('submit', async (ev) => {
     btn.disabled = false; btn.textContent = 'Send enquiry';
   }
 });
+</script>
+<script>
+(function(){
+  // Same event moment as the countdown. After-event mode starts once the Expo day ends (21:00 IST).
+  var EVENT_END=new Date('2026-11-14T21:00:00+05:30').getTime();
+  var box=document.getElementById('remind'),reg=document.getElementById('register'),cd=document.getElementById('countdown');
+  if(!box)return;
+  function afterEvent(){return Date.now()>EVENT_END||/[?&]after=1/.test(location.search);}
+  if(afterEvent()){box.hidden=false;if(reg)reg.style.display='none';if(cd)cd.style.display='none';}
+  var f=document.getElementById('remindForm'),m=document.getElementById('remindMsg'),b=document.getElementById('remindBtn');
+  var EP='https://gjpbiiqkvzysmdpioexk.supabase.co/functions/v1/subscribe';
+  function post(channel,contact){return fetch(EP,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({site:'diabesityexpo',channel:channel,contact:contact,name:f.name.value,interest:'next_expo',source_path:location.pathname,website:f.website.value})}).then(function(r){return r.json()});}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=f.email.value.trim(),phone=f.phone.value.replace(/\D/g,'');
+    if(phone.length===11&&phone.charAt(0)==='0')phone=phone.slice(1);
+    var phoneOk=(phone.length===10&&/^[6-9]/.test(phone))||(phone.length===12&&phone.indexOf('91')===0);
+    var emailOk=/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email);
+    if(!phoneOk&&!emailOk){m.className='rmsg err';m.textContent='Enter a 10-digit WhatsApp number or a valid email.';return;}
+    if(f.phone.value.trim()&&!phoneOk){m.className='rmsg err';m.textContent='That WhatsApp number does not look right.';return;}
+    if(email&&!emailOk){m.className='rmsg err';m.textContent='That email does not look right.';return;}
+    b.disabled=true;m.className='rmsg';m.textContent='Saving...';
+    var jobs=[];if(phoneOk)jobs.push(post('whatsapp',phone));if(emailOk)jobs.push(post('email',email));
+    Promise.all(jobs).then(function(rs){
+      if(rs.some(function(j){return !j.ok}))throw new Error('failed');
+      if(typeof gtag==='function')gtag('event','generate_lead',{event_category:'remind_next_expo'});
+      f.innerHTML='<p class="rmsg ok" id="remindMsg">Done. We will message you when the next Expo is announced.</p>';
+    }).catch(function(){b.disabled=false;m.className='rmsg err';m.innerHTML='Could not save right now. Please WhatsApp us at <a href="https://wa.me/918919341154?text='+encodeURIComponent('Hello, please remind me about the next Diabesity Expo.')+'" target="_blank" rel="noopener" style="color:#fff">+91 89193 41154</a>.';});
+  });
+})();
 </script>
 </body>
 </html>
