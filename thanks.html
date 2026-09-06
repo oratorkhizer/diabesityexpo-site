@@ -32,7 +32,7 @@ a.btn.wa{background:#25D366;color:#062B12;margin-left:8px}
 <div class="card">
   <div class="tick">✓</div>
   <h1 id="h">You're in. See you on 14 November.</h1>
-  <p id="msg">Your pass is confirmed and your payment receipt is on its way from Razorpay. Save your payment ID below and show it at the priority gate.</p>
+  <p id="msg">Your pass is confirmed and your payment receipt is on its way from Razorpay. Save your payment ID below and show it at the check-up desk. No fasting needed on the day; your report comes on WhatsApp the next working day and a doctor reviews it with you within the week. Keep the receipt: it qualifies as a preventive health check-up under Section 80D.</p>
   <div class="pid" id="pid"></div>
   <p>Save the date: Saturday 14 November 2026, 11 AM to 9 PM, Hyderabad. Bring the people you share meals with; the free screening is open to them too.</p>
   <a class="btn" href="/">Back to the expo site</a><a class="btn wa" id="waShare" href="#" target="_blank" rel="noopener">Tell your family on WhatsApp</a>
@@ -40,11 +40,11 @@ a.btn.wa{background:#25D366;color:#062B12;margin-left:8px}
 <script>
 const q = new URLSearchParams(location.search);
 const pass = q.get('pass'); const pid = q.get('pid'); const oid = q.get('oid');
-const names = { priority: 'Priority Pass', family: 'Family Pass' };
-const price = { priority: 499, family: 1999 };
+const names = { report: 'Report Clinic Pass', priority: 'Report Clinic Pass', metabolic: 'Metabolic Check Pass', plus: 'Metabolic Plus Pass', couple: 'Couple Pass', family: 'Family Pass' };
+const price = { report: 499, priority: 499, metabolic: 1999, plus: 4999, couple: 3799, family: 7499 };
 if (pass && names[pass]) document.getElementById('h').textContent = names[pass] + ' confirmed. See you on 14 November.';
 document.getElementById('pid').textContent = pid ? ('Payment ID: ' + pid) : '';
-document.getElementById('waShare').href = 'https://wa.me/?text=' + encodeURIComponent('I just booked my pass for the Caspian Diabesity Expo on Saturday 14 November 2026 in Hyderabad. Free full-body screening, specialist talks and free entry for the family. Register here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=share&utm_campaign=thanks_page');
+document.getElementById('waShare').href = 'https://wa.me/?text=' + encodeURIComponent('I just booked my pass for the Caspian Diabesity Expo on Saturday 14 November 2026 in Hyderabad. Get the year\'s tests done with the doctors in the room: full metabolic check from ₹1,999, free entry to talks for the family, 80D eligible. Register here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=share&utm_campaign=thanks_page');
 // Fire the purchase once per payment id
 try {
   if (pass && names[pass] && pid && !localStorage.getItem('exp_purchase_' + pid)) {

@@ -1,7 +1,7 @@
 // Vercel serverless: sponsor, exhibitor and CSR enquiry capture.
 const db = require("./_db");
 
-const INTERESTS = ["title", "co_powered", "screening_zone", "gold", "silver", "cme_slot", "stall", "csr", "other"];
+const INTERESTS = ["title", "co_powered", "screening_zone", "gold", "silver", "cme_slot", "stall", "csr", "corporate", "other"];
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {

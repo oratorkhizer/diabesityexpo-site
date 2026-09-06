@@ -4,9 +4,13 @@
 const Razorpay = require("razorpay");
 const db = require("./_db");
 
+// Tier prices approved 6 Sep 2026. The Metabolic Profile is never sold below Rs 1,795 per person.
 const PASSES = {
-  priority: { amount: 49900, name: "Priority Pass" },
-  family: { amount: 199900, name: "Family Pass (up to 4 people)" },
+  report: { amount: 49900, name: "Report Clinic Pass", people: 1 },
+  metabolic: { amount: 199900, name: "Metabolic Check Pass", people: 1 },
+  plus: { amount: 499900, name: "Metabolic Plus Pass", people: 1 },
+  couple: { amount: 379900, name: "Couple Pass (2 Metabolic Checks)", people: 2 },
+  family: { amount: 749900, name: "Family Pass (4 Metabolic Checks)", people: 4 },
 };
 
 module.exports = async (req, res) => {
@@ -16,9 +20,11 @@ module.exports = async (req, res) => {
   }
   try {
     const body = req.body || {};
-    const { passType, name, email, people } = body;
+    const { name, email } = body;
+    const passType = body.passType === "priority" ? "report" : body.passType; // legacy id from old links
     const phone = db.cleanPhone(body.phone);
     const pass = PASSES[passType];
+    const people = pass ? pass.people : 1;
     if (!pass) {
       res.status(400).json({ error: "Unknown pass type" });
       return;
@@ -53,7 +59,7 @@ module.exports = async (req, res) => {
           name: String(name || "").trim().slice(0, 100) || "Unknown",
           phone,
           email: String(email || "").trim().slice(0, 100) || null,
-          people: Math.min(20, Math.max(1, parseInt(people, 10) || (passType === "family" ? 4 : 1))),
+          people,
           pass_type: passType,
           status: "pending_payment",
           amount_paise: pass.amount,
