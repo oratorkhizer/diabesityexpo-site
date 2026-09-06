@@ -77,10 +77,11 @@ input.notes{width:170px;padding:5px 8px;border-radius:8px;border:1px solid #D5DE
       <button data-tab="free">Free (upsell list)</button>
       <button data-tab="abandoned">Abandoned checkouts</button>
       <button data-tab="sponsors">Sponsor leads</button>
+      <button data-tab="alumni">Alumni re-invite</button>
     </div>
     <div class="tools">
       <input type="search" id="q" placeholder="Search name, phone, email">
-      <select id="fu"><option value="">Any follow-up status</option><option>new</option><option>messaged</option><option>upgraded</option><option>attended</option><option>no_show</option><option>do_not_contact</option></select>
+      <select id="fu"><option value="">Any follow-up status</option><option>new</option><option>messaged</option><option>upgraded</option><option>attended</option><option>no_show</option><option>replied</option><option>booked</option><option>not_interested</option><option>do_not_contact</option></select>
       <span class="mini" id="count"></span>
     </div>
     <div class="card"><div id="table"></div></div>
@@ -92,7 +93,7 @@ input.notes{width:170px;padding:5px 8px;border-radius:8px;border:1px solid #D5DE
 const SB_URL = 'https://ntrlsnudicbdwdcguynz.supabase.co';
 const SB_KEY = 'sb_publishable_si0ucpO3OLawZMr1ihiuIw_shZbLoIw';
 let passcode = sessionStorage.getItem('expo_desk_pc') || '';
-let regs = [], leads = [], summary = {}, tab = 'all';
+let regs = [], leads = [], alumni = [], summary = {}, tab = 'all';
 
 async function rpc(fn, args){
   const r = await fetch(SB_URL + '/rest/v1/rpc/' + fn, { method:'POST', headers:{ apikey:SB_KEY, Authorization:'Bearer '+SB_KEY, 'Content-Type':'application/json' }, body: JSON.stringify(args||{}) });
@@ -134,10 +135,11 @@ function logout(){ sessionStorage.removeItem('expo_desk_pc'); location.reload();
 
 // ---- Data ----
 async function load(){
-  [summary, regs, leads] = await Promise.all([
+  [summary, regs, leads, alumni] = await Promise.all([
     rpc('admin_summary', { p_passcode: passcode }),
     rpc('admin_registrations', { p_passcode: passcode }),
-    rpc('admin_sponsor_leads', { p_passcode: passcode })
+    rpc('admin_sponsor_leads', { p_passcode: passcode }),
+    rpc('admin_alumni', { p_passcode: passcode })
   ]);
   render();
 }
@@ -154,7 +156,8 @@ function renderTiles(){
     ['Free registrations', s.free_registrations||0, 'upsell candidates'],
     ['Abandoned checkouts', s.abandoned_checkouts||0, 'started payment, did not finish'],
     ['Expected visitors', s.expected_visitors||0, 'people across confirmed passes'],
-    ['Sponsor leads', leads.length, leads.filter(l=>l.stage==='won').length + ' won']
+    ['Sponsor leads', leads.length, leads.filter(l=>l.stage==='won').length + ' won'],
+    ['Alumni to re-invite', alumni.filter(a=>a.followup_status==='new' && !a.registered_2026).length, alumni.filter(a=>a.registered_2026).length + ' already registered for 2026']
   ];
   document.getElementById('tiles').innerHTML = t.map(x => `<div class="tile ${x[3]||''}"><small>${x[0]}</small><b>${x[1]}</b><small>${x[2]}</small></div>`).join('');
 }
@@ -201,6 +204,22 @@ function render(){
     </tr>`).join('') + '</tbody></table>' : '<div class="empty">No sponsor leads yet. Share diabesityexpo.com/exhibit with prospects.</div>';
     return;
   }
+  if (tab === 'alumni') {
+    const q = document.getElementById('q').value.trim().toLowerCase();
+    const fu = document.getElementById('fu').value;
+    let rows = alumni.filter(a => !q || [a.name,a.phone].join(' ').toLowerCase().includes(q));
+    if (fu) rows = rows.filter(a => a.followup_status === fu);
+    document.getElementById('count').textContent = rows.length + ' of ' + alumni.length + ' past visitors (2024 form + 2025 profile takers)';
+    el.innerHTML = rows.length ? `<table><thead><tr><th>Name</th><th>Phone</th><th>Age / sex</th><th>Came in</th><th>Asked about</th><th>2026 status</th><th>Follow-up</th><th>Notes</th><th></th></tr></thead><tbody>` + rows.map(a => `<tr>
+      <td><b>${esc(a.name)}</b></td><td>${esc(a.phone)}</td><td class="mini">${a.age ? a.age : ''}${a.sex ? ' ' + esc(a.sex) : ''}</td>
+      <td><span class="pill p-priority">${esc(a.years)}</span></td><td class="mini">${esc(a.interest||'')}</td>
+      <td class="mini">${a.registered_2026 ? '<span class="pill p-paid">' + esc(a.registered_2026) + '</span>' : 'not yet'}</td>
+      <td><select class="fu" onchange="updAlumni('${a.id}', {p_followup_status:this.value})">${['new','messaged','replied','booked','not_interested','do_not_contact'].map(s => `<option ${s===a.followup_status?'selected':''}>${s}</option>`).join('')}</select></td>
+      <td><input class="notes" value="${esc(a.notes||'')}" placeholder="notes" onchange="updAlumni('${a.id}', {p_notes:this.value})"></td>
+      <td>${a.followup_status === 'do_not_contact' || !a.consent_wa ? '<span class="mini">no WhatsApp</span>' : `<a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="${alumniWa(a)}">WhatsApp</a>`}</td>
+    </tr>`).join('') + '</tbody></table>' : '<div class="empty">No alumni match.</div>';
+    return;
+  }
   const rows = filtered();
   document.getElementById('count').textContent = rows.length + ' of ' + regs.length + ' registrations';
   el.innerHTML = rows.length ? `<table><thead><tr><th>When</th><th>Name</th><th>Phone / email</th><th>Pass</th><th>Status</th><th>People</th><th>Amount</th><th>Source</th><th>Follow-up</th><th>Notes</th><th>Check-in</th><th></th></tr></thead><tbody>` + rows.map(r => `<tr>
@@ -221,12 +240,22 @@ async function updReg(id, patch){
   try { await rpc('admin_update_registration', Object.assign({ p_passcode: passcode, p_id: id, p_followup_status: null, p_followup_notes: null, p_checked_in: null }, patch)); const r = regs.find(x => x.id === id); if (r) { if (patch.p_followup_status) r.followup_status = patch.p_followup_status; if (patch.p_followup_notes != null) r.followup_notes = patch.p_followup_notes; if (patch.p_checked_in != null) r.checked_in_at = patch.p_checked_in ? new Date().toISOString() : null; } }
   catch(e){ alert('Could not save: ' + e.message); }
 }
+function alumniWa(a){
+  const first = (a.name||'').split(' ')[0];
+  const yr = String(a.years).includes('2025') ? 'last year' : 'in 2024';
+  const msg = `Assalamu alaikum ${first}, this is Dr Khizer from Caspian Healthcare. You came to our Diabesity Expo ${yr}. This year it is on Saturday 14 November 2026, 9 AM to 8 PM, and the full 12-test metabolic profile (thyroid, HbA1c, lipids, liver, kidney, vitamins, iron, body composition) is done at the expo itself, with a doctor review of your report: ₹1,999, no fasting, lunch and dinner included, 80D receipt. Entry to talks and stalls stays free, with lunch. Book here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=alumni&utm_campaign=reinvite#tickets`;
+  return `https://wa.me/91${a.phone}?text=${encodeURIComponent(msg)}`;
+}
+async function updAlumni(id, patch){
+  try { await rpc('admin_update_alumni', Object.assign({ p_passcode: passcode, p_id: id, p_followup_status: null, p_notes: null }, patch)); const a = alumni.find(x => x.id === id); if (a) Object.keys(patch).forEach(k => { a[k.replace('p_','')] = patch[k]; }); renderTiles(); }
+  catch(e){ alert('Could not save: ' + e.message); }
+}
 async function updLead(id, patch){
   try { await rpc('admin_update_lead', Object.assign({ p_passcode: passcode, p_id: id, p_stage: null, p_notes: null, p_value_paise: null }, patch)); const l = leads.find(x => x.id === id); if (l) Object.keys(patch).forEach(k => { l[k.replace('p_','')] = patch[k]; }); renderTiles(); }
   catch(e){ alert('Could not save: ' + e.message); }
 }
 function exportCsv(){
-  const rows = tab === 'sponsors' ? leads : filtered();
+  const rows = tab === 'sponsors' ? leads : tab === 'alumni' ? alumni : filtered();
   if (!rows.length) return alert('Nothing to export');
   const cols = Object.keys(rows[0]);
   const csv = [cols.join(',')].concat(rows.map(r => cols.map(c => '"' + String(r[c]==null?'':r[c]).replace(/"/g,'""') + '"').join(','))).join('\n');
