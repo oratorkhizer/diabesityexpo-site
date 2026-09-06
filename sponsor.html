@@ -20,7 +20,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Partner with the Caspian Diabesity Expo 2026">
-<meta property="og:description" content="Meet Hyderabad's health-seeking families and doctors face to face, or fund free screenings through the Foundation.">
+<meta property="og:description" content="Meet Hyderabad's health-seeking families face to face, or fund free screenings through the Foundation.">
 <meta property="og:url" content="https://diabesityexpo.com/sponsor">
 <meta property="og:image" content="https://diabesityexpo.com/assets/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,6 +60,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .nav-cta{padding:10px 20px;border-radius:999px;background:var(--gold);color:var(--navy)!important;font-weight:700}
 .burger{display:none;background:none;border:0;cursor:pointer;padding:6px}
 .burger span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;border-radius:2px}
+@media (prefers-reduced-motion: reduce){.hero .bg{animation:none}}
 .hero-ctas{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
 /* FORM */
 .regbox{max-width:680px;margin:40px auto 0;background:var(--navy2);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:34px}
@@ -93,11 +94,15 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .csr-strip b{color:var(--goldl)}
 /* FOOTER */
 footer{background:var(--navy);color:var(--ice);padding:60px 0 30px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+footer h4{color:#fff;font-size:.95rem;margin-bottom:14px}
 footer a{color:var(--ice);text-decoration:none;font-size:.88rem}
 footer a:hover{color:var(--goldl)}
+footer li{list-style:none;padding:4px 0}
 .fine{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;font-size:.78rem;color:#7E92AC;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .section-title{font-size:clamp(1.7rem,3.2vw,2.4rem);max-width:760px}
 .section-sub{margin-top:14px;color:var(--muted);max-width:700px}
+.on-dark .section-sub{color:var(--ice)}
 html.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease}
 html.js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){html.js .reveal{opacity:1;transform:none;transition:none}}
@@ -133,13 +138,13 @@ html.js .reveal.in{opacity:1;transform:none}
     <h1 class="section-title">An audience you cannot buy with ads.</h1>
     <div class="cols">
       <div>
-        <p class="section-sub">Up to 2,000 health-seeking visitors in person, 1,000+ metabolic checks and free screenings on site, 250+ doctors expected in the CME track, and a registered, consented database. Sold as measurable packages, not patronage.</p>
+        <p class="section-sub">Up to 2,000 health-seeking visitors in person, 1,000+ metabolic checks and free screenings on site, and a registered, consented database. Sold as measurable packages, not patronage.</p>
         <ul class="sp-list">
           <li>Qualified leads: lead-capture at every stall, opt-in database shares for top tiers</li>
           <li>Sampling and demos into exactly the households who need your product</li>
           <li>Trust transfer: your brand beside the city's doctors and a charitable foundation</li>
           <li>Audited reach report: footfall, screenings, press and social recap</li>
-          <li>For pharma: a UCPMP-compliant doctor track and a CSR route via the Foundation</li>
+          <li>For pharma and hospitals: a CSR route via the Foundation that funds free screenings for beneficiaries</li>
         </ul>
         <div class="hero-ctas" style="margin-top:26px">
           <a class="btn btn-navy" href="/prospectus" data-track="prospectus_open">Read the partner prospectus</a>
@@ -153,7 +158,6 @@ html.js .reveal.in{opacity:1;transform:none}
           <tr><td>Co-Powered By</td><td>₹2,50,000</td></tr>
           <tr><td>Screening Zone "Powered by"</td><td>₹2,00,000</td></tr>
           <tr><td>Gold Partner</td><td>₹1,50,000</td></tr>
-          <tr><td>CME Symposium Slot</td><td>₹1,50,000</td></tr>
           <tr><td>Silver Partner</td><td>₹75,000</td></tr>
           <tr><td>Exhibition stalls</td><td>from ₹25,000</td></tr>
         </table>
@@ -183,7 +187,6 @@ html.js .reveal.in{opacity:1;transform:none}
             <option value="stall">Exhibition stall (from ₹25,000)</option>
             <option value="silver">Silver Partner (₹75,000)</option>
             <option value="gold">Gold Partner (₹1,50,000)</option>
-            <option value="cme_slot">CME Symposium Slot (₹1,50,000)</option>
             <option value="screening_zone">Screening Zone "Powered by" (₹2,00,000)</option>
             <option value="co_powered">Co-Powered By (₹2,50,000)</option>
             <option value="title">Title Sponsor (₹5,00,000)</option>
