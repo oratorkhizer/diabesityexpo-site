@@ -8,7 +8,7 @@ const db = require("./_db");
 const PASSES = {
   report: { amount: 49900, name: "Report Clinic Pass", people: 1 },
   metabolic: { amount: 199900, name: "Metabolic Check Pass", people: 1 },
-  plus: { amount: 499900, name: "Metabolic Plus Pass", people: 1 },
+  plus: { amount: 399900, name: "Metabolic Plus Pass", people: 1 },
   couple: { amount: 379900, name: "Couple Pass (2 Metabolic Checks)", people: 2 },
   family: { amount: 749900, name: "Family Pass (4 Metabolic Checks)", people: 4 },
 };
