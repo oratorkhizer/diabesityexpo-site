@@ -179,6 +179,12 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
 .gal figure:hover img{transform:scale(1.05)}
 .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 10px;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:linear-gradient(transparent, rgba(6,14,28,.88))}
+/* SPEAKERS */
+.spk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:36px}
+.spk{background:#fff;border:1px solid #E1E8F2;border-radius:14px;padding:18px 20px}
+.spk b{display:block;font-size:.98rem;color:var(--navy)}
+.spk span{display:block;font-size:.86rem;color:var(--muted);margin-top:4px}
+.spk small{display:inline-block;margin-top:8px;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
 /* AGENDA */
 .agenda{background:var(--light)}
 .slot{display:flex;gap:22px;padding:20px 0;border-bottom:1px solid #DEE6F1;align-items:baseline}
@@ -286,6 +292,7 @@ html.js .reveal.in{opacity:1;transform:none}
     <ul class="nav-links" id="navLinks">
       <li><a href="#for-you">For You</a></li>
       <li><a href="#experience">The Day</a></li>
+      <li><a href="#speakers">Speakers</a></li>
       <li><a href="#agenda">Agenda</a></li>
       <li><a href="#tickets">Passes</a></li>
       <li><a href="#faq">FAQ</a></li>
@@ -403,6 +410,38 @@ html.js .reveal.in{opacity:1;transform:none}
       <figure class="reveal"><img src="assets/gallery/g8.jpg" alt="Community members and children gathered on stage" loading="lazy"><figcaption>A community, not a crowd</figcaption></figure>
     </div>
     <p style="margin-top:18px;font-size:.8rem;color:#7E92AC">Moments from the 2025 edition, Banjara Function Hall, Hyderabad.</p>
+    <div class="gal" style="margin-top:22px">
+      <figure class="reveal"><img src="assets/gallery/2024/2024-stage.jpg" alt="Dr. Khizer opening the 2024 Caspian Diabetes and Children's Health Expo" loading="lazy"><figcaption>2024: the first edition opens</figcaption></figure>
+      <figure class="reveal"><img src="assets/gallery/2024/2024-screening-neuropathy.jpg" alt="Neuropathy screening at the 2024 expo" loading="lazy"><figcaption>2024: neuropathy screening</figcaption></figure>
+      <figure class="reveal"><img src="assets/gallery/2024/2024-kids-drawing.jpg" alt="Children at the drawing corner in 2024" loading="lazy"><figcaption>2024: the children's corner</figcaption></figure>
+      <figure class="reveal"><img src="assets/gallery/2024/2024-certificate.jpg" alt="A child receiving a certificate on stage in 2024" loading="lazy"><figcaption>2024: certificates for the kids</figcaption></figure>
+    </div>
+    <p style="margin-top:18px;font-size:.8rem;color:#7E92AC">Moments from the 1st edition, November 2024.</p>
+  </div>
+</section>
+
+<section id="speakers">
+  <div class="wrap">
+    <p class="kicker">Past speakers</p>
+    <h2 class="section-title">The doctors who have stood on this stage.</h2>
+    <p class="section-sub">Every talk at the expo is given in plain language, for patients and families, by a practising specialist. Here is who spoke at the 2025 edition and on what.</p>
+    <div class="spk-grid">
+      <div class="spk reveal"><b>Dr Khizer Hussain Junaidy</b><span>Diabetes and obesity: the weight we carry · Insulin pumps and automated insulin delivery · Adult vaccination</span><small>2025 · 2024</small></div>
+      <div class="spk reveal"><b>Dr Mohammed Imran</b><span>Osteoporosis and diabetes</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Syed Muzammil</b><span>Heart disease in diabetes</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Aman Jha</b><span>Kidney disease in diabetes</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Aslam Baba</b><span>Panel: the future of diabetes and obesity care</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Mohammed Fayazuddin</b><span>Diabetic foot ulcer and peripheral vascular disease</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Yousuf Khan</b><span>Continuous glucose monitoring for glucose control</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Mohammed Jubair Aquib</b><span>Diabetes and the skin</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Musaab Mohiuddin</b><span>Eye disease in diabetes: screening and prevention</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Haritha Shyam</b><span>Meal planning that works</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Amreen Hamza</b><span>Stopping diabetes at the roots: healthy lifestyle in children</span><small>2025 · 2024</small></div>
+      <div class="spk reveal"><b>Dr Younus Sofi</b><span>Exercise for every body</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Mohd Mubashir Ahmed</b><span>Neuropathy and stroke in diabetes</span><small>2025</small></div>
+      <div class="spk reveal"><b>Dr Abdullah Kamlur</b><span>Mental health and diabetes</span><small>2025</small></div>
+    </div>
+    <p style="margin-top:18px;font-size:.85rem;color:var(--muted)">2025 chief guest: Mir Zulfiqar Ali, MLA, Charminar. The 2026 speaker list will be published by October 2026.</p>
   </div>
 </section>
 
