@@ -20,9 +20,9 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.15}
 .page:last-child{page-break-after:auto}
 .cover{background:var(--navy);color:#fff;display:flex;flex-direction:column;justify-content:space-between}
 .cover .kicker{color:var(--goldl)}
-.cover h1{font-size:30pt;max-width:150mm;margin-top:6mm}
-.cover .sub{font-size:11.5pt;color:var(--ice);max-width:150mm;margin-top:6mm}
-.cover .meta{border-top:1px solid rgba(255,255,255,.2);padding-top:8mm;font-size:10pt;color:var(--ice)}
+.cover h1{font-size:26pt;max-width:150mm;margin-top:6mm}
+.cover .sub{font-size:10.5pt;color:var(--ice);max-width:160mm;margin-top:5mm}
+.cover .meta{border-top:1px solid rgba(255,255,255,.2);padding-top:5mm;font-size:9.5pt;color:var(--ice)}
 .cover .meta b{color:#fff;display:block;font-size:12pt;margin-bottom:2mm}
 .kicker{font-size:8pt;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4mm}
 h2{font-size:20pt;color:var(--navy);margin-bottom:5mm}
@@ -46,16 +46,16 @@ tr:nth-child(even) td{background:#F7F9FC}
 .foot{position:absolute;left:16mm;right:16mm;bottom:10mm;font-size:8pt;color:var(--muted);display:flex;justify-content:space-between;border-top:1px solid #E1E8F2;padding-top:3mm}
 .tick li{list-style:none;padding-left:6mm;position:relative}
 .tick li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:800}
-.logo-chip{display:inline-block;background:#fff;border-radius:3mm;padding:3mm 4mm;margin-bottom:8mm}
+.logo-chip{display:inline-block;background:#fff;border-radius:3mm;padding:3mm 4mm;margin-bottom:6mm}
 .logo-chip img{height:16mm;width:auto;display:block}
-.cover-photo{margin:8mm 0 0;border-radius:4mm;overflow:hidden;height:62mm}
-.cover-photo img{width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block}
+.cover-photo{margin:6mm 0 0;border-radius:4mm;overflow:hidden}
+.cover-photo img{width:100%;height:auto;display:block}
 .photos{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin:2mm 0 4mm}
-.photos figure{margin:0;border-radius:3mm;overflow:hidden;height:44mm}
-.photos img{width:100%;height:100%;object-fit:cover;display:block}
+.photos figure{margin:0;border-radius:3mm;overflow:hidden}
+.photos img{width:100%;height:auto;display:block}
 .photos figcaption{font-size:7.5pt;color:var(--muted);padding:1.5mm 0 0}
 .photos.three{grid-template-columns:1fr 1fr 1fr}
-.photos.three figure{height:34mm}
+
 img{max-width:100%}
 @media print{
   body{background:#fff}
@@ -63,10 +63,11 @@ img{max-width:100%}
   .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:11mm 14mm 8mm}
   body{font-size:9.4pt}
   table{font-size:9pt}
-  .photos figure{height:38mm}
-  .photos.three figure{height:24mm}
   td{padding:2mm 3mm}
-  .gold,.callout{padding:4mm 5mm;margin:3mm 0}
+  .gold,.callout{padding:3.5mm 5mm;margin:2.5mm 0}
+  .photos{margin:1.5mm 0 3mm}
+  .photos figcaption{padding-top:1mm}
+  li{margin-bottom:1mm}
   h2{font-size:18pt;margin-bottom:4mm}
   h3{margin:4.5mm 0 1.5mm}
   p{margin-bottom:2.4mm}
@@ -90,7 +91,7 @@ img{max-width:100%}
     <p class="kicker">Partner prospectus · 3rd edition</p>
     <h1 style="margin-top:4mm">Hyderabad's annual metabolic check-up day. Be in the room.</h1>
     <p class="sub">Caspian Diabesity Expo 2026, Saturday 14 November 2026 (World Diabetes Day), 11 AM to 9 PM, Hyderabad. Hosted by the Caspian Healthcare Foundation, a registered public charitable trust, with clinical delivery by Caspian Healthcare and its laboratory, Caspian Diagnostic Centre.</p>
-    <div class="cover-photo"><img src="/assets/hero.jpg" alt="The packed hall at the Caspian Diabesity Expo 2025"></div>
+    <div class="cover-photo"><img src="/assets/prospectus/p-hall.jpg" alt="The hall at the Caspian Diabesity Expo 2025"></div>
   </div>
   <div class="meta">
     <b>Partnerships desk</b>
@@ -110,8 +111,8 @@ img{max-width:100%}
     <div class="stat"><b>715</b><small>metabolic profiles drawn in a single day in 2025: the lab lane is proven at scale</small></div>
   </div>
   <div class="photos">
-    <figure><img src="/assets/gallery/g3.jpg" alt="The expo hall with families and a kids play zone"><figcaption>The hall on expo day, 2025</figcaption></figure>
-    <figure><img src="/assets/gallery/g1.jpg" alt="Visitors being screened at the screening stalls"><figcaption>The screening zone: 715 profiles in a day</figcaption></figure>
+    <figure><img src="/assets/prospectus/p-crowd.jpg" alt="The audience at a talk, 2025"><figcaption>The audience on expo day, 2025</figcaption></figure>
+    <figure><img src="/assets/prospectus/p-community.jpg" alt="Community members and children on stage"><figcaption>A community, not a crowd</figcaption></figure>
   </div>
   <h3>Who is in the hall</h3>
   <ul class="tick">
@@ -138,10 +139,10 @@ img{max-width:100%}
     <tr><td><b>Food vendor</b></td><td>Counter in the healthy food court, subject to menu approval</td><td class="price">₹15,000</td></tr>
   </table>
   <div class="gold"><b>Early-partner pricing</b> for commitments received before 30 September 2026: preferred placement in the hall, and the stall size upgraded one step at no extra cost. All packages can be customised. Prices exclude GST where applicable; the invoice names the issuing entity.</div>
-  <div class="photos three">
-    <figure><img src="/assets/gallery/g2.jpg" alt="Visitors and doctors walking the exhibition stalls"><figcaption>The solutions expo</figcaption></figure>
-    <figure><img src="/assets/gallery/g5.jpg" alt="CPR demonstration with a manikin on stage"><figcaption>Hands-on zones</figcaption></figure>
-    <figure><img src="/assets/gallery/g8.jpg" alt="Community members and children on stage"><figcaption>A community, not a crowd</figcaption></figure>
+  <div class="photos three" style="grid-template-columns:1fr 1fr 1fr;width:80%">
+    <figure><img src="/assets/prospectus/p-stalls.jpg" alt="Visitors at the exhibition stalls"><figcaption>The solutions expo</figcaption></figure>
+    <figure><img src="/assets/prospectus/p-visitors.jpg" alt="Dr Khizer with visitors at a stall"><figcaption>Face to face with the doctors</figcaption></figure>
+    <figure><img src="/assets/prospectus/p-stalls2.jpg" alt="Dr Khizer speaking from the stage"><figcaption>From the stage</figcaption></figure>
   </div>
   <h3>Special zones you can own</h3>
   <ul class="tick">
@@ -205,9 +206,10 @@ img{max-width:100%}
   </ul>
   <h3>How to book</h3>
   <p>Send an enquiry at diabesityexpo.com/sponsor, WhatsApp +91 89784 54547 or write to oratorkhizer@gmail.com. We reply within one working day with the floor plan and a partnership letter. A package is confirmed on receipt of 50 per cent of the fee; the balance is due by 31 October 2026.</p>
-  <div class="photos" style="grid-template-columns:1fr 1fr;margin-top:4mm">
-    <figure><img src="/assets/gallery/g4.jpg" alt="Dr Khizer answering audience questions"><figcaption>Straight answers, no consult fee</figcaption></figure>
-    <figure><img src="/assets/gallery/g6.jpg" alt="Women in the audience during an interactive session"><figcaption>Every voice heard</figcaption></figure>
+  <div class="photos three" style="margin-top:4mm">
+    <figure><img src="/assets/prospectus/p-panel.jpg" alt="Panel discussion on stage"><figcaption>Straight answers, no consult fee</figcaption></figure>
+    <figure><img src="/assets/prospectus/p-kid.jpg" alt="Dr Khizer with a child on stage"><figcaption>A family day</figcaption></figure>
+    <figure><img src="/assets/prospectus/p-stallteam.jpg" alt="Partner team at their stall"><figcaption>Partners at their stalls</figcaption></figure>
   </div>
   <div class="callout"><p><b>Dr Khizer Hussain Junaidy</b>, Diabetologist &amp; Bariatric Physician · Medical Director, Caspian Healthcare · Managing Trustee, Caspian Healthcare Foundation<br>Caspian Healthcare, Vijay Nagar Colony, Hyderabad · oratorkhizer@gmail.com · +91 89784 54547</p></div>
   <div class="foot"><span>Caspian Diabesity Expo 2026 · Partner Prospectus</span><span>5</span></div>
