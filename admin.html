@@ -42,7 +42,7 @@ th{background:#F8FAFD;font-size:.74rem;letter-spacing:.08em;text-transform:upper
 tr:hover td{background:#FBFCFE}
 .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
 .p-paid{background:#DCEFE3;color:var(--ok)}.p-registered{background:#DDEAFB;color:#1D4E89}.p-pending_payment{background:#FCEBD2;color:var(--warn)}.p-failed,.p-refunded,.p-cancelled{background:#F8D9D9;color:var(--bad)}
-.p-free{background:#EEF3FA;color:var(--muted)}.p-priority{background:#EBE2C4;color:#7A6218}.p-family{background:#E3DDF5;color:#4B2E83}
+.p-free{background:#EEF3FA;color:var(--muted)}.p-priority,.p-report{background:#EBE2C4;color:#7A6218}.p-metabolic{background:#DCEFE3;color:#1F6B45}.p-plus{background:#FCEBD2;color:#9A5B00}.p-couple,.p-family{background:#E3DDF5;color:#4B2E83}
 .mini{font-size:.76rem;color:var(--muted)}
 select.fu{padding:5px 8px;border-radius:8px;border:1px solid #D5DEEA;font-size:.78rem;font-family:inherit}
 input.notes{width:170px;padding:5px 8px;border-radius:8px;border:1px solid #D5DEEA;font-size:.78rem;font-family:inherit}
@@ -146,8 +146,11 @@ function renderTiles(){
   const s = summary || {};
   const t = [
     ['Revenue collected', inr(s.revenue_paise), 'paid passes, INR', 'gold'],
-    ['Priority passes', s.priority_paid||0, '₹499 each'],
-    ['Family passes', s.family_paid||0, '₹1,999 each'],
+    ['Metabolic Checks', s.metabolic_paid||0, '₹1,999 each'],
+    ['Metabolic Plus', s.plus_paid||0, '₹4,999 each'],
+    ['Couple / Family', (s.couple_paid||0) + ' / ' + (s.family_paid||0), '₹3,799 / ₹7,499'],
+    ['Report Clinic', s.report_paid||0, '₹499 each'],
+    ['Tests to run', s.tests_to_run||0, 'metabolic profiles paid for'],
     ['Free registrations', s.free_registrations||0, 'upsell candidates'],
     ['Abandoned checkouts', s.abandoned_checkouts||0, 'started payment, did not finish'],
     ['Expected visitors', s.expected_visitors||0, 'people across confirmed passes'],
@@ -155,12 +158,14 @@ function renderTiles(){
   ];
   document.getElementById('tiles').innerHTML = t.map(x => `<div class="tile ${x[3]||''}"><small>${x[0]}</small><b>${x[1]}</b><small>${x[2]}</small></div>`).join('');
 }
+const PASS_NAME = { free:'Free Floor Pass', report:'Report Clinic Pass', priority:'Report Clinic Pass', metabolic:'Metabolic Check Pass', plus:'Metabolic Plus Pass', couple:'Couple Pass', family:'Family Pass' };
 function waLink(r){
   const first = (r.name||'').split(' ')[0];
+  const pn = PASS_NAME[r.pass_type] || 'pass';
   let msg;
-  if (r.status === 'pending_payment') msg = `Hi ${first}, this is the Caspian Diabesity Expo team. Your ${r.pass_type === 'family' ? 'Family Pass' : 'Priority Pass'} payment did not go through. Would you like me to send you the payment link again? Reserved screening slots are limited for 14 November.`;
-  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free pass is confirmed. If you would like to skip every queue and get a one-on-one specialist review of your screening report, the Priority Pass is ₹499: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
-  else msg = `Hi ${first}, your ${r.pass_type === 'family' ? 'Family Pass' : 'Priority Pass'} for the Caspian Diabesity Expo on Saturday 14 November 2026 is confirmed. Payment ID ${r.razorpay_payment_id||''}. See you at 11 AM; bring this message to the priority gate.`;
+  if (r.status === 'pending_payment') msg = `Hi ${first}, this is the Caspian Diabesity Expo team. Your ${pn} payment did not go through. Would you like me to send you the payment link again? Check-up slots are limited for 14 November.`;
+  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free floor pass is confirmed. If you would like the year's tests done on the day (full metabolic profile, no fasting, doctor review, lunch), the Metabolic Check Pass is ₹1,999 and the receipt qualifies under Section 80D: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
+  else msg = `Hi ${first}, your ${pn} for the Caspian Diabesity Expo on Saturday 14 November 2026 is confirmed. Payment ID ${r.razorpay_payment_id||''}. No fasting needed; come to the check-up desk any time from 11 AM with this message.`;
   const ph = (r.phone||'').replace(/\D/g,''); const intl = ph.length === 10 ? '91' + ph : ph;
   return `https://wa.me/${intl}?text=${encodeURIComponent(msg)}`;
 }
