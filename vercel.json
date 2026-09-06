@@ -29,7 +29,6 @@
     { "source": "/thanks.html", "destination": "/thanks", "permanent": true },
     { "source": "/register", "destination": "/#register", "permanent": false },
     { "source": "/passes", "destination": "/#tickets", "permanent": false },
-    { "source": "/sponsor", "destination": "/#sponsor", "permanent": false },
-    { "source": "/exhibit", "destination": "/#sponsor-enquiry", "permanent": false }
+    { "source": "/exhibit", "destination": "/sponsor#enquiry", "permanent": false }
   ]
 }
