@@ -164,8 +164,8 @@ function waLink(r){
   const pn = PASS_NAME[r.pass_type] || 'pass';
   let msg;
   if (r.status === 'pending_payment') msg = `Hi ${first}, this is the Caspian Diabesity Expo team. Your ${pn} payment did not go through. Would you like me to send you the payment link again? Check-up slots are limited for 14 November.`;
-  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free floor pass is confirmed. If you would like the year's tests done on the day (full metabolic profile, no fasting, doctor review, lunch), the Metabolic Check Pass is ₹1,999 and the receipt qualifies under Section 80D: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
-  else msg = `Hi ${first}, your ${pn} for the Caspian Diabesity Expo on Saturday 14 November 2026 is confirmed. Payment ID ${r.razorpay_payment_id||''}. No fasting needed; come to the check-up desk any time from 11 AM with this message.`;
+  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free floor pass is confirmed. If you would like the year's tests done on the day (full metabolic profile, no fasting, doctor review, lunch and dinner), the Metabolic Check Pass is ₹1,999 and the receipt qualifies under Section 80D: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
+  else msg = `Hi ${first}, your ${pn} for the Caspian Diabesity Expo on Saturday 14 November 2026 is confirmed. Payment ID ${r.razorpay_payment_id||''}. No fasting needed; come to the check-up desk any time from 9 AM with this message.`;
   const ph = (r.phone||'').replace(/\D/g,''); const intl = ph.length === 10 ? '91' + ph : ph;
   return `https://wa.me/${intl}?text=${encodeURIComponent(msg)}`;
 }
