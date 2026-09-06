@@ -54,7 +54,7 @@
       { "@type": "Offer", "name": "Free Floor Pass", "price": "0", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-08-08", "url": "https://diabesityexpo.com/#register" },
       { "@type": "Offer", "name": "Report Clinic Pass", "price": "499", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-09-06", "url": "https://diabesityexpo.com/#tickets" },
       { "@type": "Offer", "name": "Metabolic Check Pass", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-09-06", "url": "https://diabesityexpo.com/#tickets" },
-      { "@type": "Offer", "name": "Metabolic Plus Pass", "price": "4999", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-09-06", "url": "https://diabesityexpo.com/#tickets" },
+      { "@type": "Offer", "name": "Metabolic Plus Pass", "price": "3999", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-09-06", "url": "https://diabesityexpo.com/#tickets" },
       { "@type": "Offer", "name": "Couple Pass (2 people)", "price": "3799", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-09-06", "url": "https://diabesityexpo.com/#tickets" },
       { "@type": "Offer", "name": "Family Pass (4 people)", "price": "7499", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "validFrom": "2026-09-06", "url": "https://diabesityexpo.com/#tickets" }
     ]
@@ -480,7 +480,7 @@ html.js .reveal.in{opacity:1;transform:none}
       <div class="tix reveal">
         <h3>Metabolic Plus Pass</h3>
         <p class="for">For the heart, the liver and a proper sit-down</p>
-        <p class="price">₹4,999 <small>per person</small></p>
+        <p class="price">₹3,999 <small>per person</small></p>
         <ul>
           <li>Everything in the Metabolic Check</li>
           <li>ECG and 2D echo (Caspian Cardiac Profile)</li>
@@ -741,8 +741,8 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // ---- Registration + checkout ----
 let pendingPass = null; // null = free registration
-const PASS_LABELS = { report: 'Report Clinic Pass (₹499)', metabolic: 'Metabolic Check Pass (₹1,999)', plus: 'Metabolic Plus Pass (₹4,999)', couple: 'Couple Pass (₹3,799, 2 people)', family: 'Family Pass (₹7,499, up to 4 people)' };
-const PASS_PRICE = { report: 499, metabolic: 1999, plus: 4999, couple: 3799, family: 7499 };
+const PASS_LABELS = { report: 'Report Clinic Pass (₹499)', metabolic: 'Metabolic Check Pass (₹1,999)', plus: 'Metabolic Plus Pass (₹3,999)', couple: 'Couple Pass (₹3,799, 2 people)', family: 'Family Pass (₹7,499, up to 4 people)' };
+const PASS_PRICE = { report: 499, metabolic: 1999, plus: 3999, couple: 3799, family: 7499 };
 const PASS_PEOPLE = { report: 1, metabolic: 1, plus: 1, couple: 2, family: 4 };
 
 function startCheckout(passType){
