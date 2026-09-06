@@ -34,7 +34,7 @@ a.btn.wa{background:#25D366;color:#062B12;margin-left:8px}
   <h1 id="h">You're in. See you on 14 November.</h1>
   <p id="msg">Your pass is confirmed and your payment receipt is on its way from Razorpay. Save your payment ID below and show it at the check-up desk. No fasting needed on the day; your report comes on WhatsApp the next working day and a doctor reviews it with you within the week. Keep the receipt: it qualifies as a preventive health check-up under Section 80D.</p>
   <div class="pid" id="pid"></div>
-  <p>Save the date: Saturday 14 November 2026, 11 AM to 9 PM, Hyderabad. Bring the people you share meals with; the free screening is open to them too.</p>
+  <p>Save the date: Saturday 14 November 2026, 9 AM to 8 PM, Hyderabad. Bring the people you share meals with; the free screening is open to them too.</p>
   <a class="btn" href="/">Back to the expo site</a><a class="btn wa" id="waShare" href="#" target="_blank" rel="noopener">Tell your family on WhatsApp</a>
 </div>
 <script>
@@ -46,7 +46,7 @@ if (pass && names[pass]) document.getElementById('h').textContent = names[pass] 
 if (pass === 'report' || pass === 'priority') document.getElementById('msg').textContent = 'Your Report Clinic Pass is confirmed and your Razorpay receipt is on its way. Bring any report from the last 3 months; your 10-minute doctor review slot at the expo will be confirmed on WhatsApp. Save your payment ID below and show it at the check-up desk.';
 if (pass === 'plus') document.getElementById('msg').textContent = 'Your Metabolic Plus Pass is confirmed and your Razorpay receipt is on its way. Blood is drawn at the expo (no fasting); your report comes on WhatsApp the next working day. The Caspian team will call you to book your ECG, 2D echo, FibroScan and 20-minute consult with Dr Khizer at Caspian Healthcare within 30 days. Keep the receipt: it qualifies as a preventive health check-up under Section 80D.';
 document.getElementById('pid').textContent = pid ? ('Payment ID: ' + pid) : '';
-document.getElementById('waShare').href = 'https://wa.me/?text=' + encodeURIComponent('I just booked my pass for the Caspian Diabesity Expo on Saturday 14 November 2026 in Hyderabad. Get the year\'s tests done with the doctors in the room: full metabolic check from ₹1,999, free entry to talks for the family, 80D eligible. Register here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=share&utm_campaign=thanks_page');
+document.getElementById('waShare').href = 'https://wa.me/?text=' + encodeURIComponent('I just booked my pass for the Caspian Diabesity Expo on Saturday 14 November 2026 in Hyderabad. Get the year's tests done with the doctors in the room: full metabolic check from ₹1,999, free entry to talks for the family, 80D eligible. Register here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=share&utm_campaign=thanks_page');
 // Fire the purchase once per payment id
 try {
   if (pass && names[pass] && pid && !localStorage.getItem('exp_purchase_' + pid)) {
