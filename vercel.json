@@ -29,6 +29,7 @@
     { "source": "/thanks.html", "destination": "/thanks", "permanent": true },
     { "source": "/register", "destination": "/#register", "permanent": false },
     { "source": "/passes", "destination": "/#tickets", "permanent": false },
-    { "source": "/exhibit", "destination": "/sponsor#enquiry", "permanent": false }
+    { "source": "/exhibit", "destination": "/sponsor#enquiry", "permanent": false },
+    { "source": "/assets/CASPIAN-Diabesity-Expo-2026-Prospectus.pdf", "destination": "/prospectus", "permanent": false }
   ]
 }
