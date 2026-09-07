@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XDYZ4FNXN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7XDYZ4FNXN');
+</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your pass | Caspian Diabesity Expo 2026</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0C1D38;--navy2:#12294B;--gold:#C6A02E;--goldl:#E7D9A8;--ice:#C9D6E8;--ink:#1A2433;--muted:#55677D}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Inter',system-ui,sans-serif;background:var(--navy);color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:22px 14px 40px}
+.pass{width:100%;max-width:420px;background:#fff;color:var(--ink);border-radius:22px;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.4)}
+.head{background:var(--navy2);color:#fff;padding:18px 22px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.head .logo{background:#fff;border-radius:10px;padding:7px 10px;width:150px}
+.head .logo img{width:100%;display:block}
+.head small{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--goldl);text-align:right}
+.head b{display:block;font-size:.8rem;text-align:right;color:var(--ice)}
+.body{padding:20px 22px 8px}
+.tier{font-family:'Fraunces',serif;font-size:1.55rem;line-height:1.15;color:var(--navy)}
+.tier.free{color:#1F6B45}
+.name{margin-top:6px;font-weight:600;font-size:1.05rem}
+.meta{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;font-size:.84rem;color:var(--muted)}
+.meta b{display:block;color:var(--ink);font-size:.95rem}
+.qr{margin:16px auto 6px;display:flex;flex-direction:column;align-items:center;border-top:2px dashed #E1E8F2;padding-top:16px}
+.qr canvas,.qr img{width:190px!important;height:190px!important;image-rendering:pixelated}
+.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.35rem;letter-spacing:.14em;font-weight:700;color:var(--navy);margin-top:10px}
+.hint{font-size:.78rem;color:var(--muted);text-align:center;margin:4px 0 14px}
+.strip{background:#EEF3FA;padding:12px 22px;font-size:.8rem;color:var(--muted);line-height:1.5}
+.strip b{color:var(--navy)}
+.chk{background:#DCEFE3;color:#1F6B45;font-weight:700;text-align:center;padding:10px;font-size:.9rem}
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;justify-content:center;max-width:420px}
+.btn{display:inline-block;padding:12px 20px;border-radius:999px;font-weight:600;font-size:.9rem;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn-wa{background:#25D366;color:#062B12}
+.err{max-width:420px;background:#fff;color:var(--ink);border-radius:16px;padding:26px;text-align:center;display:none}
+.err a{color:var(--navy)}
+@media print{body{background:#fff;padding:0}.actions,.foot{display:none}.pass{box-shadow:none;border:1px solid #ddd}}
+.foot{margin-top:22px;font-size:.75rem;color:#8FA3BD;text-align:center;max-width:420px}
+</style>
+</head>
+<body>
+<div class="pass" id="pass" style="display:none">
+  <div class="head">
+    <div class="logo"><img src="/assets/logo.png" alt="Diabesity Expo"></div>
+    <div><small>Entry pass</small><b>Sat 14 Nov 2026 · 9 AM to 8 PM<br>Hyderabad</b></div>
+  </div>
+  <div class="chk" id="chk" style="display:none">Checked in at the venue</div>
+  <div class="body">
+    <div class="tier" id="tier"></div>
+    <div class="name" id="name"></div>
+    <div class="meta">
+      <div>Admits<b id="people"></b></div>
+      <div>Status<b id="status"></b></div>
+    </div>
+    <div class="qr"><div id="qrcode"></div><div class="code" id="code"></div><div class="hint">Show this code at the registration desk. A screenshot works.</div></div>
+  </div>
+  <div class="strip" id="strip"></div>
+</div>
+<div class="err" id="err"><b>We could not find that pass.</b><p style="color:var(--muted);font-size:.9rem">Check the code in your confirmation message, or WhatsApp us at <a href="https://wa.me/918919341154">+91 89193 41154</a> and we will resend it.</p></div>
+<div class="actions" id="actions" style="display:none">
+  <a class="btn btn-wa" id="waSelf" href="#" target="_blank" rel="noopener">Send pass to my WhatsApp</a>
+  <button class="btn btn-ghost" onclick="window.print()">Save or print</button>
+  <a class="btn btn-ghost" href="/">Expo site</a>
+</div>
+<p class="foot" id="foot" style="display:none">Free Floor Pass holders: entry, basic screening and lunch are free. Want the year's tests done on the day? <a href="/#tickets" style="color:var(--goldl)">Add a Metabolic Check Pass, ₹1,999</a>.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const SB_URL = 'https://ntrlsnudicbdwdcguynz.supabase.co';
+const SB_KEY = 'sb_publishable_si0ucpO3OLawZMr1ihiuIw_shZbLoIw';
+const TIER = { free:'Free Floor Pass', report:'Report Clinic Pass', priority:'Report Clinic Pass', metabolic:'Metabolic Check Pass', plus:'Metabolic Plus Pass', couple:'Couple Pass', family:'Family Pass' };
+const INCL = {
+  free:'Talks, workshops and stalls · basic screening (sugar, BP, BMI) · lunch · tea and water all day',
+  report:'10-minute doctor review of your report at the expo · reserved seating · lunch and dinner',
+  metabolic:'Full Caspian Metabolic Profile drawn at the expo (no fasting) · BCA · doctor review within a week · reserved seating · lunch and dinner',
+  plus:'Everything in Metabolic Check · ECG and 2D echo and FibroScan at Caspian within 30 days · 20-minute consult with Dr Khizer · lunch and dinner',
+  couple:'Two Metabolic Check Passes · joint 15-minute consult · reserved seating together · lunch and dinner for both',
+  family:'Four Metabolic Check Passes · 20-minute family consult · front-row block · lunch and dinner for four'
+};
+const code = (new URLSearchParams(location.search).get('c') || '').trim().toUpperCase();
+async function load(){
+  if (!code) { document.getElementById('err').style.display='block'; return; }
+  const r = await fetch(SB_URL + '/rest/v1/rpc/pass_lookup', { method:'POST', headers:{ apikey:SB_KEY, Authorization:'Bearer '+SB_KEY, 'Content-Type':'application/json' }, body: JSON.stringify({ p_code: code }) });
+  const rows = r.ok ? await r.json() : [];
+  const p = rows && rows[0];
+  if (!p) { document.getElementById('err').style.display='block'; return; }
+  const t = TIER[p.pass_type] || 'Pass';
+  document.getElementById('tier').textContent = t;
+  if (p.pass_type === 'free') document.getElementById('tier').classList.add('free');
+  document.getElementById('name').textContent = p.first_name || '';
+  document.getElementById('people').textContent = p.people + (p.people === 1 ? ' person' : ' people');
+  document.getElementById('status').textContent = p.status === 'paid' ? 'Paid' : 'Registered';
+  document.getElementById('code').textContent = p.pass_code;
+  document.getElementById('strip').innerHTML = '<b>Includes:</b> ' + (INCL[p.pass_type] || '') + (p.pass_type === 'free' ? '' : '<br>No fasting needed. Come to the check-up desk any time from 9 AM.');
+  if (p.checked_in) document.getElementById('chk').style.display='block';
+  new QRCode(document.getElementById('qrcode'), { text: 'https://diabesityexpo.com/pass?c=' + p.pass_code, width: 190, height: 190, correctLevel: QRCode.CorrectLevel.M });
+  document.getElementById('waSelf').href = 'https://wa.me/?text=' + encodeURIComponent('My Caspian Diabesity Expo pass (' + t + ', ' + p.pass_code + '), Saturday 14 November 2026, 9 AM to 8 PM, Hyderabad: https://diabesityexpo.com/pass?c=' + p.pass_code);
+  document.getElementById('pass').style.display='block';
+  document.getElementById('actions').style.display='flex';
+  if (p.pass_type === 'free') document.getElementById('foot').style.display='block';
+  try { gtag('event', 'pass_view', { pass: p.pass_type }); } catch(e){}
+}
+load();
+</script>
+</body>
+</html>

@@ -78,17 +78,32 @@ input.notes{width:170px;padding:5px 8px;border-radius:8px;border:1px solid #D5DE
       <button data-tab="abandoned">Abandoned checkouts</button>
       <button data-tab="sponsors">Sponsor leads</button>
       <button data-tab="alumni">Alumni re-invite</button>
+      <button data-tab="checkin">Check-in (venue)</button>
     </div>
     <div class="tools">
       <input type="search" id="q" placeholder="Search name, phone, email">
       <select id="fu"><option value="">Any follow-up status</option><option>new</option><option>messaged</option><option>upgraded</option><option>attended</option><option>no_show</option><option>replied</option><option>booked</option><option>not_interested</option><option>do_not_contact</option></select>
       <span class="mini" id="count"></span>
     </div>
+    <div id="checkin" style="display:none;margin-bottom:14px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="card" style="padding:18px">
+          <b>Type or scan a pass code</b>
+          <p class="mini" style="margin:4px 0 10px">A USB or Bluetooth barcode scanner types into this box. Codes look like CDE-7KQ2MN. Pasting the QR link also works.</p>
+          <input id="ciCode" placeholder="CDE-" autocomplete="off" style="width:100%;padding:12px 14px;border-radius:10px;border:2px solid var(--navy);font-size:1.2rem;font-family:ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase">
+          <div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-navy" onclick="doCheckin()">Check in</button><button class="btn btn-ghost" onclick="toggleCam()" id="camBtn">Use camera</button></div>
+          <div id="reader" style="margin-top:12px;width:100%;max-width:360px"></div>
+        </div>
+        <div class="card" style="padding:18px" id="ciResult"><b>Result</b><p class="mini" style="margin-top:6px">The pass holder's name, tier and headcount appear here. Green means checked in; amber means already checked in earlier (possible duplicate); red means not found or unpaid.</p></div>
+      </div>
+      <div class="tiles" style="margin-top:14px" id="ciTiles"></div>
+    </div>
     <div class="card"><div id="table"></div></div>
     <p class="foot">WhatsApp buttons open a pre-written message in your WhatsApp; nothing is sent automatically. Follow-up status and notes save on change. Payments are confirmed by Razorpay signature on the server; reconcile against the Razorpay dashboard before refunds.</p>
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 <script>
 const SB_URL = 'https://ntrlsnudicbdwdcguynz.supabase.co';
 const SB_KEY = 'sb_publishable_si0ucpO3OLawZMr1ihiuIw_shZbLoIw';
@@ -167,8 +182,8 @@ function waLink(r){
   const pn = PASS_NAME[r.pass_type] || 'pass';
   let msg;
   if (r.status === 'pending_payment') msg = `Hi ${first}, this is the Caspian Diabesity Expo team. Your ${pn} payment did not go through. Would you like me to send you the payment link again? Check-up slots are limited for 14 November.`;
-  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free floor pass is confirmed. If you would like the year's tests done on the day (full metabolic profile, no fasting, doctor review, dinner and reserved seating), the Metabolic Check Pass is ₹1,999 and the receipt qualifies under Section 80D: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
-  else msg = `Hi ${first}, your ${pn} for the Caspian Diabesity Expo on Saturday 14 November 2026 is confirmed. Payment ID ${r.razorpay_payment_id||''}. No fasting needed; come to the check-up desk any time from 9 AM with this message.`;
+  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free floor pass is confirmed: https://diabesityexpo.com/pass?c=${r.pass_code||''} (show it at the gate). If you would like the year's tests done on the day (full metabolic profile, no fasting, doctor review, dinner and reserved seating), the Metabolic Check Pass is ₹1,999 and the receipt qualifies under Section 80D: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
+  else msg = `Hi ${first}, your ${pn} for the Caspian Diabesity Expo on Saturday 14 November 2026 is confirmed. Your pass: https://diabesityexpo.com/pass?c=${r.pass_code||''} (code ${r.pass_code||''}). No fasting needed; come to the check-up desk any time from 9 AM and show the pass.`;
   const ph = (r.phone||'').replace(/\D/g,''); const intl = ph.length === 10 ? '91' + ph : ph;
   return `https://wa.me/${intl}?text=${encodeURIComponent(msg)}`;
 }
@@ -188,6 +203,16 @@ function filtered(){
 function render(){
   renderTiles();
   const el = document.getElementById('table');
+  document.getElementById('checkin').style.display = tab === 'checkin' ? 'block' : 'none';
+  document.querySelector('.tools').style.display = tab === 'checkin' ? 'none' : 'flex';
+  if (tab === 'checkin') {
+    const paid = regs.filter(r => r.status === 'paid'), free = regs.filter(r => r.pass_type === 'free' && r.status === 'registered');
+    const inP = paid.filter(r => r.checked_in_at).length, inF = free.filter(r => r.checked_in_at).length;
+    document.getElementById('ciTiles').innerHTML = [['Paid passes checked in', inP + ' / ' + paid.length, paid.reduce((a,r)=>a+(r.checked_in_at?r.people:0),0) + ' people'],['Free passes checked in', inF + ' / ' + free.length, free.reduce((a,r)=>a+(r.checked_in_at?r.people:0),0) + ' people'],['Lunch plates (checked in)', regs.filter(r=>r.checked_in_at).reduce((a,r)=>a+r.people,0), 'every checked-in visitor'],['Dinner plates (paid, checked in)', paid.filter(r=>r.checked_in_at).reduce((a,r)=>a+r.people,0), 'pass holders only']].map(x => `<div class="tile"><small>${x[0]}</small><b>${x[1]}</b><small>${x[2]}</small></div>`).join('');
+    el.innerHTML = '<div class="empty">Recent check-ins appear in the All registrations tab with a ticked Check-in box.</div>';
+    setTimeout(() => document.getElementById('ciCode').focus(), 50);
+    return;
+  }
   if (tab === 'sponsors') {
     const q = document.getElementById('q').value.trim().toLowerCase();
     const rows = leads.filter(l => !q || [l.org,l.contact_name,l.phone,l.email].join(' ').toLowerCase().includes(q));
@@ -226,7 +251,7 @@ function render(){
     <td class="mini">${fmt(r.created_at)}</td>
     <td><b>${esc(r.name)}</b></td>
     <td>${esc(r.phone)}<br><span class="mini">${esc(r.email||'')}</span></td>
-    <td><span class="pill p-${r.pass_type}">${r.pass_type}</span></td>
+    <td><span class="pill p-${r.pass_type}">${r.pass_type}</span><br><span class="mini">${esc(r.pass_code||'')}</span></td>
     <td><span class="pill p-${r.status}">${r.status.replace('_',' ')}</span>${r.razorpay_payment_id ? '<br><span class="mini">' + esc(r.razorpay_payment_id) + '</span>' : ''}</td>
     <td>${r.people}</td><td>${r.amount_paise ? inr(r.amount_paise) : '<span class="mini">free</span>'}</td>
     <td class="mini">${esc(r.utm_source || (r.referrer ? new URL(r.referrer).hostname : 'direct'))}${r.utm_campaign ? '<br>' + esc(r.utm_campaign) : ''}</td>
@@ -235,6 +260,34 @@ function render(){
     <td><input type="checkbox" ${r.checked_in_at ? 'checked' : ''} onchange="updReg('${r.id}', {p_checked_in:this.checked})" title="Checked in"></td>
     <td>${r.followup_status === 'do_not_contact' ? '' : `<a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="${waLink(r)}">WhatsApp</a>`}</td>
   </tr>`).join('') + '</tbody></table>' : '<div class="empty">Nothing here yet.</div>';
+}
+let scanner = null, lastScan = 0;
+function parseCode(v){ const m = String(v||'').toUpperCase().match(/CDE-[A-Z0-9]{6}/); return m ? m[0] : String(v||'').trim().toUpperCase(); }
+async function doCheckin(codeIn){
+  const box = document.getElementById('ciCode'); const code = parseCode(codeIn || box.value); const out = document.getElementById('ciResult');
+  if (!code) return;
+  out.innerHTML = '<b>Looking up ' + esc(code) + '...</b>';
+  try {
+    const before = regs.find(r => r.pass_code === code);
+    const rows = await rpc('admin_checkin', { p_passcode: passcode, p_code: code });
+    const r = rows && rows[0];
+    if (!r) { out.innerHTML = '<div style="background:#F8D9D9;color:#8B1E1E;padding:14px;border-radius:10px"><b>Not found or not paid: ' + esc(code) + '</b><br><span class="mini">Search the name in All registrations. If the payment is pending, take payment at the desk and mark it, or register them as a free pass.</span></div>'; }
+    else {
+      const dup = before && before.checked_in_at;
+      const color = dup ? 'background:#FCEBD2;color:#9A5B00' : 'background:#DCEFE3;color:#1F6B45';
+      out.innerHTML = '<div style="' + color + ';padding:14px;border-radius:10px"><b style="font-size:1.2rem">' + esc(r.name) + '</b><br>' + (PASS_NAME[r.pass_type]||r.pass_type) + ' · ' + r.people + (r.people===1?' person':' people') + ' · ' + r.status + (dup ? '<br><b>Already checked in at ' + fmt(before.checked_in_at) + '</b>' : '<br>Checked in now') + '<br><span class="mini">' + esc(r.phone) + (r.pass_type==='free' ? ' · wristband: LUNCH' : ' · wristband: PASS HOLDER (lunch + dinner + reserved seating)') + '</span></div>';
+      const local = regs.find(x => x.id === r.id); if (local) local.checked_in_at = r.checked_in_at;
+      render();
+    }
+  } catch(e){ out.innerHTML = '<div style="background:#F8D9D9;color:#8B1E1E;padding:14px;border-radius:10px">Error: ' + esc(e.message) + '</div>'; }
+  box.value = ''; box.focus();
+}
+document.getElementById('ciCode').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); doCheckin(); } });
+function toggleCam(){
+  if (scanner) { scanner.stop().then(() => { scanner.clear(); scanner = null; document.getElementById('camBtn').textContent = 'Use camera'; }); return; }
+  if (!window.Html5Qrcode) { alert('Camera scanner library did not load. Type the code instead.'); return; }
+  scanner = new Html5Qrcode('reader');
+  scanner.start({ facingMode: 'environment' }, { fps: 8, qrbox: 220 }, txt => { const now = Date.now(); if (now - lastScan < 2500) return; lastScan = now; doCheckin(txt); }).then(() => { document.getElementById('camBtn').textContent = 'Stop camera'; }).catch(err => { scanner = null; alert('Camera not available: ' + err); });
 }
 async function updReg(id, patch){
   try { await rpc('admin_update_registration', Object.assign({ p_passcode: passcode, p_id: id, p_followup_status: null, p_followup_notes: null, p_checked_in: null }, patch)); const r = regs.find(x => x.id === id); if (r) { if (patch.p_followup_status) r.followup_status = patch.p_followup_status; if (patch.p_followup_notes != null) r.followup_notes = patch.p_followup_notes; if (patch.p_checked_in != null) r.checked_in_at = patch.p_checked_in ? new Date().toISOString() : null; } }

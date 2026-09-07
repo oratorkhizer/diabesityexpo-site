@@ -34,11 +34,26 @@ a.btn.wa{background:#25D366;color:#062B12;margin-left:8px}
   <h1 id="h">You're in. See you on 14 November.</h1>
   <p id="msg">Your pass is confirmed and your payment receipt is on its way from Razorpay. Save your payment ID below and show it at the check-up desk. No fasting needed on the day; your report comes on WhatsApp the next working day and a doctor reviews it with you within the week. Keep the receipt: it qualifies as a preventive health check-up under Section 80D.</p>
   <div class="pid" id="pid"></div>
+  <div id="passBox" style="display:none;background:#fff;color:#1A2433;border-radius:14px;padding:16px;margin:14px 0">
+    <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#C6A02E;font-weight:700">Your entry pass</div>
+    <div id="qrcode" style="display:flex;justify-content:center;margin:10px 0"></div>
+    <div id="pcode" style="font-family:ui-monospace,Menlo,monospace;font-size:1.3rem;letter-spacing:.14em;font-weight:700;color:#0C1D38"></div>
+    <p style="color:#55677D;font-size:.85rem;margin:6px 0 10px">Screenshot this, or open the pass page and send it to your own WhatsApp. Show it at the registration desk on 14 November.</p>
+    <a class="btn" id="passLink" href="#" style="margin-top:0;padding:10px 20px;font-size:.9rem">Open my pass</a>
+  </div>
   <p>Save the date: Saturday 14 November 2026, 9 AM to 8 PM, Hyderabad. Bring the people you share meals with; the free screening is open to them too.</p>
   <a class="btn" href="/">Back to the expo site</a><a class="btn wa" id="waShare" href="#" target="_blank" rel="noopener">Tell your family on WhatsApp</a>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const q = new URLSearchParams(location.search);
+const pcode = (q.get('c') || '').toUpperCase();
+if (pcode) {
+  document.getElementById('passBox').style.display = 'block';
+  document.getElementById('pcode').textContent = pcode;
+  document.getElementById('passLink').href = '/pass?c=' + pcode;
+  try { new QRCode(document.getElementById('qrcode'), { text: 'https://diabesityexpo.com/pass?c=' + pcode, width: 150, height: 150 }); } catch (e) {}
+}
 const pass = q.get('pass'); const pid = q.get('pid'); const oid = q.get('oid');
 const names = { report: 'Report Clinic Pass', priority: 'Report Clinic Pass', metabolic: 'Metabolic Check Pass', plus: 'Metabolic Plus Pass', couple: 'Couple Pass', family: 'Family Pass' };
 const price = { report: 499, priority: 499, metabolic: 1999, plus: 3999, couple: 3799, family: 7499 };

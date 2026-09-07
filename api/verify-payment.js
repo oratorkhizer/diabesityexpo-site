@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
           { status: "paid", razorpay_payment_id: String(razorpay_payment_id).slice(0, 60) }
         );
         if (rows && rows[0]) {
-          pass = { id: rows[0].id, pass_type: rows[0].pass_type, amount_paise: rows[0].amount_paise, people: rows[0].people };
+          pass = { id: rows[0].id, pass_type: rows[0].pass_type, amount_paise: rows[0].amount_paise, people: rows[0].people, passCode: rows[0].pass_code };
           db.logEvent("payment_confirmed", rows[0].id, { payment_id: razorpay_payment_id });
         }
       } catch (e) {

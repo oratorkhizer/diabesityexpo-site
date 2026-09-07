@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
       return;
     }
 
-    let id = null;
+    let id = null, passCode = null;
     try {
       const rows = await db.insert("registrations", {
         name,
@@ -31,6 +31,7 @@ module.exports = async (req, res) => {
         ...db.attribution(body, req),
       });
       id = rows && rows[0] ? rows[0].id : null;
+      passCode = rows && rows[0] ? rows[0].pass_code : null;
     } catch (e) {
       console.error("register: supabase insert failed", e.message);
     }
@@ -47,10 +48,11 @@ module.exports = async (req, res) => {
         people,
         pass: "Free Entry Pass",
         saved_to_database: id ? "yes" : "no",
+        pass_code: passCode || "",
       }),
     }).catch(() => null);
 
-    res.status(200).json({ ok: true, id });
+    res.status(200).json({ ok: true, id, passCode });
   } catch (e) {
     console.error("register error", e);
     res.status(500).json({ error: "Could not register" });

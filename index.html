@@ -196,19 +196,28 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .tag.fam{background:#DCEFE3;color:#1F6B45}
 /* TICKETS */
 .tickets{background:radial-gradient(900px 500px at 15% -10%, #1B3B6B 0%, var(--navy) 60%);color:#fff}
-.tix-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;margin-top:44px;align-items:stretch}
-.tix{background:var(--navy2);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column}
-.tix.featured{background:linear-gradient(160deg,#233F6E,#12294B);border:1.5px solid var(--gold);position:relative}
-.tix .pop{position:absolute;top:-13px;left:26px;background:var(--gold);color:var(--navy);font-size:.68rem;font-weight:800;letter-spacing:.12em;padding:5px 14px;border-radius:999px;text-transform:uppercase}
-.tix h3{font-size:1.2rem}
-.tix .for{font-size:.8rem;color:var(--goldl);margin-top:4px}
-.tix .price{font-family:'Fraunces',serif;font-size:2.5rem;color:#fff;margin:16px 0 4px}
-.tix .price small{font-size:.95rem;color:var(--ice);font-family:'Inter',sans-serif}
-.tix ul{list-style:none;margin:18px 0 26px;flex:1}
-.tix li{padding:7px 0 7px 28px;position:relative;font-size:.9rem;color:var(--ice)}
+.tix-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
+.tix{background:var(--navy2);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 20px 18px;display:flex;flex-direction:column;position:relative}
+.tix.featured{background:linear-gradient(160deg,#233F6E,#12294B);border:1.5px solid var(--gold)}
+.tix .pop{position:absolute;top:-11px;left:18px;background:var(--gold);color:var(--navy);font-size:.62rem;font-weight:800;letter-spacing:.12em;padding:4px 11px;border-radius:999px;text-transform:uppercase}
+.tix .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.tix h3{font-size:1.02rem;margin:0}
+.tix .price{font-family:'Fraunces',serif;font-size:1.55rem;color:#fff;white-space:nowrap}
+.tix .price small{font-size:.72rem;color:var(--ice);font-family:'Inter',sans-serif;display:block;text-align:right;line-height:1.1}
+.tix .for{font-size:.8rem;color:var(--goldl);margin:4px 0 10px}
+.tix ul{list-style:none;margin:0 0 12px;padding:0;flex:1}
+.tix li{padding:3px 0 3px 20px;position:relative;font-size:.84rem;color:var(--ice);line-height:1.4}
 .tix li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700}
-.tix .btn{width:100%;text-align:center}
-.tix-note{margin-top:26px;font-size:.82rem;color:#8FA3BD;text-align:center}
+.tix details{margin:0 0 12px;font-size:.8rem;color:var(--ice)}
+.tix summary{cursor:pointer;color:var(--goldl);font-weight:600;list-style:none;font-size:.78rem}
+.tix summary::-webkit-details-marker{display:none}
+.tix summary::after{content:" +"}
+.tix details[open] summary::after{content:" −"}
+.tix details p{margin:8px 0 0;line-height:1.5}
+.tix .btn{width:100%;text-align:center;padding:11px 16px;font-size:.9rem}
+.tix-note{margin-top:22px;font-size:.8rem;color:#8FA3BD;text-align:center}
+.tix-common{margin-top:14px;font-size:.86rem;color:var(--ice);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 16px}
+.tix-common b{color:var(--goldl)}
 /* FORM */
 .regbox{max-width:680px;margin:40px auto 0;background:var(--navy2);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:34px}
 .regbox h3{color:#fff;margin-bottom:6px}
@@ -273,6 +282,7 @@ html.js .reveal.in{opacity:1;transform:none}
   .stats .wrap{grid-template-columns:repeat(2,1fr)}
   .track-grid,.sponsor .cols{grid-template-columns:1fr}
   .gal{grid-template-columns:repeat(2,1fr)}
+  .tix-grid{grid-template-columns:1fr}
   .regbox .row{grid-template-columns:1fr}
   section{padding:64px 0}
   .passbar{display:flex}
@@ -464,82 +474,70 @@ html.js .reveal.in{opacity:1;transform:none}
   <div class="wrap on-dark">
     <p class="kicker">Passes</p>
     <h2 class="section-title" style="color:#fff">Your annual check-up, done at the expo.</h2>
-    <p class="section-sub">Every check-up pass includes the full Caspian Metabolic Profile (12 tests, no fasting, drawn at the expo), a doctor review of your report, dinner and reserved seating. Entry to the talks and stalls is free for everyone, and so is lunch for every registered visitor. Receipts qualify as a preventive health check-up under Section 80D.</p>
+    <p class="section-sub">Pick the pass that matches where you are: never tested, tested elsewhere, or due for the full annual check. Paid pass receipts qualify as a preventive health check-up under Section 80D.</p>
+    <div class="tix-common"><b>Free for every registered visitor:</b> entry to all talks and stalls, basic screening (sugar, BP, BMI), lunch, and tea and water all day. <b>Every paid pass adds</b> the year's tests or a doctor review, dinner and reserved seating.</div>
     <div class="tix-grid">
       <div class="tix reveal">
-        <h3>Free Floor Pass</h3>
-        <p class="for">For everyone: talks, stalls, family day</p>
-        <p class="price">₹0</p>
+        <div class="row"><h3>Free Floor Pass</h3><div class="price">₹0</div></div>
+        <p class="for">Talks, stalls, screening, lunch</p>
         <ul>
-          <li>Full expo floor, all public talks and workshops</li>
-          <li>Basic screening: random sugar, BP, BMI</li>
-          <li>Lunch for every registered visitor; tea, water and biscuits all day</li>
           <li>Whole family welcome</li>
-          <li>Registration required, takes one minute</li>
+          <li>Basic screening: random sugar, BP, BMI</li>
+          <li>Lunch, tea and water all day</li>
         </ul>
         <a class="btn btn-ghost" href="#register" data-track="cta_card_free_pass">Register free</a>
       </div>
       <div class="tix reveal">
-        <h3>Report Clinic Pass</h3>
+        <div class="row"><h3>Report Clinic Pass</h3><div class="price">₹499<small>per person</small></div></div>
         <p class="for">Already done your tests this year?</p>
-        <p class="price">₹499 <small>per person</small></p>
         <ul>
-          <li>Bring any report from the last 3 months</li>
-          <li>10-minute one-on-one review with a doctor at the expo</li>
-          <li>Reserved seating at all talks, lunch and dinner</li>
-          <li>Priced like a consultation, because it is one</li>
+          <li>10-minute one-on-one doctor review of any report from the last 3 months</li>
+          <li>Reserved seating, lunch and dinner</li>
         </ul>
         <button class="btn btn-ghost" onclick="startCheckout('report')">Book Report Clinic</button>
       </div>
       <div class="tix featured reveal">
         <span class="pop">Most popular</span>
-        <h3>Metabolic Check Pass</h3>
-        <p class="for">The year's tests, plus the doctor who explains them</p>
-        <p class="price">₹1,999 <small>per person</small></p>
+        <div class="row"><h3>Metabolic Check Pass</h3><div class="price">₹1,999<small>per person</small></div></div>
+        <p class="for">The year's 12 tests, plus the doctor who explains them</p>
         <ul>
-          <li>Full Caspian Metabolic Profile: thyroid, CBC, ESR, liver, kidney, HbA1c, urine, vitamin D, B12, iron, lipids</li>
-          <li>Body composition analysis (BCA) on the spot</li>
-          <li>No fasting: drawn at the expo, report on WhatsApp next working day</li>
-          <li>10-minute doctor review of your report, by video or at Caspian, within a week</li>
-          <li>Lunch, dinner, reserved seating, and a written plan with your report</li>
-          <li>Labs charge ₹1,600 to ₹2,700 for these tests alone, with no doctor</li>
+          <li>Full Caspian Metabolic Profile drawn at the expo, no fasting</li>
+          <li>Body composition analysis on the spot</li>
+          <li>Report on WhatsApp next working day, doctor review within a week</li>
         </ul>
+        <details><summary>Everything included</summary><p>Thyroid profile, CBC, ESR, liver and kidney function, HbA1c, urine examination, vitamin D, B12, iron profile, lipid profile, BCA. 10-minute doctor review by video or at Caspian. Lunch, dinner, reserved seating, a written plan with your report. Labs charge ₹1,600 to ₹2,700 for these tests alone, with no doctor.</p></details>
         <button class="btn btn-gold" onclick="startCheckout('metabolic')">Book Metabolic Check</button>
       </div>
       <div class="tix reveal">
-        <h3>Metabolic Plus Pass</h3>
-        <p class="for">For the heart, the liver and a proper sit-down</p>
-        <p class="price">₹3,999 <small>per person</small></p>
+        <div class="row"><h3>Metabolic Plus Pass</h3><div class="price">₹3,999<small>per person</small></div></div>
+        <p class="for">Heart, liver and a proper sit-down</p>
         <ul>
           <li>Everything in the Metabolic Check</li>
-          <li>ECG and 2D echo (Caspian Cardiac Profile), done at Caspian Healthcare on a slot booked for you within 30 days</li>
-          <li>FibroScan liver stiffness and fat scan at the next Caspian FibroScan camp</li>
+          <li>ECG, 2D echo and FibroScan at Caspian within 30 days</li>
           <li>20-minute consult with Dr Khizer, Diabetologist &amp; Bariatric Physician</li>
-          <li>Signed patient guide and 30-day WhatsApp follow-up</li>
         </ul>
+        <details><summary>Everything included</summary><p>Caspian Cardiac Profile (ECG and 2D echo) on a slot booked for you within 30 days; FibroScan liver stiffness and fat scan at the next Caspian FibroScan camp; signed patient guide; 30-day WhatsApp follow-up; lunch, dinner and reserved seating.</p></details>
         <button class="btn btn-gold" onclick="startCheckout('plus')">Book Metabolic Plus</button>
       </div>
       <div class="tix reveal">
-        <h3>Couple Pass</h3>
+        <div class="row"><h3>Couple Pass</h3><div class="price">₹3,799<small>for 2 people</small></div></div>
         <p class="for">Two Metabolic Checks, one plan</p>
-        <p class="price">₹3,799 <small>for 2 people</small></p>
         <ul>
           <li>Two full Metabolic Check Passes</li>
           <li>Joint 15-minute consult: one plan for the household</li>
-          <li>Reserved seating together, lunch and dinner for both</li>
+          <li>Seats together, lunch and dinner for both</li>
         </ul>
         <button class="btn btn-gold" onclick="startCheckout('couple')">Book Couple Pass</button>
       </div>
       <div class="tix reveal">
-        <h3>Family Pass</h3>
+        <div class="row"><h3>Family Pass</h3><div class="price">₹7,499<small>up to 4 people</small></div></div>
         <p class="for">Risk runs in families; test together</p>
-        <p class="price">₹7,499 <small>up to 4 people</small></p>
         <ul>
           <li>Four full Metabolic Check Passes</li>
           <li>20-minute family consult with a specialist</li>
-          <li>Front-row block, lunch and dinner for four, signed patient guide</li>
-          <li>Sponsors one free screening for someone in need, in your family's name</li>
+          <li>Front-row block, lunch and dinner for four</li>
         </ul>
+        <details><summary>Everything included</summary><p>Signed patient guide for the family, and your pass sponsors one free screening for someone in need, in your family's name.</p></details>
         <button class="btn btn-gold" onclick="startCheckout('family')">Book Family Pass</button>
       </div>
     </div>
@@ -565,7 +563,7 @@ html.js .reveal.in{opacity:1;transform:none}
         <div class="row">
           <button type="submit" class="btn btn-gold full" id="regBtn">Register free</button>
         </div>
-        <div class="ok" id="regOk">Registered. See you on 14 November. A confirmation will reach your WhatsApp or email before the event. <span id="regUpsell">Want the year's tests done on the day? <a href="#tickets" onclick="startCheckout('metabolic');return false;">Add a Metabolic Check Pass for ₹1,999</a>.</span></div>
+        <div class="ok" id="regOk">Registered. See you on 14 November. <span id="regPass"></span><span id="regUpsell">Want the year's tests done on the day? <a href="#tickets" onclick="startCheckout('metabolic');return false;">Add a Metabolic Check Pass for ₹1,999</a>.</span></div>
       </form>
     </div>
   </div>
@@ -741,7 +739,9 @@ document.getElementById('regForm').addEventListener('submit', async (ev) => {
         body: JSON.stringify({ name, phone, email, people, attribution: attr })
       });
       if (!r.ok) throw new Error('register failed');
+      const reg = await r.json().catch(() => ({}));
       track('generate_lead', { lead_type: 'free_pass', people: Number(people), currency: 'INR', value: 0 });
+      if (reg.passCode) document.getElementById('regPass').innerHTML = 'Your pass code is <b>' + reg.passCode + '</b>. <a href="/pass?c=' + reg.passCode + '">Open your pass</a>, save a screenshot and show it at the gate. ';
       document.getElementById('regOk').style.display = 'block';
       btn.textContent = 'Registered ✓';
     } catch(e) {
@@ -777,7 +777,7 @@ document.getElementById('regForm').addEventListener('submit', async (ev) => {
         });
         const vr = await v.json();
         if (vr.verified) {
-          window.location.href = '/thanks?pass=' + passType + '&pid=' + encodeURIComponent(resp.razorpay_payment_id) + '&oid=' + encodeURIComponent(resp.razorpay_order_id);
+          window.location.href = '/thanks?pass=' + passType + '&pid=' + encodeURIComponent(resp.razorpay_payment_id) + '&oid=' + encodeURIComponent(resp.razorpay_order_id) + (vr.pass && vr.pass.passCode ? '&c=' + encodeURIComponent(vr.pass.passCode) : '');
         } else {
           alert('Payment received but verification failed. Please WhatsApp us with your payment ID: ' + resp.razorpay_payment_id);
         }
