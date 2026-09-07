@@ -277,10 +277,32 @@ async function doCheckin(codeIn){
       const color = dup ? 'background:#FCEBD2;color:#9A5B00' : 'background:#DCEFE3;color:#1F6B45';
       out.innerHTML = '<div style="' + color + ';padding:14px;border-radius:10px"><b style="font-size:1.2rem">' + esc(r.name) + '</b><br>' + (PASS_NAME[r.pass_type]||r.pass_type) + ' · ' + r.people + (r.people===1?' person':' people') + ' · ' + r.status + (dup ? '<br><b>Already checked in at ' + fmt(before.checked_in_at) + '</b>' : '<br>Checked in now') + '<br><span class="mini">' + esc(r.phone) + (r.pass_type==='free' ? ' · wristband: LUNCH' : ' · wristband: PASS HOLDER (lunch + dinner + reserved seating)') + '</span></div>';
       const local = regs.find(x => x.id === r.id); if (local) local.checked_in_at = r.checked_in_at;
+      if (r.status === 'paid' && r.pass_type !== 'report') out.innerHTML += lisPanel(r);
       render();
     }
   } catch(e){ out.innerHTML = '<div style="background:#F8D9D9;color:#8B1E1E;padding:14px;border-radius:10px">Error: ' + esc(e.message) + '</div>'; }
   box.value = ''; box.focus();
+}
+function lisPanel(r){
+  if (r.lis_bill_ids) return '<div class="mini" style="margin-top:10px;padding:10px;background:#EEF3FA;border-radius:8px">LiveHealth bill already created: ' + esc(r.lis_bill_ids) + '</div>';
+  const n = Math.max(1, Math.min(6, r.people || 1));
+  let rows = '';
+  for (let i = 0; i < n; i++) rows += `<div style="display:grid;grid-template-columns:1fr 60px 70px;gap:6px;margin-top:6px"><input class="notes" style="width:100%" id="lisn${i}" placeholder="Full name ${i+1}" value="${i===0?esc(r.name):''}"><input class="notes" style="width:100%" id="lisa${i}" placeholder="Age"><select class="fu" id="liss${i}"><option value="">Sex</option><option value="M">M</option><option value="F">F</option></select></div>`;
+  return `<div style="margin-top:10px;padding:12px;background:#EEF3FA;border-radius:8px" id="lisBox"><b>Lab bill in LiveHealth</b><p class="mini" style="margin:4px 0 0">One Metabolic Profile per person on this pass. Fill the names, then send. The phlebotomist finds them in LiveHealth by name or mobile.</p>${rows}<div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button class="btn btn-navy btn-sm" onclick="sendLis('${esc(r.pass_code)}',${n})">Send to LiveHealth</button><span class="mini" id="lisMsg"></span></div></div>`;
+}
+async function sendLis(code, n){
+  const people = [];
+  for (let i = 0; i < n; i++) { const nm = document.getElementById('lisn'+i).value.trim(); if (nm) people.push({ name: nm, age: document.getElementById('lisa'+i).value.trim() || null, sex: document.getElementById('liss'+i).value || null }); }
+  const msg = document.getElementById('lisMsg'); msg.textContent = 'Sending...';
+  try {
+    const r = await fetch('/api/lis-bill', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ adminPasscode: passcode, code, people }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || ('HTTP ' + r.status));
+    if (d.configured === false) { msg.textContent = 'Not connected yet: ' + d.message; return; }
+    if (d.already) { msg.textContent = 'Already billed: ' + d.billIds; return; }
+    msg.textContent = (d.billIds && d.billIds.length ? 'Billed: ' + d.billIds.join(', ') : '') + (d.errors && d.errors.length ? ' Errors: ' + d.errors.join('; ') : '');
+    const local = regs.find(x => x.pass_code === code); if (local && d.billIds && d.billIds.length) local.lis_bill_ids = d.billIds.join(',');
+  } catch(e){ msg.textContent = 'Failed: ' + e.message; }
 }
 document.getElementById('ciCode').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); doCheckin(); } });
 function toggleCam(){
