@@ -65,6 +65,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/(te|ur)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "redirects": [

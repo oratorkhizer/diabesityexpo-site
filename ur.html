@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<!--
+  URDU PATIENT PAGE. Draft of 11 September 2026, task 15 of the list taken
+  from the yashodahospitals.com review. Right to left.
+
+  HIDDEN UNTIL A NATIVE SPEAKER APPROVES IT:
+    - robots noindex,nofollow below, and an X-Robots-Tag rule in vercel.json
+    - not in sitemap.xml, and not linked from any English page
+  robots.txt deliberately does NOT block it: Google has to be able to fetch
+  the page to read the noindex.
+
+  TO PUBLISH, after review: remove the yellow review bar, set robots to
+  index,follow, delete the /(te|ur) rule in vercel.json, add the page to
+  sitemap.xml, add hreflang links (en-IN, te-IN, ur-IN) to all three pages,
+  and add a language link to the English nav.
+
+  FACTS ARE COPIED FROM index.html AS OF 11 SEPTEMBER 2026: date, hours,
+  prices, inclusions, refund date, 2025 figures. If any of them changes there,
+  change it here and in te.html in the same commit.
+
+  NOT COPIED ON PURPOSE: the Section 80D answer. The CA has not yet confirmed
+  who issues the receipt or whether it qualifies.
+
+  Numbers, prices and the phone number sit in .num spans (left to right,
+  isolated) so they do not reverse inside the Urdu text. The phone and email
+  inputs are dir=ltr for the same reason.
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XDYZ4FNXN"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7XDYZ4FNXN');</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>کیسپین ڈائبیسٹی ایکسپو 2026 | حیدرآباد کا سالانہ میٹابولک چیک اپ کا دن | 14 نومبر</title>
+<meta name="description" content="ہفتہ، 14 نومبر 2026، حیدرآباد۔ مفت داخلہ، مفت بنیادی اسکریننگ اور دوپہر کا کھانا۔ میٹابولک چیک پاس ₹1,999۔">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0C1D38;--gold:#C6A02E;--goldl:#E7D9A8;--ice:#C9D6E8;--light:#EEF3FA;--line:#DCE5F1;--ink:#1A2433;--muted:#55677D;--max:980px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;color:var(--ink);background:#fff;font-size:18px;line-height:2.2}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+.review{background:#FFF4D6;color:#5A4300;font-size:.92rem;padding:8px 0;text-align:center}
+.review small{display:block;font-family:system-ui,sans-serif;font-size:.78rem;line-height:1.6;direction:ltr}
+.top{background:var(--navy);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.brand{font-family:system-ui,sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.08em;color:#fff;text-decoration:none;direction:ltr}
+.langs{display:flex;gap:6px;list-style:none}
+.langs a{display:block;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3);color:var(--ice);text-decoration:none;font-size:.92rem}
+.langs a[aria-current]{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:700}
+.hero{background:linear-gradient(180deg,rgba(12,29,56,.88),rgba(12,29,56,.97)),url('/assets/hero.jpg') center 30%/cover;color:#fff;padding:48px 0 52px}
+.kicker{color:var(--gold);font-weight:700;font-size:.95rem;margin-bottom:8px}
+h1{font-size:clamp(1.55rem,1.15rem + 2.2vw,2.4rem);line-height:2;margin-bottom:12px}
+.lede{color:var(--ice);max-width:44em;margin-bottom:16px}
+.when{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:8px 16px;margin-bottom:20px;font-weight:600}
+.host{color:var(--ice);font-size:.9rem;margin-top:18px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;padding:6px 24px;border-radius:999px;font:inherit;font-weight:700;text-decoration:none;border:0;cursor:pointer}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn[disabled]{opacity:.6;cursor:default}
+section.s{padding:42px 0}
+section.alt{background:var(--light)}
+h2{font-size:clamp(1.25rem,1.05rem + 1vw,1.75rem);line-height:2;color:var(--navy);margin-bottom:6px}
+.sub{color:var(--muted);max-width:44em;margin-bottom:16px}
+ul.list{list-style:none;display:grid;gap:10px}
+ul.list li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px}
+.card.pop{border:2px solid var(--gold)}
+.badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:.8rem;font-weight:700;border-radius:999px;padding:0 10px}
+.card h3{font-size:1.05rem;line-height:2;color:var(--navy)}
+.price{font-size:1.1rem;color:var(--navy);margin:0 0 6px}
+.price .num{font-family:system-ui,sans-serif;font-size:1.45rem;font-weight:800}
+.price small{font-size:.85rem;color:var(--muted);margin-inline-start:8px}
+.card p{color:var(--muted);font-size:.95rem}
+.card .tests{margin-top:6px;font-size:.88rem}
+.note{color:var(--muted);font-size:.9rem;margin-top:14px}
+form{display:grid;gap:10px;max-width:560px}
+input,select{font:inherit;padding:4px 14px;border:1px solid var(--ice);border-radius:10px;background:#fff;width:100%}
+input[dir=ltr]{text-align:right}
+input[dir=ltr]::placeholder{font-family:"Noto Nastaliq Urdu",serif}
+.consent{color:var(--muted);font-size:.86rem}
+.ok{display:none;background:#E9F7EF;border:1px solid #B7E1C6;border-radius:12px;padding:8px 16px}
+details{border-bottom:1px solid var(--line);padding:8px 0}
+summary{cursor:pointer;font-weight:700;color:var(--navy)}
+details p{color:var(--muted);margin-top:4px}
+footer{background:var(--navy);color:var(--ice);padding:26px 0;font-size:.95rem}
+footer a{color:var(--goldl)}
+footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0;font-family:system-ui,sans-serif;font-size:.85rem;line-height:1.6}
+.credit{font-family:system-ui,sans-serif;font-size:.82rem;line-height:1.6;margin-top:10px;direction:ltr;text-align:right}
+.num{direction:ltr;unicode-bidi:isolate;white-space:nowrap;font-family:system-ui,sans-serif}
+</style>
+</head>
+<body>
+
+<div class="review">یہ ترجمے کا مسودہ ہے۔ ابھی کسی اہلِ زبان نے اس کی جانچ نہیں کی۔<small>Draft translation, not yet checked by a native Urdu speaker. Hidden from Google until it is.</small></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" lang="en">CASPIAN DIABESITY EXPO 2026</a>
+    <ul class="langs">
+      <li><a href="/ur" aria-current="page">اردو</a></li>
+      <li><a href="/te" lang="te" dir="ltr">తెలుగు</a></li>
+      <li><a href="/" lang="en" dir="ltr">English</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">تیسرا ایڈیشن · عالمی یومِ ذیابیطس · داخلہ مفت</p>
+    <h1>اس سال کے سارے ٹیسٹ ایک ہی دن، ڈاکٹروں کی موجودگی میں۔</h1>
+    <p class="lede">کیسپین ڈائبیسٹی ایکسپو حیدرآباد کا سالانہ میٹابولک چیک اپ کا دن ہے، شوگر (ذیابیطس) اور موٹاپے سے متاثر لوگوں اور ان کے گھر والوں کے لیے۔ خون کا نمونہ ایکسپو میں ہی لیا جائے گا، اور ڈاکٹر آپ کے ساتھ بیٹھ کر رپورٹ سمجھائیں گے۔ ماہرین سے سیدھے جواب، اور پورے خاندان کے لیے ایک دن، سب ایک ہی چھت کے نیچے۔</p>
+    <p class="when">ہفتہ، <span class="num">14</span> نومبر <span class="num">2026</span> · صبح <span class="num">9</span> بجے سے رات <span class="num">8</span> بجے تک · حیدرآباد (مقام کا اعلان جلد ہوگا)</p>
+    <div class="btns">
+      <a class="btn btn-gold" href="#register" data-track="cta_hero_free">مفت پاس حاصل کریں</a>
+      <a class="btn btn-ghost" href="https://wa.me/918919341154?text=Hi%2C%20I%20have%20a%20question%20about%20the%20Diabesity%20Expo%202026%20(Urdu%20page)." target="_blank" rel="noopener" data-track="whatsapp_click">واٹس ایپ پر پوچھیں</a>
+    </div>
+    <p class="host">میزبان: کیسپین ہیلتھ کیئر فاؤنڈیشن، ایک رجسٹرڈ پبلک چیریٹیبل ٹرسٹ۔ <span class="num">2025</span> کے ایکسپو میں <span class="num">1,500</span> سے زیادہ لوگ آئے، اور ایک ہی دن میں <span class="num">715</span> میٹابولک پروفائل ہوئے۔</p>
+  </div>
+</section>
+
+<section class="s">
+  <div class="wrap">
+    <h2>ہر رجسٹرڈ مہمان کے لیے مفت</h2>
+    <p class="sub">مفت فلور پاس کے ساتھ یہ سب مفت ہے۔ کسی کو واپس نہیں لوٹایا جائے گا۔</p>
+    <ul class="list">
+      <li>تمام لیکچرز، ورکشاپس اور اسٹالز میں داخلہ</li>
+      <li>بنیادی اسکریننگ: شوگر (رینڈم)، بی پی، بی ایم آئی</li>
+      <li>دوپہر کا کھانا، اور دن بھر چائے اور پانی</li>
+      <li>پورا خاندان خوش آمدید، بچوں سمیت</li>
+    </ul>
+  </div>
+</section>
+
+<section class="s alt">
+  <div class="wrap">
+    <h2>اس دن کیا ہوگا</h2>
+    <ul class="list">
+      <li>ماہرین کے لیکچر آسان زبان میں: موٹاپا، ذیابیطس میں پاؤں کی حفاظت، ویکسینیشن، اور ریورسل کی حقیقت۔ کچھ بھی پوچھیے، کوئی فیس نہیں۔</li>
+      <li>ورکشاپس: گھر پر پاؤں کی دیکھ بھال، <span class="num">CGM</span> رپورٹ پڑھنا، ہمارے باورچی خانے کے مطابق کھانے کی پلیٹ کی منصوبہ بندی، اور ایمرجنسی کو جلد پہچاننا۔</li>
+      <li>سولیوشنز ایکسپو: <span class="num">CGM</span>، گلوکومیٹر، صحت مند غذائیں، جوتے اور فٹنس۔ خریدنے سے پہلے آزمائیے، کوئی دباؤ نہیں۔</li>
+    </ul>
+  </div>
+</section>
+
+<section class="s" id="tickets">
+  <div class="wrap">
+    <h2>پاس: اس سال کا چیک اپ ایکسپو میں ہی</h2>
+    <p class="sub">پیڈ پاس لازمی نہیں۔ ہر پیڈ پاس میں دوپہر کا کھانا، رات کا کھانا اور مخصوص نشست شامل ہے۔</p>
+    <div class="cards">
+      <div class="card">
+        <h3>رپورٹ کلینک پاس</h3>
+        <div class="price"><span class="num">₹499</span><small>فی فرد</small></div>
+        <p>اس سال ٹیسٹ پہلے ہی کروا چکے ہیں؟ پچھلے <span class="num">3</span> مہینوں کی کوئی بھی رپورٹ لائیے، ڈاکٹر <span class="num">10</span> منٹ آپ کے ساتھ بیٹھ کر سمجھائیں گے۔</p>
+      </div>
+      <div class="card pop">
+        <span class="badge">سب سے زیادہ پسند کیا جانے والا</span>
+        <h3>میٹابولک چیک پاس</h3>
+        <div class="price"><span class="num">₹1,999</span><small>فی فرد</small></div>
+        <p>اس سال کے <span class="num">12</span> ٹیسٹ، اور انہیں سمجھانے والا ڈاکٹر۔ خون کا نمونہ ایکسپو میں، فاقے کی ضرورت نہیں۔ باڈی کمپوزیشن موقع پر۔ رپورٹ اگلے کام کے دن واٹس ایپ پر، اور ایک ہفتے کے اندر ڈاکٹر کا جائزہ (ویڈیو پر یا کیسپین میں)۔</p>
+        <p class="tests"><span class="num">12</span> ٹیسٹ: تھائرائیڈ پروفائل، <span class="num">CBC</span>، <span class="num">ESR</span>، جگر کے ٹیسٹ، گردے کے ٹیسٹ، <span class="num">HbA1c</span>، پیشاب کا معائنہ، وٹامن <span class="num">D</span>، وٹامن <span class="num">B12</span>، آئرن پروفائل، لپڈ پروفائل، باڈی کمپوزیشن (<span class="num">BCA</span>)۔</p>
+      </div>
+      <div class="card">
+        <h3>میٹابولک پلس پاس</h3>
+        <div class="price"><span class="num">₹3,999</span><small>فی فرد</small></div>
+        <p>میٹابولک چیک کی ہر چیز، اور <span class="num">30</span> دن کے اندر کیسپین میں <span class="num">ECG</span>، <span class="num">2D</span> ایکو اور <span class="num">FibroScan</span>۔ ڈاکٹر خضر (<span class="num">Diabetologist &amp; Bariatric Physician</span>) کے ساتھ <span class="num">20</span> منٹ کی مشاورت۔</p>
+      </div>
+      <div class="card">
+        <h3>کپل پاس</h3>
+        <div class="price"><span class="num">₹3,799</span><small>دو افراد</small></div>
+        <p>دو میٹابولک چیک پاس۔ گھر کے لیے ایک ہی منصوبہ بنانے کو دونوں کی ایک ساتھ <span class="num">15</span> منٹ کی مشاورت۔ ساتھ ساتھ نشستیں۔</p>
+      </div>
+      <div class="card">
+        <h3>فیملی پاس</h3>
+        <div class="price"><span class="num">₹7,499</span><small>چار افراد تک</small></div>
+        <p>چار میٹابولک چیک پاس۔ ماہر کے ساتھ <span class="num">20</span> منٹ کی خاندانی مشاورت۔ شوگر کا خطرہ خاندان میں چلتا ہے، اس لیے مل کر ٹیسٹ کروائیے۔</p>
+      </div>
+    </div>
+    <p style="margin-top:18px"><a class="btn btn-navy" href="/#tickets" data-track="cta_book_paid">پاس بک کریں</a></p>
+    <p class="note">بکنگ اور ادائیگی کا صفحہ فی الحال انگریزی میں ہے۔ مدد چاہیے تو <span class="num">+91 89193 41154</span> پر واٹس ایپ کیجیے۔ پیڈ پاس <span class="num">31</span> اکتوبر <span class="num">2026</span> تک مکمل طور پر قابلِ واپسی ہیں۔ ادائیگی <span class="num">Razorpay</span> کے ذریعے محفوظ طریقے سے ہوتی ہے۔ ٹیسٹ ہماری لیبارٹری، کیسپین ڈائیگنوسٹک سینٹر، کرتی ہے۔</p>
+  </div>
+</section>
+
+<section class="s alt" id="register">
+  <div class="wrap">
+    <h2>مفت پاس کے لیے رجسٹر کریں</h2>
+    <p class="sub">صرف ایک منٹ۔ آپ کو ایک پاس کوڈ ملے گا، اس کا اسکرین شاٹ گیٹ پر دکھائیے۔</p>
+    <form id="regForm">
+      <input type="text" id="f-name" placeholder="پورا نام *" required autocomplete="name" aria-label="پورا نام">
+      <input type="tel" id="f-phone" dir="ltr" placeholder="واٹس ایپ نمبر *" pattern="[0-9+ ]{10,15}" required autocomplete="tel" inputmode="tel" aria-label="واٹس ایپ نمبر">
+      <input type="email" id="f-email" dir="ltr" placeholder="ای میل (اختیاری)" autocomplete="email" aria-label="ای میل">
+      <select id="f-people" aria-label="کتنے لوگ آ رہے ہیں">
+        <option value="1">اکیلے آ رہا / رہی ہوں</option>
+        <option value="2">2 افراد</option>
+        <option value="3">3 افراد</option>
+        <option value="4">4 یا زیادہ</option>
+      </select>
+      <button type="submit" class="btn btn-gold" id="regBtn">مفت رجسٹر کریں</button>
+      <p class="consent">آپ کی تفصیلات صرف اس ایکسپو کے سلسلے میں آپ سے رابطے کے لیے استعمال ہوں گی۔ ہم انہیں نہ بیچتے ہیں، نہ کسی کو دیتے ہیں۔ <a href="/privacy">پرائیویسی پالیسی (انگریزی)</a></p>
+      <div class="ok" id="regOk" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<section class="s">
+  <div class="wrap">
+    <h2>اکثر پوچھے جانے والے سوالات</h2>
+    <details><summary>کیا داخلہ واقعی مفت ہے؟</summary><p>جی ہاں۔ مفت فلور پاس کے لیے رجسٹر کیجیے۔ لیکچرز، ورکشاپس، اسٹالز، بنیادی اسکریننگ، دوپہر کا کھانا، چائے اور پانی سب مفت ہیں۔ کسی کو واپس نہیں لوٹایا جائے گا۔</p></details>
+    <details><summary>کیا فاقہ ضروری ہے؟</summary><p>نہیں۔ میٹابولک چیک کے لیے خون کا نمونہ ایکسپو میں ہی لیا جاتا ہے، فاقے کی ضرورت نہیں۔</p></details>
+    <details><summary>کیا والدین اور بچوں کو ساتھ لا سکتے ہیں؟</summary><p>ضرور۔ یہ پورے خاندان کا دن ہے۔ کپل اور فیملی پاس میں ہر فرد کا اپنا میٹابولک چیک، اور سب کے لیے ایک مشترکہ مشاورت ہوتی ہے۔</p></details>
+    <details><summary>کیا پیڈ پاس کی رقم واپس ملے گی؟</summary><p>جی ہاں۔ <span class="num">31</span> اکتوبر <span class="num">2026</span> تک پوری رقم واپس ملے گی، <span class="num">Razorpay</span> کے ذریعے اسی طریقے سے جس سے ادائیگی کی تھی۔</p></details>
+    <details><summary>یہ ایکسپو کون منعقد کر رہا ہے؟</summary><p>کیسپین ہیلتھ کیئر فاؤنڈیشن، ایک رجسٹرڈ پبلک چیریٹیبل ٹرسٹ۔ <span class="num">2025</span> کا ایکسپو <span class="num">RSSDI</span> تلنگانہ کے اشتراک سے ہوا تھا۔</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>سوال ہے؟ کال یا واٹس ایپ کیجیے: <a class="num" href="tel:+918919341154" data-track="call_click">+91 89193 41154</a></p>
+    <ul>
+      <li><a href="/" lang="en">English</a></li>
+      <li><a href="/terms" lang="en">Terms</a></li>
+      <li><a href="/privacy" lang="en">Privacy</a></li>
+      <li><a href="/refund" lang="en">Refunds</a></li>
+    </ul>
+    <p class="credit" lang="en">© 2026 Caspian Healthcare Foundation · Made with ❤️ by <a href="https://caspianstudio.in" target="_blank" rel="noopener">Caspian Studio</a> · Catering by <a href="https://zarafehospitality.com" target="_blank" rel="noopener">Zarafé Hospitality</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var LANG = 'ur';
+  var T = {
+    sending: 'رجسٹر ہو رہا ہے...',
+    done: 'رجسٹر ہو گیا ✓',
+    again: 'مفت رجسٹر کریں',
+    ok: 'رجسٹریشن ہو گئی۔ 14 نومبر کو ملتے ہیں۔',
+    code: 'آپ کا پاس کوڈ: ',
+    open: 'اپنا پاس کھولیے',
+    after: 'اسکرین شاٹ محفوظ کیجیے اور گیٹ پر دکھائیے۔',
+    error: 'ابھی جمع نہیں ہو سکا۔ براہِ کرم +91 89193 41154 پر واٹس ایپ کیجیے۔'
+  };
+
+  function track(name, params){
+    params = params || {}; params.lang = LANG;
+    try { gtag('event', name, params); } catch(e){}
+    try { window.va && window.va('event', { name: name, data: params }); } catch(e){}
+  }
+  document.querySelectorAll('[data-track]').forEach(function(el){
+    el.addEventListener('click', function(){ track(el.getAttribute('data-track')); });
+  });
+
+  // Same first-touch attribution as the English page, so the Expo Desk can
+  // see from landing_path that a registrant came in through this page.
+  function attribution(){
+    var a = {};
+    try { a = JSON.parse(sessionStorage.getItem('expo_attr') || '{}'); } catch(e){}
+    if (!a.landing_path) {
+      var q = new URLSearchParams(location.search);
+      a = { utm_source: q.get('utm_source'), utm_medium: q.get('utm_medium'),
+            utm_campaign: q.get('utm_campaign'), utm_content: q.get('utm_content'),
+            referrer: document.referrer || null, landing_path: location.pathname + location.search };
+      try { sessionStorage.setItem('expo_attr', JSON.stringify(a)); } catch(e){}
+    }
+    return a;
+  }
+  attribution();
+
+  var form = document.getElementById('regForm');
+  var btn = document.getElementById('regBtn');
+  var ok = document.getElementById('regOk');
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var body = {
+      name: document.getElementById('f-name').value.trim(),
+      phone: document.getElementById('f-phone').value.trim(),
+      email: document.getElementById('f-email').value.trim(),
+      people: document.getElementById('f-people').value,
+      attribution: attribution()
+    };
+    btn.disabled = true; btn.textContent = T.sending;
+    fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function(r){ if (!r.ok) throw new Error('register failed'); return r.json().catch(function(){ return {}; }); })
+      .then(function(reg){
+        track('generate_lead', { lead_type: 'free_pass', people: Number(body.people), currency: 'INR', value: 0 });
+        ok.textContent = T.ok + ' ';
+        if (reg && reg.passCode) {
+          ok.appendChild(document.createTextNode(T.code));
+          var b = document.createElement('b'); b.className = 'num'; b.textContent = reg.passCode; ok.appendChild(b);
+          ok.appendChild(document.createTextNode('۔ '));
+          var a = document.createElement('a'); a.href = '/pass?c=' + encodeURIComponent(reg.passCode); a.textContent = T.open; ok.appendChild(a);
+          ok.appendChild(document.createTextNode('، ' + T.after));
+        }
+        ok.style.display = 'block';
+        btn.textContent = T.done;
+      })
+      .catch(function(){
+        alert(T.error);
+        btn.disabled = false; btn.textContent = T.again;
+      });
+  });
+})();
+</script>
+</body>
+</html>

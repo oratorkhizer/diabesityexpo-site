@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="te" dir="ltr">
+<head>
+<!--
+  TELUGU PATIENT PAGE. Draft of 11 September 2026, task 15 of the list taken
+  from the yashodahospitals.com review.
+
+  HIDDEN UNTIL A NATIVE SPEAKER APPROVES IT:
+    - robots noindex,nofollow below, and an X-Robots-Tag rule in vercel.json
+    - not in sitemap.xml, and not linked from any English page
+  robots.txt deliberately does NOT block it: Google has to be able to fetch
+  the page to read the noindex.
+
+  TO PUBLISH, after review: remove the yellow review bar, set robots to
+  index,follow, delete the /(te|ur) rule in vercel.json, add the page to
+  sitemap.xml, add hreflang links (en-IN, te-IN, ur-IN) to all three pages,
+  and add a language link to the English nav.
+
+  FACTS ARE COPIED FROM index.html AS OF 11 SEPTEMBER 2026: date, hours,
+  prices, inclusions, refund date, 2025 figures. If any of them changes there,
+  change it here and in ur.html in the same commit.
+
+  NOT COPIED ON PURPOSE: the Section 80D answer. The CA has not yet confirmed
+  who issues the receipt or whether it qualifies, so it is not repeated in a
+  second and third language.
+
+  Paid passes link to the English checkout (/#tickets). The free pass form
+  posts to the same /api/register as the English page; landing_path records
+  that the visitor arrived here.
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XDYZ4FNXN"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7XDYZ4FNXN');</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>కాస్పియన్ డయాబెసిటీ ఎక్స్‌పో 2026 | హైదరాబాద్ వార్షిక మెటబాలిక్ చెకప్ రోజు | 14 నవంబర్</title>
+<meta name="description" content="శనివారం, 14 నవంబర్ 2026, హైదరాబాద్. ఉచిత ప్రవేశం, ఉచిత బేసిక్ స్క్రీనింగ్, మధ్యాహ్న భోజనం. మెటబాలిక్ చెకప్ పాస్ ₹1,999.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0C1D38;--gold:#C6A02E;--goldl:#E7D9A8;--ice:#C9D6E8;--light:#EEF3FA;--line:#DCE5F1;--ink:#1A2433;--muted:#55677D;--max:980px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Noto Sans Telugu",system-ui,sans-serif;color:var(--ink);background:#fff;font-size:17px;line-height:1.8}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+.review{background:#FFF4D6;color:#5A4300;font-size:.92rem;padding:10px 0;text-align:center}
+.review small{display:block;font-family:system-ui,sans-serif;font-size:.78rem}
+.top{background:var(--navy);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.brand{font-family:system-ui,sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.08em;color:#fff;text-decoration:none}
+.langs{display:flex;gap:6px;list-style:none}
+.langs a{display:block;padding:4px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3);color:var(--ice);text-decoration:none;font-size:.92rem}
+.langs a[aria-current]{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:700}
+.hero{background:linear-gradient(180deg,rgba(12,29,56,.88),rgba(12,29,56,.97)),url('/assets/hero.jpg') center 30%/cover;color:#fff;padding:52px 0 56px}
+.kicker{color:var(--gold);font-weight:700;font-size:.95rem;margin-bottom:10px}
+h1{font-size:clamp(1.65rem,1.2rem + 2.4vw,2.6rem);line-height:1.4;margin-bottom:14px}
+.lede{color:var(--ice);max-width:44em;margin-bottom:18px}
+.when{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:12px 16px;margin-bottom:22px;font-weight:600}
+.host{color:var(--ice);font-size:.92rem;margin-top:20px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 24px;border-radius:999px;font:inherit;font-weight:700;text-decoration:none;border:0;cursor:pointer}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn[disabled]{opacity:.6;cursor:default}
+section.s{padding:46px 0}
+section.alt{background:var(--light)}
+h2{font-size:clamp(1.3rem,1.1rem + 1.1vw,1.85rem);line-height:1.45;color:var(--navy);margin-bottom:8px}
+.sub{color:var(--muted);max-width:44em;margin-bottom:18px}
+ul.list{list-style:none;display:grid;gap:10px}
+ul.list li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.card.pop{border:2px solid var(--gold)}
+.badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:.8rem;font-weight:700;border-radius:999px;padding:0 10px;margin-bottom:6px}
+.card h3{font-size:1.08rem;line-height:1.5;color:var(--navy)}
+.price{font-family:system-ui,sans-serif;font-size:1.5rem;font-weight:800;color:var(--navy);margin:2px 0 8px}
+.price small{font-family:"Noto Sans Telugu",system-ui,sans-serif;font-size:.85rem;font-weight:400;color:var(--muted);margin-inline-start:6px}
+.card p{color:var(--muted);font-size:.97rem}
+.card .tests{margin-top:8px;font-size:.9rem}
+.note{color:var(--muted);font-size:.92rem;margin-top:16px}
+form{display:grid;gap:10px;max-width:560px}
+input,select{font:inherit;padding:11px 14px;border:1px solid var(--ice);border-radius:10px;background:#fff;width:100%}
+.consent{color:var(--muted);font-size:.88rem}
+.ok{display:none;background:#E9F7EF;border:1px solid #B7E1C6;border-radius:12px;padding:12px 16px}
+details{border-bottom:1px solid var(--line);padding:12px 0}
+summary{cursor:pointer;font-weight:700;color:var(--navy)}
+details p{color:var(--muted);margin-top:6px}
+footer{background:var(--navy);color:var(--ice);padding:30px 0;font-size:.95rem}
+footer a{color:var(--goldl)}
+footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0;font-family:system-ui,sans-serif;font-size:.85rem}
+.credit{font-family:system-ui,sans-serif;font-size:.82rem;margin-top:12px}
+.num{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="review">ఇది అనువాద ముసాయిదా. తెలుగు మాతృభాషగా ఉన్నవారు ఇంకా సరిచూడలేదు.<small>Draft translation, not yet checked by a native Telugu speaker. Hidden from Google until it is.</small></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/">CASPIAN DIABESITY EXPO 2026</a>
+    <ul class="langs">
+      <li><a href="/" lang="en">English</a></li>
+      <li><a href="/te" aria-current="page">తెలుగు</a></li>
+      <li><a href="/ur" lang="ur" dir="rtl">اردو</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">3వ ఎడిషన్ · ప్రపంచ మధుమేహ దినోత్సవం · ఉచిత ప్రవేశం</p>
+    <h1>ఈ ఏడాది పరీక్షలన్నీ ఒకే రోజు, డాక్టర్లు మీ ముందే ఉండగా.</h1>
+    <p class="lede">కాస్పియన్ డయాబెసిటీ ఎక్స్‌పో హైదరాబాద్ వార్షిక మెటబాలిక్ చెకప్ రోజు. షుగర్ (మధుమేహం), అధిక బరువు ఉన్నవారికి, వారి కుటుంబాలకు. రక్త నమూనా ఎక్స్‌పోలోనే తీసుకుంటాం. మీ రిపోర్టును డాక్టర్ మీతో కూర్చుని వివరిస్తారు. స్పెషలిస్టుల నుంచి సూటిగా సమాధానాలు, కుటుంబం మొత్తానికి ఒక రోజు, అన్నీ ఒకే చోట.</p>
+    <p class="when">శనివారం, 14 నవంబర్ 2026 · ఉదయం 9 నుంచి రాత్రి 8 వరకు · హైదరాబాద్ (వేదిక వివరాలు త్వరలో)</p>
+    <div class="btns">
+      <a class="btn btn-gold" href="#register" data-track="cta_hero_free">ఉచిత పాస్ తీసుకోండి</a>
+      <a class="btn btn-ghost" href="https://wa.me/918919341154?text=Hi%2C%20I%20have%20a%20question%20about%20the%20Diabesity%20Expo%202026%20(Telugu%20page)." target="_blank" rel="noopener" data-track="whatsapp_click">WhatsApp లో అడగండి</a>
+    </div>
+    <p class="host">నిర్వహణ: కాస్పియన్ హెల్త్‌కేర్ ఫౌండేషన్, రిజిస్టర్డ్ పబ్లిక్ ఛారిటబుల్ ట్రస్ట్. 2025 ఎక్స్‌పోకు 1,500 మందికి పైగా వచ్చారు, ఒక్క రోజులో 715 మెటబాలిక్ ప్రొఫైల్స్ జరిగాయి.</p>
+  </div>
+</section>
+
+<section class="s">
+  <div class="wrap">
+    <h2>రిజిస్టర్ చేసుకున్న అందరికీ ఉచితం</h2>
+    <p class="sub">ఉచిత ఫ్లోర్ పాస్‌తో ఇవన్నీ ఉచితం. ఎవరినీ వెనక్కి పంపము.</p>
+    <ul class="list">
+      <li>అన్ని టాక్స్, వర్క్‌షాప్స్, స్టాల్స్‌లోకి ప్రవేశం</li>
+      <li>బేసిక్ స్క్రీనింగ్: షుగర్ (రాండమ్), BP, BMI</li>
+      <li>మధ్యాహ్న భోజనం, రోజంతా టీ, నీళ్లు</li>
+      <li>కుటుంబం మొత్తానికి స్వాగతం, పిల్లలతో సహా</li>
+    </ul>
+  </div>
+</section>
+
+<section class="s alt">
+  <div class="wrap">
+    <h2>ఆ రోజు ఏముంటుంది</h2>
+    <ul class="list">
+      <li>స్పెషలిస్టుల టాక్స్, సులభమైన భాషలో: ఊబకాయం, డయాబెటిక్ ఫుట్, వ్యాక్సినేషన్, రివర్సల్ గురించి నిజం. ఏదైనా అడగండి, కన్సల్టేషన్ ఫీజు లేదు.</li>
+      <li>వర్క్‌షాప్స్: ఇంట్లోనే పాదాల సంరక్షణ, CGM రిపోర్ట్ చదవడం, మన వంటింటికి తగిన ప్లేట్ ప్లానింగ్, అత్యవసర పరిస్థితిని ముందే గుర్తించడం.</li>
+      <li>సొల్యూషన్స్ ఎక్స్‌పో: CGM, గ్లూకోమీటర్లు, ఆరోగ్యకరమైన ఆహారం, ఫుట్‌వేర్, ఫిట్‌నెస్. కొనే ముందు ప్రయత్నించండి, ఎలాంటి ఒత్తిడి లేదు.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="s" id="tickets">
+  <div class="wrap">
+    <h2>పాసులు: ఈ ఏడాది చెకప్ ఎక్స్‌పోలోనే</h2>
+    <p class="sub">పెయిడ్ పాస్ తప్పనిసరి కాదు. ప్రతి పెయిడ్ పాస్‌లో మధ్యాహ్న భోజనం, రాత్రి భోజనం, రిజర్వ్ చేసిన సీటు ఉంటాయి.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>రిపోర్ట్ క్లినిక్ పాస్</h3>
+        <div class="price"><span class="num">₹499</span><small>ఒక్కరికి</small></div>
+        <p>ఈ ఏడాది పరీక్షలు ఇప్పటికే చేయించుకున్నారా? గత 3 నెలల్లోని ఏ రిపోర్ట్ అయినా తీసుకురండి. డాక్టర్ మీతో 10 నిమిషాలు కూర్చుని వివరిస్తారు.</p>
+      </div>
+      <div class="card pop">
+        <span class="badge">ఎక్కువ మంది ఎంచుకునేది</span>
+        <h3>మెటబాలిక్ చెకప్ పాస్</h3>
+        <div class="price"><span class="num">₹1,999</span><small>ఒక్కరికి</small></div>
+        <p>ఈ ఏడాది 12 పరీక్షలు, వాటిని వివరించే డాక్టర్. రక్త నమూనా ఎక్స్‌పోలోనే, ఉపవాసం అక్కర్లేదు. బాడీ కంపోజిషన్ అక్కడికక్కడే. రిపోర్ట్ మరుసటి పని దినం WhatsApp లో, వారంలోపు డాక్టర్ రివ్యూ (వీడియోలో లేదా కాస్పియన్‌లో).</p>
+        <p class="tests">12 పరీక్షలు: థైరాయిడ్ ప్రొఫైల్, CBC, ESR, లివర్ ఫంక్షన్, కిడ్నీ ఫంక్షన్, HbA1c, మూత్ర పరీక్ష, విటమిన్ D, విటమిన్ B12, ఐరన్ ప్రొఫైల్, లిపిడ్ ప్రొఫైల్, బాడీ కంపోజిషన్ (BCA).</p>
+      </div>
+      <div class="card">
+        <h3>మెటబాలిక్ ప్లస్ పాస్</h3>
+        <div class="price"><span class="num">₹3,999</span><small>ఒక్కరికి</small></div>
+        <p>మెటబాలిక్ చెకప్‌లో ఉన్నవన్నీ, అదనంగా 30 రోజుల్లో కాస్పియన్‌లో ECG, 2D ఎకో, FibroScan. డా. ఖిజర్‌తో (Diabetologist &amp; Bariatric Physician) 20 నిమిషాల కన్సల్టేషన్.</p>
+      </div>
+      <div class="card">
+        <h3>కపుల్ పాస్</h3>
+        <div class="price"><span class="num">₹3,799</span><small>ఇద్దరికి</small></div>
+        <p>రెండు మెటబాలిక్ చెకప్ పాసులు. ఇంటికి ఒకే ప్లాన్ కోసం ఇద్దరికీ కలిపి 15 నిమిషాల కన్సల్టేషన్. పక్కపక్కనే సీట్లు.</p>
+      </div>
+      <div class="card">
+        <h3>ఫ్యామిలీ పాస్</h3>
+        <div class="price"><span class="num">₹7,499</span><small>నలుగురి వరకు</small></div>
+        <p>నాలుగు మెటబాలిక్ చెకప్ పాసులు. స్పెషలిస్టుతో 20 నిమిషాల ఫ్యామిలీ కన్సల్టేషన్. షుగర్ ముప్పు కుటుంబాల్లో వస్తుంది, అందుకే కలిసి పరీక్ష చేయించుకోండి.</p>
+      </div>
+    </div>
+    <p style="margin-top:20px"><a class="btn btn-navy" href="/#tickets" data-track="cta_book_paid">పాస్ బుక్ చేయండి</a></p>
+    <p class="note">బుకింగ్, చెల్లింపు పేజీ ప్రస్తుతం ఇంగ్లీష్‌లో ఉంది. సహాయం కావాలంటే <span class="num">+91 89193 41154</span> కి WhatsApp చేయండి. పెయిడ్ పాసులకు 31 అక్టోబర్ 2026 వరకు పూర్తి రీఫండ్. చెల్లింపులు Razorpay ద్వారా సురక్షితంగా జరుగుతాయి. పరీక్షలు మా ల్యాబ్ కాస్పియన్ డయాగ్నోస్టిక్ సెంటర్ చేస్తుంది.</p>
+  </div>
+</section>
+
+<section class="s alt" id="register">
+  <div class="wrap">
+    <h2>ఉచిత పాస్ కోసం రిజిస్టర్ చేసుకోండి</h2>
+    <p class="sub">ఒక్క నిమిషం చాలు. మీకు పాస్ కోడ్ వస్తుంది. దాని స్క్రీన్‌షాట్ గేట్ దగ్గర చూపించండి.</p>
+    <form id="regForm">
+      <input type="text" id="f-name" placeholder="పూర్తి పేరు *" required autocomplete="name" aria-label="పూర్తి పేరు">
+      <input type="tel" id="f-phone" placeholder="WhatsApp నంబర్ *" pattern="[0-9+ ]{10,15}" required autocomplete="tel" inputmode="tel" aria-label="WhatsApp నంబర్">
+      <input type="email" id="f-email" placeholder="ఈమెయిల్ (ఇష్టమైతే)" autocomplete="email" aria-label="ఈమెయిల్">
+      <select id="f-people" aria-label="ఎంత మంది వస్తున్నారు">
+        <option value="1">ఒక్కరే వస్తున్నాను</option>
+        <option value="2">2 మంది</option>
+        <option value="3">3 మంది</option>
+        <option value="4">4 లేదా అంతకంటే ఎక్కువ</option>
+      </select>
+      <button type="submit" class="btn btn-gold" id="regBtn">ఉచితంగా రిజిస్టర్ చేయండి</button>
+      <p class="consent">మీ వివరాలు ఈ ఎక్స్‌పో గురించి మిమ్మల్ని సంప్రదించడానికి మాత్రమే వాడతాం. ఎవరికీ అమ్మము, ఇవ్వము. <a href="/privacy">ప్రైవసీ పాలసీ (ఇంగ్లీష్)</a></p>
+      <div class="ok" id="regOk" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<section class="s">
+  <div class="wrap">
+    <h2>తరచూ అడిగే ప్రశ్నలు</h2>
+    <details><summary>నిజంగా ప్రవేశం ఉచితమేనా?</summary><p>అవును. ఉచిత ఫ్లోర్ పాస్ కోసం రిజిస్టర్ చేసుకోండి. టాక్స్, వర్క్‌షాప్స్, స్టాల్స్, బేసిక్ స్క్రీనింగ్, మధ్యాహ్న భోజనం, టీ, నీళ్లు అన్నీ ఉచితం. ఎవరినీ వెనక్కి పంపము.</p></details>
+    <details><summary>ఉపవాసం ఉండాలా?</summary><p>అక్కర్లేదు. మెటబాలిక్ చెకప్ కోసం రక్త నమూనా ఎక్స్‌పోలోనే తీసుకుంటాం, ఉపవాసం అవసరం లేదు.</p></details>
+    <details><summary>తల్లిదండ్రులను, పిల్లలను తీసుకురావచ్చా?</summary><p>తప్పకుండా. ఇది కుటుంబం మొత్తానికి ఒక రోజు. కపుల్, ఫ్యామిలీ పాసుల్లో ప్రతి ఒక్కరికీ వేరేగా మెటబాలిక్ చెకప్, అందరికీ కలిపి ఒక కన్సల్టేషన్ ఉంటాయి.</p></details>
+    <details><summary>పెయిడ్ పాస్ డబ్బు తిరిగి వస్తుందా?</summary><p>అవును. 31 అక్టోబర్ 2026 వరకు పూర్తి రీఫండ్, మీరు చెల్లించిన పద్ధతిలోనే Razorpay ద్వారా.</p></details>
+    <details><summary>ఈ ఎక్స్‌పోను ఎవరు నిర్వహిస్తున్నారు?</summary><p>కాస్పియన్ హెల్త్‌కేర్ ఫౌండేషన్, రిజిస్టర్డ్ పబ్లిక్ ఛారిటబుల్ ట్రస్ట్. 2025 ఎక్స్‌పో RSSDI తెలంగాణ సహకారంతో జరిగింది.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>ప్రశ్నలు ఉన్నాయా? కాల్ లేదా WhatsApp: <a class="num" href="tel:+918919341154" data-track="call_click">+91 89193 41154</a></p>
+    <ul>
+      <li><a href="/">English</a></li>
+      <li><a href="/terms">Terms</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="/refund">Refunds</a></li>
+    </ul>
+    <p class="credit">© 2026 Caspian Healthcare Foundation · Made with ❤️ by <a href="https://caspianstudio.in" target="_blank" rel="noopener">Caspian Studio</a> · Catering by <a href="https://zarafehospitality.com" target="_blank" rel="noopener">Zarafé Hospitality</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var LANG = 'te';
+  var T = {
+    sending: 'రిజిస్టర్ చేస్తున్నాం...',
+    done: 'రిజిస్టర్ అయ్యింది ✓',
+    again: 'ఉచితంగా రిజిస్టర్ చేయండి',
+    ok: 'రిజిస్టర్ అయ్యింది. 14 నవంబర్‌న కలుద్దాం.',
+    code: 'మీ పాస్ కోడ్: ',
+    open: 'మీ పాస్ తెరవండి',
+    after: 'స్క్రీన్‌షాట్ సేవ్ చేసి గేట్ దగ్గర చూపించండి.',
+    error: 'ఇప్పుడు పంపలేకపోయాం. దయచేసి +91 89193 41154 కి WhatsApp చేయండి.'
+  };
+
+  function track(name, params){
+    params = params || {}; params.lang = LANG;
+    try { gtag('event', name, params); } catch(e){}
+    try { window.va && window.va('event', { name: name, data: params }); } catch(e){}
+  }
+  document.querySelectorAll('[data-track]').forEach(function(el){
+    el.addEventListener('click', function(){ track(el.getAttribute('data-track')); });
+  });
+
+  // Same first-touch attribution as the English page, so the Expo Desk can
+  // see from landing_path that a registrant came in through this page.
+  function attribution(){
+    var a = {};
+    try { a = JSON.parse(sessionStorage.getItem('expo_attr') || '{}'); } catch(e){}
+    if (!a.landing_path) {
+      var q = new URLSearchParams(location.search);
+      a = { utm_source: q.get('utm_source'), utm_medium: q.get('utm_medium'),
+            utm_campaign: q.get('utm_campaign'), utm_content: q.get('utm_content'),
+            referrer: document.referrer || null, landing_path: location.pathname + location.search };
+      try { sessionStorage.setItem('expo_attr', JSON.stringify(a)); } catch(e){}
+    }
+    return a;
+  }
+  attribution();
+
+  var form = document.getElementById('regForm');
+  var btn = document.getElementById('regBtn');
+  var ok = document.getElementById('regOk');
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var body = {
+      name: document.getElementById('f-name').value.trim(),
+      phone: document.getElementById('f-phone').value.trim(),
+      email: document.getElementById('f-email').value.trim(),
+      people: document.getElementById('f-people').value,
+      attribution: attribution()
+    };
+    btn.disabled = true; btn.textContent = T.sending;
+    fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function(r){ if (!r.ok) throw new Error('register failed'); return r.json().catch(function(){ return {}; }); })
+      .then(function(reg){
+        track('generate_lead', { lead_type: 'free_pass', people: Number(body.people), currency: 'INR', value: 0 });
+        ok.textContent = T.ok + ' ';
+        if (reg && reg.passCode) {
+          ok.appendChild(document.createTextNode(T.code));
+          var b = document.createElement('b'); b.className = 'num'; b.textContent = reg.passCode; ok.appendChild(b);
+          ok.appendChild(document.createTextNode('. '));
+          var a = document.createElement('a'); a.href = '/pass?c=' + encodeURIComponent(reg.passCode); a.textContent = T.open; ok.appendChild(a);
+          ok.appendChild(document.createTextNode(', ' + T.after));
+        }
+        ok.style.display = 'block';
+        btn.textContent = T.done;
+      })
+      .catch(function(){
+        alert(T.error);
+        btn.disabled = false; btn.textContent = T.again;
+      });
+  });
+})();
+</script>
+</body>
+</html>
