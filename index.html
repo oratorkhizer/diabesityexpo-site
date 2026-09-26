@@ -92,8 +92,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#B0124F; --navy2:#7D2942; --navy3:#972D4C; --gold:#FFB703; --goldl:#F2D699;
-  --ice:#C9D6E8; --light:#EEF3FA; --white:#FFFFFF; --ink:#1A2433; --muted:#88576B;
+  --navy:#1D6B3A; --navy2:#2D5A3C; --navy3:#2F6B45; --gold:#FFB703; --goldl:#F2D699;
+  --ice:#C9D6E8; --light:#EEF3FA; --white:#FFFFFF; --ink:#1A2433; --muted:#5C7A66;
   --radius:16px; --max:1180px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -111,7 +111,7 @@ section{padding:84px 0}
 .btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.4)}
 .btn-navy{background:var(--navy);color:#fff}
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(176,18,79,.9);backdrop-filter:blur(10px);transition:box-shadow .2s}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(29,107,58,.9);backdrop-filter:blur(10px);transition:box-shadow .2s}
 nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .nav-in{max-width:var(--max);margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}
@@ -125,9 +125,9 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .burger{display:none;background:none;border:0;cursor:pointer;padding:6px}
 .burger span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;border-radius:2px}
 /* HERO */
-.hero{position:relative;background:radial-gradient(1100px 600px at 85% -10%, #7D0033 0%, var(--navy) 55%);color:#fff;padding:170px 0 110px;overflow:hidden}
+.hero{position:relative;background:radial-gradient(1100px 600px at 85% -10%, #124A27 0%, var(--navy) 55%);color:#fff;padding:170px 0 110px;overflow:hidden}
 .hero .bg{position:absolute;inset:0;background:url('assets/hero.jpg') center 30%/cover no-repeat;animation:heroZoom 26s ease-in-out infinite alternate;will-change:transform}
-.hero .veil{position:absolute;inset:0;background:linear-gradient(100deg, rgba(87,32,46,.96) 30%, rgba(176,18,79,.82) 60%, rgba(176,18,79,.62));}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(100deg, rgba(26,58,38,.96) 30%, rgba(29,107,58,.82) 60%, rgba(29,107,58,.62));}
 .hero .wrap{position:relative;z-index:2}
 @keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.09)}}
 @media (prefers-reduced-motion: reduce){.hero .bg{animation:none}}
@@ -139,7 +139,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .hero .meta{margin-top:26px;font-weight:600;color:#fff;font-size:1.02rem}
 .hero .meta span{color:var(--gold)}
 .hero-ctas{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
-.hero .host{margin-top:44px;font-size:.85rem;color:#CA91A8}
+.hero .host{margin-top:44px;font-size:.85rem;color:#A6C4AE}
 .hero .host b{color:var(--ice);font-weight:600}
 /* COUNTDOWN */
 .count{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
@@ -166,7 +166,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 /* OFFER */
 .offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:40px}
 .offer{border:1px solid #E1E8F2;border-radius:var(--radius);padding:26px;transition:box-shadow .2s, transform .2s}
-.offer:hover{box-shadow:0 14px 40px rgba(125,41,66,.12);transform:translateY(-3px)}
+.offer:hover{box-shadow:0 14px 40px rgba(45,90,60,.12);transform:translateY(-3px)}
 .offer .ic{width:52px;height:52px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
 .offer .ic svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .offer h3{font-size:1.1rem;margin-bottom:8px}
@@ -196,13 +196,13 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .slot .t{font-weight:600}
 .slot .d{font-size:.88rem;color:var(--muted);margin-top:2px}
 .tag{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-left:10px;vertical-align:middle}
-.tag.pub{background:#DDEAFB;color:#9F0047}
+.tag.pub{background:#DDEAFB;color:#185C31}
 .tag.fam{background:#DCEFE3;color:#1F6B45}
 /* TICKETS */
-.tickets{background:radial-gradient(900px 500px at 15% -10%, #7D0033 0%, var(--navy) 60%);color:#fff}
+.tickets{background:radial-gradient(900px 500px at 15% -10%, #124A27 0%, var(--navy) 60%);color:#fff}
 .tix-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
 .tix{background:var(--navy2);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 20px 18px;display:flex;flex-direction:column;position:relative}
-.tix.featured{background:linear-gradient(160deg,#800637,#7D2942);border:1.5px solid var(--gold)}
+.tix.featured{background:linear-gradient(160deg,#134C28,#2D5A3C);border:1.5px solid var(--gold)}
 .tix .pop{position:absolute;top:-11px;left:18px;background:var(--gold);color:var(--navy);font-size:.62rem;font-weight:800;letter-spacing:.12em;padding:4px 11px;border-radius:999px;text-transform:uppercase}
 .tix .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .tix h3{font-size:1.02rem;margin:0}
@@ -219,7 +219,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .tix details[open] summary::after{content:" −"}
 .tix details p{margin:8px 0 0;line-height:1.5}
 .tix .btn{width:100%;text-align:center;padding:11px 16px;font-size:.9rem}
-.tix-note{margin-top:22px;font-size:.8rem;color:#CA91A8;text-align:center}
+.tix-note{margin-top:22px;font-size:.8rem;color:#A6C4AE;text-align:center}
 .tix-common{margin-top:14px;font-size:.86rem;color:var(--ice);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 16px}
 .tix-common b{color:var(--goldl)}
 /* FORM */
@@ -228,7 +228,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .regbox p{color:var(--ice);font-size:.88rem;margin-bottom:20px}
 .regbox .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
 .regbox input,.regbox select,.regbox textarea{width:100%;padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:.95rem;font-family:inherit}
-.regbox input::placeholder,.regbox textarea::placeholder{color:#B98097}
+.regbox input::placeholder,.regbox textarea::placeholder{color:#8FAE98}
 .regbox select option{color:var(--ink)}
 .regbox .full{grid-column:1/-1}
 .regbox .ok{display:none;background:rgba(31,107,69,.25);border:1px solid #2E9E68;color:#C9F0DB;padding:14px;border-radius:10px;margin-top:14px;font-size:.9rem}
@@ -237,7 +237,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .regbox.light h3{color:var(--navy)}
 .regbox.light p{color:var(--muted)}
 .regbox.light input,.regbox.light select,.regbox.light textarea{background:#fff;border:1px solid #D5DEEA;color:var(--ink)}
-.regbox.light input::placeholder,.regbox.light textarea::placeholder{color:#BB8DA0}
+.regbox.light input::placeholder,.regbox.light textarea::placeholder{color:#97B3A0}
 .regbox.light .ok{background:#DCEFE3;border-color:#2E9E68;color:#1F6B45}
 .regbox.light .ok a{color:#1F6B45}
 /* SPONSOR */
@@ -265,8 +265,8 @@ footer h4{color:#fff;font-size:.95rem;margin-bottom:14px}
 footer a{color:var(--ice);text-decoration:none;font-size:.88rem}
 footer a:hover{color:var(--goldl)}
 footer li{list-style:none;padding:4px 0}
-.credit{text-align:center;font-size:.78rem;color:#B98097;margin-top:18px}.credit a{color:var(--goldl)}
-.fine{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;font-size:.78rem;color:#B98097;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.credit{text-align:center;font-size:.78rem;color:#8FAE98;margin-top:18px}.credit a{color:var(--goldl)}
+.fine{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;font-size:.78rem;color:#8FAE98;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .section-title{font-size:clamp(1.7rem,3.2vw,2.4rem);max-width:760px}
 .section-sub{margin-top:14px;color:var(--muted);max-width:700px}
 .on-dark .section-sub{color:var(--ice)}
@@ -276,7 +276,7 @@ html.js .reveal.in{opacity:1;transform:none}
 .wa-float{position:fixed;right:22px;bottom:22px;z-index:60;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(0,0,0,.3)}
 .wa-float svg{width:30px;height:30px;fill:#fff}
 /* Sticky mobile pass bar */
-.passbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(176,18,79,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;gap:10px}
+.passbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(29,107,58,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;gap:10px}
 .passbar a{flex:1;text-align:center;padding:12px 10px;font-size:.9rem}
 .passbar .btn-ghost{border-color:rgba(255,255,255,.35)}
 @media(max-width:900px){
@@ -295,15 +295,15 @@ html.js .reveal.in{opacity:1;transform:none}
   body{padding-bottom:70px}
 }
 </style>
-<style>/* identity pass 2 */.kicker{display:inline-block;background:var(--gold);color:#3A0418;font-family:'Unbounded',system-ui,sans-serif;font-size:.7rem;letter-spacing:.04em;padding:5px 10px;border-radius:3px}.tagline{letter-spacing:.02em;text-transform:none;font-size:.9rem}</style>
-<style>/* identity pass 3 */#faq details{background:transparent!important;border:0!important;box-shadow:none!important;margin:0 0 14px!important;padding:0!important}#faq details>summary{display:inline-block!important;background:#B0124F!important;color:#fff!important;border-radius:20px 20px 20px 4px!important;padding:11px 18px!important;list-style:none!important;font-weight:600!important;max-width:85%;cursor:pointer}#faq details>summary *{color:#fff!important}#faq details>summary::-webkit-details-marker{display:none}#faq details>summary::after{display:none!important}#faq details>:not(summary){background:#fff!important;color:#1A2433!important;border-radius:20px 20px 4px 20px!important;padding:12px 18px!important;margin:8px 0 0 auto!important;max-width:85%;box-shadow:0 1px 3px rgba(0,0,0,.08)}</style>
+<style>/* identity pass 2 */.kicker{display:inline-block;background:var(--gold);color:#0F2E1B;font-family:'Unbounded',system-ui,sans-serif;font-size:.7rem;letter-spacing:.04em;padding:5px 10px;border-radius:3px}.tagline{letter-spacing:.02em;text-transform:none;font-size:.9rem}</style>
+<style>/* identity pass 3 */#faq details{background:transparent!important;border:0!important;box-shadow:none!important;margin:0 0 14px!important;padding:0!important}#faq details>summary{display:inline-block!important;background:#1D6B3A!important;color:#fff!important;border-radius:20px 20px 20px 4px!important;padding:11px 18px!important;list-style:none!important;font-weight:600!important;max-width:85%;cursor:pointer}#faq details>summary *{color:#fff!important}#faq details>summary::-webkit-details-marker{display:none}#faq details>summary::after{display:none!important}#faq details>:not(summary){background:#fff!important;color:#1A2433!important;border-radius:20px 20px 4px 20px!important;padding:12px 18px!important;margin:8px 0 0 auto!important;max-width:85%;box-shadow:0 1px 3px rgba(0,0,0,.08)}</style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="nav-in">
     <a class="brand" href="#top" aria-label="Caspian Diabesity Expo home">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#FFB703"/><path d="M10 34h12l5-12 8 22 6-14 4 4h9" fill="none" stroke="#B0124F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#FFB703"/><path d="M10 34h12l5-12 8 22 6-14 4 4h9" fill="none" stroke="#1D6B3A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div><b>CASPIAN DIABESITY EXPO</b><span>3RD EDITION · HYDERABAD</span></div>
     </a>
     <ul class="nav-links" id="navLinks">
@@ -428,14 +428,14 @@ html.js .reveal.in{opacity:1;transform:none}
       <figure class="reveal"><img src="assets/gallery/g7.jpg" alt="Dignitaries launching a patient guide on stage" loading="lazy"><figcaption>Patient-guide book launch</figcaption></figure>
       <figure class="reveal"><img src="assets/gallery/g8.jpg" alt="Community members and children gathered on stage" loading="lazy"><figcaption>A community, not a crowd</figcaption></figure>
     </div>
-    <p style="margin-top:18px;font-size:.8rem;color:#B98097">Moments from the 2025 edition, Banjara Function Hall, Hyderabad.</p>
+    <p style="margin-top:18px;font-size:.8rem;color:#8FAE98">Moments from the 2025 edition, Banjara Function Hall, Hyderabad.</p>
     <div class="gal" style="margin-top:22px">
       <figure class="reveal"><img src="assets/gallery/2024/2024-stage.jpg" alt="Dr. Khizer opening the 2024 Caspian Diabetes and Children's Health Expo" loading="lazy"><figcaption>2024: the first edition opens</figcaption></figure>
       <figure class="reveal"><img src="assets/gallery/2024/2024-screening-neuropathy.jpg" alt="Neuropathy screening at the 2024 expo" loading="lazy"><figcaption>2024: neuropathy screening</figcaption></figure>
       <figure class="reveal"><img src="assets/gallery/2024/2024-kids-drawing.jpg" alt="Children at the drawing corner in 2024" loading="lazy"><figcaption>2024: the children's corner</figcaption></figure>
       <figure class="reveal"><img src="assets/gallery/2024/2024-certificate.jpg" alt="A child receiving a certificate on stage in 2024" loading="lazy"><figcaption>2024: certificates for the kids</figcaption></figure>
     </div>
-    <p style="margin-top:18px;font-size:.8rem;color:#B98097">Moments from the 1st edition, November 2024.</p>
+    <p style="margin-top:18px;font-size:.8rem;color:#8FAE98">Moments from the 1st edition, November 2024.</p>
   </div>
 </section>
 
