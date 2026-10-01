@@ -114,6 +114,31 @@
       "permanent": false
     },
     {
+      "source": "/ideas",
+      "destination": "/get-involved#ideas",
+      "permanent": false
+    },
+    {
+      "source": "/nominate",
+      "destination": "/get-involved#nominate",
+      "permanent": false
+    },
+    {
+      "source": "/ask",
+      "destination": "/get-involved#ask",
+      "permanent": false
+    },
+    {
+      "source": "/volunteer",
+      "destination": "/get-involved#volunteer",
+      "permanent": false
+    },
+    {
+      "source": "/involve",
+      "destination": "/get-involved",
+      "permanent": false
+    },
+    {
       "source": "/assets/CASPIAN-Diabesity-Expo-2026-Prospectus.pdf",
       "destination": "/prospectus",
       "permanent": false

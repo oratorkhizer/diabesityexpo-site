@@ -78,6 +78,7 @@ input.notes{width:170px;padding:5px 8px;border-radius:8px;border:1px solid #D5DE
       <button data-tab="abandoned">Abandoned checkouts</button>
       <button data-tab="sponsors">Sponsor leads</button>
       <button data-tab="alumni">Alumni re-invite</button>
+      <button data-tab="involve">Get involved</button>
       <button data-tab="checkin">Check-in (venue)</button>
     </div>
     <div class="tools">
@@ -108,7 +109,7 @@ input.notes{width:170px;padding:5px 8px;border-radius:8px;border:1px solid #D5DE
 const SB_URL = 'https://ntrlsnudicbdwdcguynz.supabase.co';
 const SB_KEY = 'sb_publishable_si0ucpO3OLawZMr1ihiuIw_shZbLoIw';
 let passcode = sessionStorage.getItem('expo_desk_pc') || '';
-let regs = [], leads = [], alumni = [], summary = {}, tab = 'all';
+let regs = [], leads = [], alumni = [], involve = [], summary = {}, tab = 'all';
 
 async function rpc(fn, args){
   const r = await fetch(SB_URL + '/rest/v1/rpc/' + fn, { method:'POST', headers:{ apikey:SB_KEY, Authorization:'Bearer '+SB_KEY, 'Content-Type':'application/json' }, body: JSON.stringify(args||{}) });
@@ -150,12 +151,14 @@ function logout(){ sessionStorage.removeItem('expo_desk_pc'); location.reload();
 
 // ---- Data ----
 async function load(){
-  [summary, regs, leads, alumni] = await Promise.all([
+  [summary, regs, leads, alumni, involve] = await Promise.all([
     rpc('admin_summary', { p_passcode: passcode }),
     rpc('admin_registrations', { p_passcode: passcode }),
     rpc('admin_sponsor_leads', { p_passcode: passcode }),
-    rpc('admin_alumni', { p_passcode: passcode })
+    rpc('admin_alumni', { p_passcode: passcode }),
+    rpc('admin_involvement', { p_passcode: passcode }).catch(() => [])
   ]);
+  involve = involve || [];
   render();
 }
 const inr = p => '₹' + (Math.round((p||0)/100)).toLocaleString('en-IN');
@@ -172,6 +175,7 @@ function renderTiles(){
     ['Abandoned checkouts', s.abandoned_checkouts||0, 'started payment, did not finish'],
     ['Expected visitors', s.expected_visitors||0, 'people across confirmed passes'],
     ['Sponsor leads', leads.length, leads.filter(l=>l.stage==='won').length + ' won'],
+    ['Get involved', involve.length, involve.filter(i=>i.status==='new').length + ' new to read'],
     ['Alumni to re-invite', alumni.filter(a=>a.followup_status==='new' && !a.registered_2026).length, alumni.filter(a=>a.registered_2026).length + ' already registered for 2026']
   ];
   document.getElementById('tiles').innerHTML = t.map(x => `<div class="tile ${x[3]||''}"><small>${x[0]}</small><b>${x[1]}</b><small>${x[2]}</small></div>`).join('');
@@ -227,6 +231,30 @@ function render(){
       <td><input class="notes" value="${esc(l.notes||'')}" placeholder="notes" onchange="updLead('${l.id}', {p_notes:this.value})"></td>
       <td><a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="https://wa.me/${(l.phone||'').replace(/\D/g,'').replace(/^(\d{10})$/,'91$1')}?text=${encodeURIComponent('Hi ' + (l.contact_name||'').split(' ')[0] + ', thank you for your enquiry about the Caspian Diabesity Expo 2026. This is Dr Khizer. When would be a good time for a short call about your ' + (l.interest||'partnership').replace(/_/g,' ') + '?')}">WhatsApp</a></td>
     </tr>`).join('') + '</tbody></table>' : '<div class="empty">No sponsor leads yet. Share diabesityexpo.com/exhibit with prospects.</div>';
+    return;
+  }
+  if (tab === 'involve') {
+    const q = document.getElementById('q').value.trim().toLowerCase();
+    const k = document.getElementById('fu').value;
+    const KIND = { idea:'Idea', story:'Story', question:'Question', volunteer:'Volunteer', community:'Community', club:'Club waitlist' };
+    let rows = involve.filter(i => !q || [i.name,i.phone,i.area,JSON.stringify(i.details)].join(' ').toLowerCase().includes(q));
+    if (k && KIND[k]) rows = rows.filter(i => i.kind === k);
+    const counts = Object.keys(KIND).map(x => KIND[x] + ' ' + involve.filter(i=>i.kind===x).length).join(' · ');
+    document.getElementById('count').textContent = rows.length + ' entries · ' + counts;
+    const det = d => Object.keys(d||{}).filter(x => d[x] !== '' && d[x] !== false && !(Array.isArray(d[x]) && !d[x].length)).map(x => '<b>' + esc(x.replace(/_/g,' ')) + ':</b> ' + esc(Array.isArray(d[x]) ? d[x].join(', ') : d[x] === true ? 'yes' : d[x])).join('<br>');
+    const wa = i => { const first = (i.name||'').split(' ')[0]; const ph = (i.phone||'').replace(/\D/g,''); const intl = ph.length === 10 ? '91' + ph : ph;
+      const m = { idea:'thank you for your idea for the Caspian Diabesity Expo. I would like to understand it better. Is now a good time for a short call?', story:'thank you for the story nomination for the Caspian Diabesity Expo. I would love to hear the full story. When can we speak for ten minutes?', question:'thank you for sending your question for the Caspian Diabesity Expo. It is on our list for the experts on 14 November.', volunteer:'thank you for offering to volunteer at the Caspian Diabesity Expo on 14 November. I will share the briefing date shortly. Can you confirm your timing?', community:'thank you for wanting to bring your group to the Caspian Diabesity Expo. When can we speak to plan it?', club:'you are on the Diabesity Club waitlist. The club launches at the Caspian Diabesity Expo on 14 November, and I will share the details here first.' }[i.kind];
+      return `https://wa.me/${intl}?text=${encodeURIComponent('Hi ' + first + ', this is Dr Khizer. ' + m)}`; };
+    el.innerHTML = rows.length ? `<table><thead><tr><th>When</th><th>Type</th><th>Name</th><th>Phone / area</th><th>Details</th><th>Publish OK</th><th>Status</th><th>Notes</th><th></th></tr></thead><tbody>` + rows.map(i => `<tr>
+      <td class="mini">${fmt(i.created_at)}</td><td><span class="pill p-priority">${KIND[i.kind]||i.kind}</span></td>
+      <td><b>${esc(i.name)}</b>${i.language ? '<br><span class="mini">' + esc(i.language) + '</span>' : ''}</td>
+      <td>${esc(i.phone)}<br><span class="mini">${esc(i.area||'')}${i.email ? ' · ' + esc(i.email) : ''}</span></td>
+      <td class="mini" style="max-width:420px;white-space:normal">${det(i.details)}</td>
+      <td class="mini">${i.kind === 'story' ? (i.consent_publish ? 'yes' : 'no') : ''}</td>
+      <td><select class="fu" onchange="updInv('${i.id}', {p_status:this.value})">${['new','contacted','shortlisted','accepted','done','declined'].map(x => `<option ${x===i.status?'selected':''}>${x}</option>`).join('')}</select></td>
+      <td><input class="notes" value="${esc(i.notes||'')}" placeholder="notes" onchange="updInv('${i.id}', {p_notes:this.value})"></td>
+      <td><a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="${wa(i)}">WhatsApp</a></td>
+    </tr>`).join('') + '</tbody></table>' : '<div class="empty">No entries yet. Share diabesityexpo.com/get-involved (shortlinks: /ideas, /nominate, /ask, /volunteer).</div>';
     return;
   }
   if (tab === 'alumni') {
@@ -325,18 +353,24 @@ async function updAlumni(id, patch){
   try { await rpc('admin_update_alumni', Object.assign({ p_passcode: passcode, p_id: id, p_followup_status: null, p_notes: null }, patch)); const a = alumni.find(x => x.id === id); if (a) Object.keys(patch).forEach(k => { a[k.replace('p_','')] = patch[k]; }); renderTiles(); }
   catch(e){ alert('Could not save: ' + e.message); }
 }
+async function updInv(id, patch){
+  try { await rpc('admin_update_involvement', Object.assign({ p_passcode: passcode, p_id: id, p_status: null, p_notes: null }, patch)); const i = involve.find(x => x.id === id); if (i) Object.keys(patch).forEach(k => { i[k.replace('p_','')] = patch[k]; }); renderTiles(); }
+  catch(e){ alert('Could not save: ' + e.message); }
+}
 async function updLead(id, patch){
   try { await rpc('admin_update_lead', Object.assign({ p_passcode: passcode, p_id: id, p_stage: null, p_notes: null, p_value_paise: null }, patch)); const l = leads.find(x => x.id === id); if (l) Object.keys(patch).forEach(k => { l[k.replace('p_','')] = patch[k]; }); renderTiles(); }
   catch(e){ alert('Could not save: ' + e.message); }
 }
 function exportCsv(){
-  const rows = tab === 'sponsors' ? leads : tab === 'alumni' ? alumni : filtered();
+  const rows = tab === 'sponsors' ? leads : tab === 'alumni' ? alumni : tab === 'involve' ? involve.map(i => Object.assign({}, i, { details: JSON.stringify(i.details) })) : filtered();
   if (!rows.length) return alert('Nothing to export');
   const cols = Object.keys(rows[0]);
   const csv = [cols.join(',')].concat(rows.map(r => cols.map(c => '"' + String(r[c]==null?'':r[c]).replace(/"/g,'""') + '"').join(','))).join('\n');
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'})); a.download = 'expo-' + tab + '-' + new Date().toISOString().slice(0,10) + '.csv'; a.click();
 }
-document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.tabs button').forEach(x => x.classList.remove('on')); b.classList.add('on'); tab = b.dataset.tab; render(); }));
+const FU_HTML = document.getElementById('fu').innerHTML;
+const KIND_HTML = '<option value="">All entry types</option><option value="idea">Ideas</option><option value="story">Stories</option><option value="question">Questions</option><option value="volunteer">Volunteers</option><option value="community">Community groups</option><option value="club">Club waitlist</option>';
+document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.tabs button').forEach(x => x.classList.remove('on')); b.classList.add('on'); const was = tab; tab = b.dataset.tab; if ((was === 'involve') !== (tab === 'involve')) { const f = document.getElementById('fu'); f.innerHTML = tab === 'involve' ? KIND_HTML : FU_HTML; f.value = ''; } render(); }));
 document.getElementById('q').addEventListener('input', render);
 document.getElementById('fu').addEventListener('change', render);
 initGate();
