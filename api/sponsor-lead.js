@@ -32,8 +32,8 @@ module.exports = async (req, res) => {
     } catch (e) {
       console.error("sponsor-lead: supabase insert failed", e.message);
     }
-    await db.notify({ _subject: "SPONSOR LEAD: Diabesity Expo 2026 (" + interest + ")", org, contact_name, phone, email: email || "", interest, budget_band: budget_band || "", message: message || "" });
-    res.status(200).json({ ok: true, id });
+    const notify = ({ _subject: "SPONSOR LEAD: Diabesity Expo 2026 (" + interest + ")", org, contact_name, phone, email: email || "", interest, budget_band: budget_band || "", message: message || "" });
+    res.status(200).json({ ok: true, id, notify });
   } catch (e) {
     console.error("sponsor-lead error", e);
     res.status(500).json({ error: "Could not save enquiry" });

@@ -285,6 +285,7 @@ footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0;
     fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
       .then(function(r){ if (!r.ok) throw new Error('register failed'); return r.json().catch(function(){ return {}; }); })
       .then(function(reg){
+        if (window.expoNotify && reg) expoNotify(reg.notify);
         track('generate_lead', { lead_type: 'free_pass', people: Number(body.people), currency: 'INR', value: 0 });
         ok.textContent = T.ok + ' ';
         if (reg && reg.passCode) {
@@ -304,5 +305,6 @@ footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0;
   });
 })();
 </script>
+<script src="/assets/notify.js?v=1"></script>
 </body>
 </html>

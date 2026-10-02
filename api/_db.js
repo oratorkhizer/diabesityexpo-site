@@ -75,6 +75,8 @@ function cleanPhone(p) {
 }
 
 
+// NOT USED: FormSubmit's Cloudflare wall returns 403 to server calls.
+// Alerts are sent from the browser by /assets/notify.js instead.
 // Email alert via FormSubmit. Awaited (Vercel stops the function once the
 // response is sent, so a fire-and-forget fetch can be dropped) with a 6 s cap,
 // and FormSubmit's own reply is logged so a failure shows in Vercel logs.

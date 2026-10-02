@@ -114,13 +114,13 @@ module.exports = async (req, res) => {
     }
     const flat = {};
     Object.keys(d).forEach((k) => { flat[k] = Array.isArray(d[k]) ? d[k].join(", ") : String(d[k]); });
-    await db.notify(Object.assign({
+    const notify = (Object.assign({
         _subject: "GET INVOLVED: " + LABEL[kind] + " from " + name + " (Diabesity Expo 2026)",
         name, phone, email: row.email || "", area: row.area || "", language: row.language || "",
         ok_to_publish: row.consent_publish ? "yes" : "no",
       }, flat));
     if (!saved) { res.status(500).json({ error: "Could not save. Please WhatsApp us on +91 89193 41154." }); return; }
-    res.status(200).json({ ok: true });
+    res.status(200).json({ ok: true, notify });
   } catch (e) {
     console.error("involve error", e);
     res.status(500).json({ error: "Could not save. Please WhatsApp us on +91 89193 41154." });

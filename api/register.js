@@ -36,8 +36,9 @@ module.exports = async (req, res) => {
       console.error("register: supabase insert failed", e.message);
     }
 
-    // Best-effort copy to the organiser inbox (existing FormSubmit route).
-    await db.notify({
+    // Email alert fields. The browser sends them to FormSubmit (its Cloudflare
+    // wall blocks calls from the Vercel server), see /assets/notify.js.
+    const notify = ({
         _subject: "Free Pass: Diabesity Expo 2026",
         name,
         phone,
@@ -48,7 +49,7 @@ module.exports = async (req, res) => {
         pass_code: passCode || "",
       });
 
-    res.status(200).json({ ok: true, id, passCode });
+    res.status(200).json({ ok: true, id, passCode, notify });
   } catch (e) {
     console.error("register error", e);
     res.status(500).json({ error: "Could not register" });
