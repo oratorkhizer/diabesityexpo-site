@@ -74,4 +74,36 @@ function cleanPhone(p) {
   return digits.slice(0, 20);
 }
 
-module.exports = { rest, insert, update, logEvent, attribution, cleanPhone, hasServiceRole };
+
+// Email alert via FormSubmit. Awaited (Vercel stops the function once the
+// response is sent, so a fire-and-forget fetch can be dropped) with a 6 s cap,
+// and FormSubmit's own reply is logged so a failure shows in Vercel logs.
+async function notify(fields) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), 6000);
+  try {
+    const r = await fetch("https://formsubmit.co/ajax/oratorkhizer@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Origin: "https://diabesityexpo.com",
+        Referer: "https://diabesityexpo.com/",
+      },
+      body: JSON.stringify(Object.assign({ _template: "table", _captcha: "false" }, fields)),
+      signal: ctl.signal,
+    });
+    const text = await r.text();
+    let ok = false;
+    try { ok = String(JSON.parse(text).success) === "true"; } catch (e) {}
+    if (!ok) console.error("notify: formsubmit did not send", r.status, text.slice(0, 300));
+    return ok;
+  } catch (e) {
+    console.error("notify: formsubmit error", e.message);
+    return false;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+module.exports = { notify, rest, insert, update, logEvent, attribution, cleanPhone, hasServiceRole };

@@ -114,15 +114,11 @@ module.exports = async (req, res) => {
     }
     const flat = {};
     Object.keys(d).forEach((k) => { flat[k] = Array.isArray(d[k]) ? d[k].join(", ") : String(d[k]); });
-    fetch("https://formsubmit.co/ajax/oratorkhizer@gmail.com", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(Object.assign({
+    await db.notify(Object.assign({
         _subject: "GET INVOLVED: " + LABEL[kind] + " from " + name + " (Diabesity Expo 2026)",
         name, phone, email: row.email || "", area: row.area || "", language: row.language || "",
         ok_to_publish: row.consent_publish ? "yes" : "no",
-      }, flat)),
-    }).catch(() => null);
+      }, flat));
     if (!saved) { res.status(500).json({ error: "Could not save. Please WhatsApp us on +91 89193 41154." }); return; }
     res.status(200).json({ ok: true });
   } catch (e) {

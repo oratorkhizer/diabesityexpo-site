@@ -32,11 +32,7 @@ module.exports = async (req, res) => {
     } catch (e) {
       console.error("sponsor-lead: supabase insert failed", e.message);
     }
-    fetch("https://formsubmit.co/ajax/oratorkhizer@gmail.com", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ _subject: "SPONSOR LEAD: Diabesity Expo 2026 (" + interest + ")", org, contact_name, phone, email: email || "", interest, budget_band: budget_band || "", message: message || "" }),
-    }).catch(() => null);
+    await db.notify({ _subject: "SPONSOR LEAD: Diabesity Expo 2026 (" + interest + ")", org, contact_name, phone, email: email || "", interest, budget_band: budget_band || "", message: message || "" });
     res.status(200).json({ ok: true, id });
   } catch (e) {
     console.error("sponsor-lead error", e);

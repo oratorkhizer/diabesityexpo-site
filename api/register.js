@@ -37,10 +37,7 @@ module.exports = async (req, res) => {
     }
 
     // Best-effort copy to the organiser inbox (existing FormSubmit route).
-    fetch("https://formsubmit.co/ajax/oratorkhizer@gmail.com", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
+    await db.notify({
         _subject: "Free Pass: Diabesity Expo 2026",
         name,
         phone,
@@ -49,8 +46,7 @@ module.exports = async (req, res) => {
         pass: "Free Entry Pass",
         saved_to_database: id ? "yes" : "no",
         pass_code: passCode || "",
-      }),
-    }).catch(() => null);
+      });
 
     res.status(200).json({ ok: true, id, passCode });
   } catch (e) {
