@@ -186,7 +186,7 @@ function waLink(r){
   const pn = PASS_NAME[r.pass_type] || 'pass';
   let msg;
   if (r.status === 'pending_payment') msg = `Hi ${first}, this is the Caspian Diabesity Expo team. Your ${pn} payment did not go through. Would you like me to send you the payment link again? Check-up slots are limited for 14 November.`;
-  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free floor pass is confirmed: https://diabesityexpo.com/pass?c=${r.pass_code||''} (show it at the gate). If you would like the year's tests done on the day (full metabolic profile, no fasting, doctor review, dinner and reserved seating), the Metabolic Check Pass is ₹1,999 and the receipt qualifies under Section 80D: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
+  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free floor pass is confirmed: https://diabesityexpo.com/pass?c=${r.pass_code||''} (show it at the gate). If you would like the year's tests done on the day (full metabolic profile, no fasting, doctor review, dinner and reserved seating), the Metabolic Check Pass is ₹1,999: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
   else msg = `Hi ${first}, your ${pn} for the Caspian Diabesity Expo on Saturday 14 November 2026 is confirmed. Your pass: https://diabesityexpo.com/pass?c=${r.pass_code||''} (code ${r.pass_code||''}). No fasting needed; come to the check-up desk any time from 9 AM and show the pass.`;
   const ph = (r.phone||'').replace(/\D/g,''); const intl = ph.length === 10 ? '91' + ph : ph;
   return `https://wa.me/${intl}?text=${encodeURIComponent(msg)}`;
@@ -346,7 +346,7 @@ async function updReg(id, patch){
 function alumniWa(a){
   const first = (a.name||'').split(' ')[0];
   const yr = String(a.years).includes('2025') ? 'last year' : 'in 2024';
-  const msg = `Assalamu alaikum ${first}, this is Dr Khizer from Caspian Healthcare. You came to our Diabesity Expo ${yr}. This year it is on Saturday 14 November 2026, 9 AM to 8 PM, and the full 12-test metabolic profile (thyroid, HbA1c, lipids, liver, kidney, vitamins, iron, body composition) is done at the expo itself, with a doctor review of your report: ₹1,999, no fasting, lunch and dinner included, 80D receipt. Entry to talks and stalls stays free, with lunch. Book here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=alumni&utm_campaign=reinvite#tickets`;
+  const msg = `Assalamu alaikum ${first}, this is Dr Khizer from Caspian Healthcare. You came to our Diabesity Expo ${yr}. This year it is on Saturday 14 November 2026, 9 AM to 8 PM, and the full 12-test metabolic profile (thyroid, HbA1c, lipids, liver, kidney, vitamins, iron, body composition) is done at the expo itself, with a doctor review of your report: ₹1,999, no fasting, lunch and dinner included. Entry to talks and stalls stays free, with lunch. Book here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=alumni&utm_campaign=reinvite#tickets`;
   return `https://wa.me/91${a.phone}?text=${encodeURIComponent(msg)}`;
 }
 async function updAlumni(id, patch){
