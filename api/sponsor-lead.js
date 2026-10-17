@@ -29,11 +29,17 @@ module.exports = async (req, res) => {
     const a = db.attribution(body, req);
     let id = null;
     try {
-      const rows = await db.insert("sponsor_leads", {
+      const lead = {
         org, contact_name, phone, email, interest, budget_band, message,
         utm_source: a.utm_source, utm_medium: a.utm_medium, utm_campaign: a.utm_campaign, referrer: a.referrer,
-      });
-      id = rows && rows[0] ? rows[0].id : null;
+      };
+      if (db.serverKey()) {
+        const r = await db.rpc("expo_sponsor_lead_srv", { p_row: lead });
+        id = r && r.id ? r.id : null;
+      } else {
+        const rows = await db.insert("sponsor_leads", lead);
+        id = rows && rows[0] ? rows[0].id : null;
+      }
     } catch (e) {
       console.error("sponsor-lead: supabase insert failed", e.message);
     }

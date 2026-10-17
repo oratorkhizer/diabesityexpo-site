@@ -25,18 +25,24 @@ module.exports = async (req, res) => {
 
     let id = null, passCode = null;
     try {
-      const rows = await db.insert("registrations", {
-        name,
-        phone,
-        email,
-        people,
-        pass_type: "free",
-        status: "registered",
-        amount_paise: 0,
-        ...db.attribution(body, req),
-      });
-      id = rows && rows[0] ? rows[0].id : null;
-      passCode = rows && rows[0] ? rows[0].pass_code : null;
+      if (db.serverKey()) {
+        const r = await db.rpc("expo_register_free_srv", { p_row: { name, phone, email, people, ...db.attribution(body, req) } });
+        id = r && r.id ? r.id : null;
+        passCode = r && r.pass_code ? r.pass_code : null;
+      } else {
+        const rows = await db.insert("registrations", {
+          name,
+          phone,
+          email,
+          people,
+          pass_type: "free",
+          status: "registered",
+          amount_paise: 0,
+          ...db.attribution(body, req),
+        });
+        id = rows && rows[0] ? rows[0].id : null;
+        passCode = rows && rows[0] ? rows[0].pass_code : null;
+      }
     } catch (e) {
       console.error("register: supabase insert failed", e.message);
     }

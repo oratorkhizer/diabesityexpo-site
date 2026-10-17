@@ -46,6 +46,17 @@ function insert(table, row) {
   return rest(table, { method: "POST", body: row, prefer }).then((d) => (Array.isArray(d) ? d : []));
 }
 
+// Form writes go through SECURITY DEFINER *_srv functions that check
+// FORM_SERVER_KEY (its SHA-256 hash lives in public._server_keys), so the
+// public key alone can no longer write these tables.
+function serverKey() {
+  return process.env.FORM_SERVER_KEY || "";
+}
+
+function rpc(fn, args) {
+  return rest("rpc/" + fn, { method: "POST", body: Object.assign({ p_server_key: serverKey() }, args) });
+}
+
 function update(table, filter, patch) {
   return rest(table + "?" + filter, { method: "PATCH", body: patch, prefer: "return=representation" });
 }
@@ -108,4 +119,4 @@ async function notify(fields) {
   }
 }
 
-module.exports = { notify, rest, insert, update, logEvent, attribution, cleanPhone, hasServiceRole };
+module.exports = { notify, rest, rpc, serverKey, insert, update, logEvent, attribution, cleanPhone, hasServiceRole };
