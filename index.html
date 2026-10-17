@@ -570,6 +570,8 @@ html.js .reveal.in{opacity:1;transform:none}
             <option value="4">4 or more</option>
           </select>
         </div>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="f-website">Leave this empty</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+        <div id="regTs" style="display:contents"></div>
         <div class="row">
           <button type="submit" class="btn btn-gold full" id="regBtn">Register free</button>
         </div>
@@ -664,6 +666,7 @@ html.js .reveal.in{opacity:1;transform:none}
   <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.7 6L4 29l8.2-1.6c1.2.6 2.5.9 3.8.9 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22c-1.2 0-2.4-.3-3.5-.8l-.6-.3-4.9 1 1-4.7-.3-.6C6.6 18.1 6 16.6 6 15 6 9.5 10.5 5 16 5s10 4.5 10 10-4.5 10-10 10zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
 </a>
 
+<script src="/assets/turnstile.js"></script>
 <script>
 document.documentElement.classList.add('js');
 // Safety: if anything prevents the observer from firing, reveal everything after 4s
@@ -753,6 +756,11 @@ function startCheckout(passType){
   if (st === 'unverified' && hint) hint.textContent = 'Payment received but we could not confirm it automatically. Please WhatsApp +91 89193 41154 with your payment ID ' + (q.get('pid') || '') + '.';
 })();
 
+const regGuard = window.BotGuard ? window.BotGuard(document.getElementById('regTs')) : null;
+async function botFields(){
+  const tk = regGuard ? await regGuard.wait() : '';
+  return { turnstile: tk, ms: regGuard ? regGuard.ms() : '', website: document.getElementById('f-website').value };
+}
 document.getElementById('regForm').addEventListener('submit', async (ev) => {
   ev.preventDefault();
   const name = document.getElementById('f-name').value.trim();
@@ -768,17 +776,20 @@ document.getElementById('regForm').addEventListener('submit', async (ev) => {
     try {
       const r = await fetch('/api/register', {
         method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ name, phone, email, people, attribution: attr })
+        body: JSON.stringify(Object.assign({ name, phone, email, people, attribution: attr }, await botFields()))
       });
-      if (!r.ok) throw new Error('register failed');
+      if (regGuard) regGuard.reset();
       const reg = await r.json().catch(() => ({}));
+      if (reg.human === false) { alert(reg.error); btn.disabled = false; btn.textContent = 'Register free'; return; }
+      if (!r.ok) throw new Error('register failed');
       if (window.expoNotify) expoNotify(reg.notify);
       track('generate_lead', { lead_type: 'free_pass', people: Number(people), currency: 'INR', value: 0 });
       if (reg.passCode) document.getElementById('regPass').innerHTML = 'Your pass code is <b>' + reg.passCode + '</b>. <a href="/pass?c=' + reg.passCode + '">Open your pass</a>, save a screenshot and show it at the gate. ';
       document.getElementById('regOk').style.display = 'block';
       btn.textContent = 'Registered ✓';
     } catch(e) {
-      alert('Could not submit right now. Please WhatsApp us at +91 89193 41154.');
+      if (regGuard) regGuard.reset();
+    alert('Could not submit right now. Please WhatsApp us at +91 89193 41154.');
       btn.disabled = false; btn.textContent = 'Register free';
     }
     return;
@@ -790,15 +801,18 @@ document.getElementById('regForm').addEventListener('submit', async (ev) => {
   try {
     const r = await fetch('/api/create-order', {
       method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ passType, name, phone, email, people, attribution: attr })
+      body: JSON.stringify(Object.assign({ passType, name, phone, email, people, attribution: attr }, await botFields()))
     });
+    if (regGuard) regGuard.reset();
+    const o = await r.json().catch(() => ({}));
+    if (o.human === false) { alert(o.error); btn.disabled = false; btn.textContent = 'Continue to payment'; return; }
     if (!r.ok) throw new Error('order failed');
-    const o = await r.json();
     if (!o.url) throw new Error('no link');
     track('begin_checkout', { currency: 'INR', value: PASS_PRICE[passType], items: [{ item_id: passType, item_name: PASS_LABELS[passType], price: PASS_PRICE[passType], quantity: 1 }] });
     btn.textContent = 'Taking you to Razorpay...';
     window.location.href = o.url;
   } catch(e) {
+    if (regGuard) regGuard.reset();
     alert('Could not start the payment. Please try again or WhatsApp +91 89193 41154.');
     btn.disabled = false; btn.textContent = 'Continue to payment';
   }

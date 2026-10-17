@@ -1,6 +1,7 @@
 // Vercel serverless: free pass registration.
 // Saves the registrant to Supabase (the follow-up list) and emails a copy to the organiser inbox.
 const db = require("./_db");
+const bot = require("./_bot");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
@@ -9,6 +10,10 @@ module.exports = async (req, res) => {
   }
   try {
     const body = req.body || {};
+    // Bot checks: a drop answers like a normal registration but saves and emails nothing.
+    const verdict = await bot.check(req, { honeypot: body.website, ms: body.ms, name: body.name, email: body.email, token: body.turnstile });
+    if (verdict === "drop") { res.status(200).json({ ok: true, id: null, passCode: null, notify: null }); return; }
+    if (verdict === "reject") { res.status(400).json({ error: bot.HUMAN_MSG, human: false }); return; }
     const name = String(body.name || "").trim().slice(0, 100);
     const phone = db.cleanPhone(body.phone);
     const email = String(body.email || "").trim().slice(0, 100) || null;

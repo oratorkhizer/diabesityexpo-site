@@ -26,6 +26,10 @@ Supabase project `diabesityexpo` (Caspian Branding org, Mumbai). Tables: `regist
 | `SUPABASE_SERVICE_ROLE_KEY` | **Required** for paid-pass rows (pending and paid) and for returning row ids. Without it, free registrations and sponsor leads are still saved; paid passes are only in Razorpay. Copy from Supabase > Project Settings > API keys, paste in Vercel, redeploy. |
 | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | Optional overrides; defaults are baked in. |
 
+### Bot protection
+
+The free pass forms (`/`, `/te`, `/ur`), the paid-pass step (`/api/create-order` only; payment return and verify are untouched), the sponsor enquiry and `/get-involved` send a hidden honeypot `website`, the fill time `ms` and an invisible Cloudflare Turnstile token (`assets/turnstile.js`, group site key). `api/_bot.js` checks them before anything is saved. Turnstile is enforced only when the Vercel env var `TURNSTILE_SECRET_KEY` is set. The public key can still INSERT into `registrations` and `sponsor_leads` directly (RLS); revoke those policies once `SUPABASE_SERVICE_ROLE_KEY` is set to close that path.
+
 ### Analytics
 
 GA4 `G-7XDYZ4FNXN` with events `generate_lead` (free pass, sponsor), `select_item`, `begin_checkout`, `purchase` (thanks page, once per payment id), `checkout_abandoned`, `payment_failed`, plus `data-track` clicks (CTAs, WhatsApp, prospectus). Vercel Web Analytics enabled; the same events are mirrored with `window.va`.

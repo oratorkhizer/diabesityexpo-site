@@ -1,6 +1,7 @@
 // Vercel serverless: "Get involved" submissions (ideas, stories, questions,
 // volunteers, community groups, Diabesity Club waitlist).
 const db = require("./_db");
+const bot = require("./_bot");
 
 const KINDS = ["idea", "story", "question", "volunteer", "community", "club"];
 const LANGS = ["English", "Hindi", "Urdu", "Telugu"];
@@ -82,7 +83,10 @@ module.exports = async (req, res) => {
   }
   try {
     const b = req.body || {};
-    if (b.website) { res.status(200).json({ ok: true }); return; } // honeypot
+    // Bot checks (honeypot, fill time, random name, Turnstile). A drop answers ok and saves nothing.
+    const verdict = await bot.check(req, { honeypot: b.website, ms: b.ms, name: b.name, email: b.email, token: b.turnstile });
+    if (verdict === "drop") { res.status(200).json({ ok: true, notify: null }); return; }
+    if (verdict === "reject") { res.status(400).json({ error: bot.HUMAN_MSG, human: false }); return; }
     const kind = KINDS.includes(b.kind) ? b.kind : null;
     const name = s(b.name, 100);
     const phone = db.cleanPhone(b.phone);

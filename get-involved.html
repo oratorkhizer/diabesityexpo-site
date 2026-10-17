@@ -160,6 +160,7 @@ footer{border-top:1px solid var(--line);padding:22px;text-align:center;font-size
 
     <form id="inv" novalidate>
       <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div id="invTs" style="display:contents"></div>
 
       <!-- IDEA -->
       <div class="k" data-k="idea">
@@ -269,6 +270,7 @@ footer{border-top:1px solid var(--line);padding:22px;text-align:center;font-size
 
 <footer>© 2026 Caspian Healthcare Foundation, Hyderabad · <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/contact">Contact</a><br><span style="display:inline-block;margin-top:8px">Made with ❤️ by <a href="https://caspianstudio.in" target="_blank" rel="noopener">Caspian Studio</a> · Catering by <a href="https://zarafehospitality.com" target="_blank" rel="noopener">Zarafé Hospitality</a></span></footer>
 
+<script src="/assets/turnstile.js"></script>
 <script>
 const TOPICS = ["Food and Indian diet","Weight-loss medicines","Children and weight","Fatty liver","Diabetes in pregnancy","Foot care","Snoring and sleep apnoea","Heart and diabetes","Exercise for busy people","Stress and mental health","Fasting with diabetes","Insulin and new devices"];
 document.querySelectorAll('[data-topics]').forEach(box => {
@@ -321,6 +323,7 @@ function vals(scope){
   });
   return o;
 }
+const invGuard = window.BotGuard ? window.BotGuard(document.getElementById('invTs')) : null;
 form.addEventListener('submit', async e => {
   e.preventDefault();
   const err = document.getElementById('err'), btn = document.getElementById('send');
@@ -334,7 +337,9 @@ form.addEventListener('submit', async e => {
   body.attribution = { utm_source:p.get('utm_source'), utm_medium:p.get('utm_medium'), utm_campaign:p.get('utm_campaign'), utm_content:p.get('utm_content'), referrer:document.referrer||null, landing_path:location.pathname };
   btn.disabled = true; const label = btn.textContent; btn.textContent = 'Sending...';
   try {
+    body.turnstile = invGuard ? await invGuard.wait() : ''; body.ms = invGuard ? invGuard.ms() : '';
     const r = await fetch('/api/involve', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    if (invGuard) invGuard.reset();
     const d = await r.json().catch(() => ({}));
     if (!r.ok) throw new Error(d.error || 'Something went wrong');
     if (window.expoNotify) expoNotify(d.notify);
@@ -346,7 +351,7 @@ form.addEventListener('submit', async e => {
     if (window.gtag) gtag('event', 'generate_lead', { form: 'get_involved_' + kind });
     if (window.va) va('event', { name: 'get_involved', data: { kind } });
     form.reset(); document.getElementById('nomOther').style.display = 'none';
-  } catch (ex) { err.textContent = ex.message; }
+  } catch (ex) { if (invGuard) invGuard.reset(); err.textContent = ex.message; }
   finally { btn.disabled = false; btn.textContent = label; }
 });
 document.getElementById('again').addEventListener('click', e => { e.preventDefault(); done.style.display = 'none'; form.style.display = ''; box.hidden = true; kind = null; document.querySelectorAll('.pick').forEach(b => b.setAttribute('aria-pressed','false')); history.replaceState(null,'',location.pathname + location.search); window.scrollTo({ top: document.querySelector('.choose').offsetTop - 120, behavior:'smooth' }); });

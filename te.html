@@ -205,6 +205,8 @@ footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0
         <option value="3">3 మంది</option>
         <option value="4">4 లేదా అంతకంటే ఎక్కువ</option>
       </select>
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="f-website">Leave this empty</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+      <div id="regTs" style="display:contents"></div>
       <button type="submit" class="btn btn-gold" id="regBtn">ఉచితంగా రిజిస్టర్ చేయండి</button>
       <p class="consent">మీ వివరాలు ఈ ఎక్స్‌పో గురించి మిమ్మల్ని సంప్రదించడానికి మాత్రమే వాడతాం. ఎవరికీ అమ్మము, ఇవ్వము. <a href="/privacy">ప్రైవసీ పాలసీ (ఇంగ్లీష్)</a></p>
       <div class="ok" id="regOk" role="status"></div>
@@ -236,6 +238,7 @@ footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0
   </div>
 </footer>
 
+<script src="/assets/turnstile.js"></script>
 <script>
 (function(){
   var LANG = 'te';
@@ -276,6 +279,7 @@ footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0
   attribution();
 
   var form = document.getElementById('regForm');
+  var guard = window.BotGuard ? window.BotGuard(document.getElementById('regTs')) : null, human = '';
   var btn = document.getElementById('regBtn');
   var ok = document.getElementById('regOk');
 
@@ -288,9 +292,13 @@ footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0
       people: document.getElementById('f-people').value,
       attribution: attribution()
     };
-    btn.disabled = true; btn.textContent = T.sending;
-    fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
-      .then(function(r){ if (!r.ok) throw new Error('register failed'); return r.json().catch(function(){ return {}; }); })
+    btn.disabled = true; btn.textContent = T.sending; human = '';
+    body.website = document.getElementById('f-website').value;
+    (guard ? guard.wait() : Promise.resolve('')).then(function(tk){
+      body.turnstile = tk; body.ms = guard ? guard.ms() : '';
+      return fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    })
+      .then(function(r){ if (guard) guard.reset(); return r.json().catch(function(){ return {}; }).then(function(j){ if (j && j.human === false) { human = j.error; throw new Error('human'); } if (!r.ok) throw new Error('register failed'); return j; }); })
       .then(function(reg){
         if (window.expoNotify && reg) expoNotify(reg.notify);
         track('generate_lead', { lead_type: 'free_pass', people: Number(body.people), currency: 'INR', value: 0 });
@@ -306,7 +314,8 @@ footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0
         btn.textContent = T.done;
       })
       .catch(function(){
-        alert(T.error);
+        if (guard) guard.reset();
+        alert(human || T.error);
         btn.disabled = false; btn.textContent = T.again;
       });
   });

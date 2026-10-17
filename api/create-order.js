@@ -5,6 +5,7 @@
 // Amounts are fixed server-side; the client only sends a pass type.
 // A pending_payment row is saved first so abandoned checkouts can be followed up.
 const db = require("./_db");
+const bot = require("./_bot");
 
 // Tier prices approved 6 Sep 2026. The Metabolic Profile is never sold below Rs 1,795 per person.
 const PASSES = {
@@ -37,6 +38,11 @@ module.exports = async (req, res) => {
   }
   try {
     const body = req.body || {};
+    // Bot checks on the human form step only (payment-return and verify-payment are untouched).
+    // A drop sends the visitor back as an unfinished payment: no order, no row, nothing charged.
+    const verdict = await bot.check(req, { honeypot: body.website, ms: body.ms, name: body.name, email: body.email, token: body.turnstile });
+    if (verdict === "drop") { res.status(200).json({ url: "https://diabesityexpo.com/?payment=incomplete#register" }); return; }
+    if (verdict === "reject") { res.status(400).json({ error: bot.HUMAN_MSG, human: false }); return; }
     const { name, email } = body;
     const passType = body.passType === "priority" ? "report" : body.passType; // legacy id from old links
     const phone = db.cleanPhone(body.phone);

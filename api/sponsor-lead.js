@@ -1,5 +1,6 @@
 // Vercel serverless: sponsor, exhibitor and CSR enquiry capture.
 const db = require("./_db");
+const bot = require("./_bot");
 
 const INTERESTS = ["title", "co_powered", "screening_zone", "gold", "silver", "cme_slot", "stall", "csr", "corporate", "other"];
 
@@ -10,6 +11,10 @@ module.exports = async (req, res) => {
   }
   try {
     const body = req.body || {};
+    // Bot checks: a drop answers like a normal enquiry but saves and emails nothing.
+    const verdict = await bot.check(req, { honeypot: body.website, ms: body.ms, name: body.contact_name, email: body.email, token: body.turnstile });
+    if (verdict === "drop") { res.status(200).json({ ok: true, id: null, notify: null }); return; }
+    if (verdict === "reject") { res.status(400).json({ error: bot.HUMAN_MSG, human: false }); return; }
     const org = String(body.org || "").trim().slice(0, 150);
     const contact_name = String(body.contact_name || "").trim().slice(0, 100);
     const phone = db.cleanPhone(body.phone);
