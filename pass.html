@@ -10,7 +10,7 @@
   gtag('config', 'G-7XDYZ4FNXN');
 </script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your pass | Caspian Diabesity Expo 2026</title>
+<title>Your pass (cancelled) | Caspian Diabesity Expo</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -52,9 +52,10 @@ body{margin:0;font-family:'Mulish',system-ui,sans-serif;background:var(--navy);c
 <div class="pass" id="pass" style="display:none">
   <div class="head">
     <div class="logo"><img src="/assets/logo.png" alt="Diabesity Expo"></div>
-    <div><small>Entry pass</small><b>Sat 14 Nov 2026 · 9 AM to 8 PM<br>Hyderabad</b></div>
+    <div><small>Entry pass · cancelled</small><b>Sat 14 Nov 2026<br>Expo not being held</b></div>
   </div>
   <div class="chk" id="chk" style="display:none">Checked in at the venue</div>
+  <div style="background:#FFF4D6;color:#1A2433;padding:12px 16px;font-size:.88rem;line-height:1.5"><b>This pass is cancelled.</b> The Caspian Diabesity Expo 2026 is not being held. You do not need to do anything, and no payment was taken. We plan to return in 2027 and will message you the date first. <a href="/#updates" style="color:#1D6B3A;font-weight:600">More</a></div>
   <div class="body">
     <div class="tier" id="tier"></div>
     <div class="name" id="name"></div>
@@ -101,10 +102,10 @@ async function load(){
   document.getElementById('people').textContent = p.people + (p.people === 1 ? ' person' : ' people');
   document.getElementById('status').textContent = p.status === 'paid' ? 'Paid' : 'Registered';
   document.getElementById('code').textContent = p.pass_code;
-  document.getElementById('strip').innerHTML = '<b>Includes:</b> ' + (INCL[p.pass_type] || '') + (p.pass_type === 'free' ? '' : '<br>No fasting needed. Come to the check-up desk any time from 9 AM.');
+  document.getElementById('strip').innerHTML = '<b>Includes:</b> ' + (INCL[p.pass_type] || '') + (p.pass_type === 'free' ? '' : '');
   if (p.checked_in) document.getElementById('chk').style.display='block';
   new QRCode(document.getElementById('qrcode'), { text: 'https://diabesityexpo.com/pass?c=' + p.pass_code, width: 190, height: 190, correctLevel: QRCode.CorrectLevel.M });
-  document.getElementById('waSelf').href = 'https://wa.me/?text=' + encodeURIComponent('My Caspian Diabesity Expo pass (' + t + ', ' + p.pass_code + '), Saturday 14 November 2026, 9 AM to 8 PM, Hyderabad: https://diabesityexpo.com/pass?c=' + p.pass_code);
+  document.getElementById('waSelf').href = 'https://wa.me/?text=' + encodeURIComponent('The Caspian Diabesity Expo 2026 (14 November) is not being held. It plans to return in 2027: https://diabesityexpo.com');
   document.getElementById('pass').style.display='block';
   document.getElementById('actions').style.display='flex';
   if (p.pass_type === 'free') document.getElementById('foot').style.display='block';

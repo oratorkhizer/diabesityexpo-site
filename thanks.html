@@ -13,7 +13,7 @@
 <script defer src="/_vercel/insights/script.js"></script>
 
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>You're in | Caspian Diabesity Expo 2026</title>
+<title>Expo 2026 not held | Caspian Diabesity Expo</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Mulish:wght@400;500;600&display=swap" rel="stylesheet">
@@ -31,17 +31,17 @@ a.btn.wa{background:#25D366;color:#062B12;margin-left:8px}
 <body>
 <div class="card">
   <div class="tick">✓</div>
-  <h1 id="h">You're in. See you on 14 November.</h1>
-  <p id="msg">Your pass is confirmed and your payment receipt is on its way from Razorpay. Save your payment ID below and show it at the check-up desk. No fasting needed on the day; your report comes on WhatsApp the next working day and a doctor reviews it with you within the week. Keep the receipt: it qualifies as a preventive health check-up under Section 80D.</p>
+  <h1 id="h">The 2026 expo is not being held.</h1>
+  <p id="msg">We are not holding the Caspian Diabesity Expo on 14 November 2026. If any payment was taken from you, it will be refunded in full to the original payment method; WhatsApp +91 89193 41154 with the payment ID below if you have not heard from us. We plan to return in 2027.</p>
   <div class="pid" id="pid"></div>
   <div id="passBox" style="display:none;background:#fff;color:#1A2433;border-radius:14px;padding:16px;margin:14px 0">
     <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#FFB703;font-weight:700">Your entry pass</div>
     <div id="qrcode" style="display:flex;justify-content:center;margin:10px 0"></div>
     <div id="pcode" style="font-family:ui-monospace,Menlo,monospace;font-size:1.3rem;letter-spacing:.14em;font-weight:700;color:#1D6B3A"></div>
-    <p style="color:#5C7A66;font-size:.85rem;margin:6px 0 10px">Screenshot this, or open the pass page and send it to your own WhatsApp. Show it at the registration desk on 14 November.</p>
+    <p style="color:#5C7A66;font-size:.85rem;margin:6px 0 10px">Screenshot this, or open the pass page and send it to your own WhatsApp. This pass is cancelled.</p>
     <a class="btn" id="passLink" href="#" style="margin-top:0;padding:10px 20px;font-size:.9rem">Open my pass</a>
   </div>
-  <p>Save the date: Saturday 14 November 2026, 9 AM to 8 PM, Hyderabad. Bring the people you share meals with; the free screening is open to them too.</p>
+  <p>Want the 2027 date first? Leave your number on the expo site.</p>
   <a class="btn" href="/">Back to the expo site</a><a class="btn wa" id="waShare" href="#" target="_blank" rel="noopener">Tell your family on WhatsApp</a>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -57,11 +57,9 @@ if (pcode) {
 const pass = q.get('pass'); const pid = q.get('pid'); const oid = q.get('oid');
 const names = { report: 'Report Clinic Pass', priority: 'Report Clinic Pass', metabolic: 'Metabolic Check Pass', plus: 'Metabolic Plus Pass', couple: 'Couple Pass', family: 'Family Pass' };
 const price = { report: 499, priority: 499, metabolic: 1999, plus: 3999, couple: 3799, family: 7499 };
-if (pass && names[pass]) document.getElementById('h').textContent = names[pass] + ' confirmed. See you on 14 November.';
-if (pass === 'report' || pass === 'priority') document.getElementById('msg').textContent = 'Your Report Clinic Pass is confirmed and your Razorpay receipt is on its way. Bring any report from the last 3 months; your 10-minute doctor review slot at the expo will be confirmed on WhatsApp. Save your payment ID below and show it at the check-up desk.';
-if (pass === 'plus') document.getElementById('msg').textContent = 'Your Metabolic Plus Pass is confirmed and your Razorpay receipt is on its way. Blood is drawn at the expo (no fasting); your report comes on WhatsApp the next working day. The Caspian team will call you to book your ECG, 2D echo, FibroScan and 20-minute consult with Dr Khizer at Caspian Healthcare within 30 days. Keep the receipt: it qualifies as a preventive health check-up under Section 80D.';
+/* 2026 edition not held: keep the cancellation headline for every pass type */
 document.getElementById('pid').textContent = pid ? ('Payment ID: ' + pid) : '';
-document.getElementById('waShare').href = 'https://wa.me/?text=' + encodeURIComponent('I just booked my pass for the Caspian Diabesity Expo on Saturday 14 November 2026 in Hyderabad. Get the year's tests done with the doctors in the room: full metabolic check from ₹1,999, free entry to talks for the family, 80D eligible. Register here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=share&utm_campaign=thanks_page');
+document.getElementById('waShare').href = 'https://wa.me/?text=' + encodeURIComponent('The Caspian Diabesity Expo returns in 2027. Get the date first: https://diabesityexpo.com/#updates');
 // Fire the purchase once per payment id
 try {
   if (pass && names[pass] && pid && !localStorage.getItem('exp_purchase_' + pid)) {

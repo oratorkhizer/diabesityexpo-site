@@ -36,6 +36,12 @@ module.exports = async (req, res) => {
     res.status(405).json({ error: "Method not allowed" });
     return;
   }
+  // 23 Oct 2026: the 2026 expo is not being held. No new passes are issued or sold.
+  // Remove this block when the 2027 edition opens registrations.
+  if (process.env.EXPO_OPEN !== "1") {
+    res.status(410).json({ error: "The 2026 Caspian Diabesity Expo is not being held. We plan to return in 2027. Leave your number at diabesityexpo.com to hear the date first." });
+    return;
+  }
   try {
     const body = req.body || {};
     // Bot checks on the human form step only (payment-return and verify-payment are untouched).

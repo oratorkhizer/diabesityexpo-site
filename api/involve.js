@@ -3,7 +3,7 @@
 const db = require("./_db");
 const bot = require("./_bot");
 
-const KINDS = ["idea", "story", "question", "volunteer", "community", "club"];
+const KINDS = ["idea", "story", "question", "volunteer", "community", "club", "notify"];
 const LANGS = ["English", "Hindi", "Urdu", "Telugu"];
 const LABEL = {
   idea: "IDEA",
@@ -12,6 +12,7 @@ const LABEL = {
   volunteer: "VOLUNTEER",
   community: "COMMUNITY GROUP",
   club: "DIABESITY CLUB WAITLIST",
+  notify: "TELL ME ABOUT 2027",
 };
 
 const s = (v, n) => (typeof v === "string" ? v.trim().slice(0, n) : "");
@@ -59,6 +60,8 @@ function details(kind, b) {
       };
     case "club":
       return { for_whom: s(b.for_whom, 20), interests: list(b.interests, TOPICS) };
+    case "notify":
+      return { people: s(b.people, 10), source: s(b.source, 20) };
   }
   return {};
 }
@@ -119,7 +122,7 @@ module.exports = async (req, res) => {
     const flat = {};
     Object.keys(d).forEach((k) => { flat[k] = Array.isArray(d[k]) ? d[k].join(", ") : String(d[k]); });
     const notify = (Object.assign({
-        _subject: "GET INVOLVED: " + LABEL[kind] + " from " + name + " (Diabesity Expo 2026)",
+        _subject: "GET INVOLVED: " + LABEL[kind] + " from " + name + " (Diabesity Expo)",
         name, phone, email: row.email || "", area: row.area || "", language: row.language || "",
         ok_to_publish: row.consent_publish ? "yes" : "no",
       }, flat));

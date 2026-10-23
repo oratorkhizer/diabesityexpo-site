@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Expo Desk | Caspian Diabesity Expo 2026</title>
+<title>Expo Desk | Caspian Diabesity Expo</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@ input.notes{width:170px;padding:5px 8px;border-radius:8px;border:1px solid #D5DE
 </head>
 <body>
 <header>
-  <div><h1>Expo Desk</h1><small>Caspian Diabesity Expo 2026 · registrations, passes, revenue and follow-up</small></div>
+  <div><h1>Expo Desk</h1><small>Caspian Diabesity Expo · 2026 edition not held · registrations, 2027 updates list and follow-up</small></div>
   <div id="hdrTools" style="display:none"><button class="btn btn-ghost btn-sm" onclick="load()">Refresh</button> <button class="btn btn-ghost btn-sm" onclick="exportCsv()">Export CSV</button> <button class="btn btn-ghost btn-sm" onclick="logout()">Lock</button></div>
 </header>
 
@@ -185,9 +185,10 @@ function waLink(r){
   const first = (r.name||'').split(' ')[0];
   const pn = PASS_NAME[r.pass_type] || 'pass';
   let msg;
-  if (r.status === 'pending_payment') msg = `Hi ${first}, this is the Caspian Diabesity Expo team. Your ${pn} payment did not go through. Would you like me to send you the payment link again? Check-up slots are limited for 14 November.`;
-  else if (r.pass_type === 'free') msg = `Hi ${first}, thank you for registering for the Caspian Diabesity Expo on Saturday 14 November 2026. Your free floor pass is confirmed: https://diabesityexpo.com/pass?c=${r.pass_code||''} (show it at the gate). If you would like the year's tests done on the day (full metabolic profile, no fasting, doctor review, dinner and reserved seating), the Metabolic Check Pass is ₹1,999 and the receipt qualifies under Section 80D: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=followup&utm_campaign=upsell#tickets`;
-  else msg = `Hi ${first}, your ${pn} for the Caspian Diabesity Expo on Saturday 14 November 2026 is confirmed. Your pass: https://diabesityexpo.com/pass?c=${r.pass_code||''} (code ${r.pass_code||''}). No fasting needed; come to the check-up desk any time from 9 AM and show the pass.`;
+  // 23 Oct 2026: the 2026 expo is not happening. Every registrant template now carries the cancellation note.
+  if (r.status === 'paid') msg = `Hi ${first}, this is Dr Khizer from the Caspian Diabesity Expo team. Thank you for booking your ${pn}. I am sorry to tell you that we are not holding the Caspian Diabesity Expo this year (14 November 2026 is cancelled). We plan to return in 2027, and you will be the first to hear the new date. If you want your annual tests done before then, Caspian Diagnostic Centre runs the full Metabolic Profile all year: WhatsApp 89193 41154 to book. Your full payment will be refunded to the original payment method within 5 to 7 working days.`;
+  else if (r.status === 'pending_payment') msg = `Hi ${first}, this is Dr Khizer from the Caspian Diabesity Expo team. Your ${pn} payment did not go through, so nothing was charged. I am sorry to tell you that we are not holding the Caspian Diabesity Expo this year (14 November 2026 is cancelled). We plan to return in 2027, and you will be the first to hear the new date. If you want your annual tests done before then, Caspian Diagnostic Centre runs the full Metabolic Profile all year: WhatsApp 89193 41154 to book.`;
+  else msg = `Hi ${first}, this is Dr Khizer from the Caspian Diabesity Expo team. Thank you for registering for the expo. I am sorry to tell you that we are not holding the Caspian Diabesity Expo this year (14 November 2026 is cancelled). We plan to return in 2027, and you will be the first to hear the new date. If you want your annual tests done before then, Caspian Diagnostic Centre runs the full Metabolic Profile all year: WhatsApp 89193 41154 to book.`;
   const ph = (r.phone||'').replace(/\D/g,''); const intl = ph.length === 10 ? '91' + ph : ph;
   return `https://wa.me/${intl}?text=${encodeURIComponent(msg)}`;
 }
@@ -236,14 +237,14 @@ function render(){
   if (tab === 'involve') {
     const q = document.getElementById('q').value.trim().toLowerCase();
     const k = document.getElementById('fu').value;
-    const KIND = { idea:'Idea', story:'Story', question:'Question', volunteer:'Volunteer', community:'Community', club:'Club waitlist' };
+    const KIND = { idea:'Idea', story:'Story', question:'Question', volunteer:'Volunteer', community:'Community', club:'Club waitlist', notify:'2027 updates' };
     let rows = involve.filter(i => !q || [i.name,i.phone,i.area,JSON.stringify(i.details)].join(' ').toLowerCase().includes(q));
     if (k && KIND[k]) rows = rows.filter(i => i.kind === k);
     const counts = Object.keys(KIND).map(x => KIND[x] + ' ' + involve.filter(i=>i.kind===x).length).join(' · ');
     document.getElementById('count').textContent = rows.length + ' entries · ' + counts;
     const det = d => Object.keys(d||{}).filter(x => d[x] !== '' && d[x] !== false && !(Array.isArray(d[x]) && !d[x].length)).map(x => '<b>' + esc(x.replace(/_/g,' ')) + ':</b> ' + esc(Array.isArray(d[x]) ? d[x].join(', ') : d[x] === true ? 'yes' : d[x])).join('<br>');
     const wa = i => { const first = (i.name||'').split(' ')[0]; const ph = (i.phone||'').replace(/\D/g,''); const intl = ph.length === 10 ? '91' + ph : ph;
-      const m = { idea:'thank you for your idea for the Caspian Diabesity Expo. I would like to understand it better. Is now a good time for a short call?', story:'thank you for the story nomination for the Caspian Diabesity Expo. I would love to hear the full story. When can we speak for ten minutes?', question:'thank you for sending your question for the Caspian Diabesity Expo. It is on our list for the experts on 14 November.', volunteer:'thank you for offering to volunteer at the Caspian Diabesity Expo on 14 November. I will share the briefing date shortly. Can you confirm your timing?', community:'thank you for wanting to bring your group to the Caspian Diabesity Expo. When can we speak to plan it?', club:'you are on the Diabesity Club waitlist. The club launches at the Caspian Diabesity Expo on 14 November, and I will share the details here first.' }[i.kind];
+      const m = { idea:'thank you for your idea for the Caspian Diabesity Expo. I would like to understand it better. Is now a good time for a short call?', story:'thank you for the story nomination for the Caspian Diabesity Expo. I would love to hear the full story. When can we speak for ten minutes?', question:'thank you for sending your question for the Caspian Diabesity Expo. We are not holding the expo this year, so I will make sure it is answered at the 2027 edition.', volunteer:'thank you for offering to volunteer at the Caspian Diabesity Expo. We are not holding the expo this year; we plan to return in 2027, and I will reach out to you first when we start planning.', community:'thank you for wanting to bring your group to the Caspian Diabesity Expo. We are not holding the expo this year, but we would still be glad to plan something with your group. When can we speak?', club:'you are on the Diabesity Club waitlist. I will share the details here first.', notify:'thank you for asking to hear about the next Caspian Diabesity Expo. I will message you here as soon as the 2027 date is fixed.' }[i.kind];
       return `https://wa.me/${intl}?text=${encodeURIComponent('Hi ' + first + ', this is Dr Khizer. ' + m)}`; };
     el.innerHTML = rows.length ? `<table><thead><tr><th>When</th><th>Type</th><th>Name</th><th>Phone / area</th><th>Details</th><th>Publish OK</th><th>Status</th><th>Notes</th><th></th></tr></thead><tbody>` + rows.map(i => `<tr>
       <td class="mini">${fmt(i.created_at)}</td><td><span class="pill p-priority">${KIND[i.kind]||i.kind}</span></td>
@@ -346,7 +347,7 @@ async function updReg(id, patch){
 function alumniWa(a){
   const first = (a.name||'').split(' ')[0];
   const yr = String(a.years).includes('2025') ? 'last year' : 'in 2024';
-  const msg = `Assalamu alaikum ${first}, this is Dr Khizer from Caspian Healthcare. You came to our Diabesity Expo ${yr}. This year it is on Saturday 14 November 2026, 9 AM to 8 PM, and the full 12-test metabolic profile (thyroid, HbA1c, lipids, liver, kidney, vitamins, iron, body composition) is done at the expo itself, with a doctor review of your report: ₹1,999, no fasting, lunch and dinner included, 80D receipt. Entry to talks and stalls stays free, with lunch. Book here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=alumni&utm_campaign=reinvite#tickets`;
+  const msg = `Assalamu alaikum ${first}, this is Dr Khizer from Caspian Healthcare. You came to our Diabesity Expo ${yr}, thank you. We are not holding the expo this year; we plan to return in 2027. If you would like to hear the date first, add your name here: https://diabesityexpo.com/?utm_source=whatsapp&utm_medium=alumni&utm_campaign=notify2027#updates`;
   return `https://wa.me/91${a.phone}?text=${encodeURIComponent(msg)}`;
 }
 async function updAlumni(id, patch){
@@ -369,7 +370,7 @@ function exportCsv(){
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'})); a.download = 'expo-' + tab + '-' + new Date().toISOString().slice(0,10) + '.csv'; a.click();
 }
 const FU_HTML = document.getElementById('fu').innerHTML;
-const KIND_HTML = '<option value="">All entry types</option><option value="idea">Ideas</option><option value="story">Stories</option><option value="question">Questions</option><option value="volunteer">Volunteers</option><option value="community">Community groups</option><option value="club">Club waitlist</option>';
+const KIND_HTML = '<option value="">All entry types</option><option value="idea">Ideas</option><option value="story">Stories</option><option value="question">Questions</option><option value="volunteer">Volunteers</option><option value="community">Community groups</option><option value="club">Club waitlist</option><option value="notify">2027 updates list</option>';
 document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.tabs button').forEach(x => x.classList.remove('on')); b.classList.add('on'); const was = tab; tab = b.dataset.tab; if ((was === 'involve') !== (tab === 'involve')) { const f = document.getElementById('fu'); f.innerHTML = tab === 'involve' ? KIND_HTML : FU_HTML; f.value = ''; } render(); }));
 document.getElementById('q').addEventListener('input', render);
 document.getElementById('fu').addEventListener('change', render);
