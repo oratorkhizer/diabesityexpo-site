@@ -140,7 +140,12 @@
     },
     {
       "source": "/assets/CASPIAN-Diabesity-Expo-2026-Prospectus.pdf",
-      "destination": "/prospectus",
+      "destination": "/sponsor#enquiry",
+      "permanent": false
+    },
+    {
+      "source": "/prospectus",
+      "destination": "/sponsor#enquiry",
       "permanent": false
     }
   ]
