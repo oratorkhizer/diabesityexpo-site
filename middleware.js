@@ -5,6 +5,7 @@
 // redirect when the original address is a 404 and the lowercase one is not.
 
 export const config = {
+  runtime: 'nodejs', // Vercel's recommended runtime; the old edge default is deprecated
   matcher: '/((?!_next/|_vercel/|api/|\\.well-known/).*)',
 };
 
